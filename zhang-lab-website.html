@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zhang Lab | Singapore Institute of Food and Biotechnology Innovation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #0F6E56;
+    --teal-light: #E1F5EE;
+    --teal-mid: #1D9E75;
+    --teal-dark: #085041;
+    --gray-50: #F8F7F4;
+    --gray-100: #EFEFEB;
+    --gray-300: #D3D1C7;
+    --gray-500: #888780;
+    --gray-700: #444441;
+    --gray-900: #1C1C1A;
+    --white: #ffffff;
+    --nav-h: 68px;
+    --max-w: 1120px;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--gray-900);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-100);
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+    width: 100%; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--serif); font-size: 1.25rem;
+    color: var(--gray-900); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--teal); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--gray-700);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    padding-top: var(--nav-h);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: var(--max-w); margin: 0 auto;
+    align-items: center;
+    padding-left: 2rem; padding-right: 2rem;
+    gap: 5rem;
+  }
+  .hero-text { padding: 4rem 0; }
+  .hero-eyebrow {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal);
+    margin-bottom: 1.25rem;
+  }
+  .hero-name {
+    font-family: var(--serif); font-size: clamp(2.6rem, 4vw, 3.8rem);
+    line-height: 1.1; color: var(--gray-900); margin-bottom: 0.25rem;
+  }
+  .hero-name em { color: var(--teal); font-style: italic; }
+  .hero-title {
+    font-size: 1.05rem; color: var(--gray-500); font-weight: 300;
+    margin-bottom: 2rem; line-height: 1.5;
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--gray-700); line-height: 1.75;
+    max-width: 48ch; margin-bottom: 2.5rem;
+  }
+  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.5rem; border-radius: 2px;
+    font-size: 0.875rem; font-weight: 500; text-decoration: none;
+    transition: all 0.2s; cursor: pointer; border: none;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary { background: var(--teal); color: var(--white); }
+  .btn-primary:hover { background: var(--teal-dark); }
+  .btn-outline {
+    background: transparent; color: var(--teal);
+    border: 1.5px solid var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal-light); }
+
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1rem;
+    padding: 2rem 0;
+  }
+  .hero-photo-wrap {
+    width: 100%; aspect-ratio: 3/4; max-height: 480px;
+    background: var(--gray-100);
+    border-radius: 0;
+    overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #e8f5f0 0%, #c8e8da 50%, #a0d4be 100%);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1rem;
+  }
+  .avatar-circle {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: var(--teal); display: flex; align-items: center;
+    justify-content: center; font-family: var(--serif); font-size: 2.5rem;
+    color: white; letter-spacing: -0.02em;
+  }
+  .avatar-label { font-size: 0.8rem; color: var(--teal-dark); opacity: 0.7; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--gray-100);
+  }
+  .hero-stat {
+    padding: 1.25rem 1rem; text-align: center;
+    border-right: 1px solid var(--gray-100);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: var(--serif); font-size: 1.8rem;
+    color: var(--teal); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem; color: var(--gray-500);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 2rem; }
+  .section-inner { max-width: var(--max-w); margin: 0 auto; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: ''; display: block; height: 1px; width: 48px;
+    background: var(--teal); opacity: 0.4;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.6rem);
+    line-height: 1.15; margin-bottom: 1rem; color: var(--gray-900);
+    max-width: 22ch;
+  }
+  .section-lead {
+    font-size: 1.05rem; color: var(--gray-500); max-width: 60ch;
+    margin-bottom: 3rem; line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--gray-50); }
+  .research-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    background: var(--gray-300); margin-top: 3rem;
+  }
+  .research-card {
+    background: var(--white); padding: 2rem 1.75rem;
+    position: relative; overflow: hidden;
+    transition: background 0.25s;
+  }
+  .research-card:hover { background: #fafffe; }
+  .research-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--teal);
+    transition: height 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .research-card:hover::before { height: 100%; }
+  .research-icon {
+    width: 44px; height: 44px; margin-bottom: 1.25rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .research-icon svg { width: 32px; height: 32px; }
+  .research-card h3 {
+    font-family: var(--serif); font-size: 1.25rem;
+    color: var(--gray-900); margin-bottom: 0.75rem; line-height: 1.25;
+  }
+  .research-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.7; }
+  .research-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+  .tag {
+    font-size: 0.7rem; padding: 0.2rem 0.65rem; border-radius: 1px;
+    background: var(--teal-light); color: var(--teal-dark);
+    font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+
+  /* ── PUBLICATIONS ── */
+  #publications { background: var(--white); }
+  .pub-list { display: flex; flex-direction: column; gap: 0; }
+  .pub-item {
+    padding: 1.75rem 0; border-bottom: 1px solid var(--gray-100);
+    display: grid; grid-template-columns: 40px 1fr; gap: 1.5rem;
+    align-items: start; transition: background 0.2s;
+  }
+  .pub-item:first-child { border-top: 1px solid var(--gray-100); }
+  .pub-year {
+    font-family: var(--serif); font-size: 0.9rem; color: var(--teal);
+    padding-top: 0.2rem; font-style: italic;
+  }
+  .pub-title {
+    font-size: 0.975rem; font-weight: 500; color: var(--gray-900);
+    margin-bottom: 0.35rem; line-height: 1.5;
+  }
+  .pub-authors { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.25rem; }
+  .pub-journal { font-size: 0.85rem; color: var(--teal); font-weight: 400; font-style: italic; }
+  .pub-badge {
+    display: inline-block; font-size: 0.65rem; padding: 0.15rem 0.5rem;
+    background: var(--teal); color: white; border-radius: 1px;
+    text-transform: uppercase; font-weight: 500; letter-spacing: 0.05em;
+    margin-left: 0.5rem; vertical-align: middle;
+  }
+  .pub-more { margin-top: 2rem; }
+
+  /* ── TEAM ── */
+  #team { background: var(--gray-50); }
+  .team-pi {
+    display: grid; grid-template-columns: 280px 1fr; gap: 3rem;
+    margin-bottom: 4rem; align-items: start;
+    padding: 2.5rem; background: var(--white);
+    border-left: 3px solid var(--teal);
+  }
+  .team-pi-photo {
+    aspect-ratio: 3/4; background: var(--gray-100);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 3rem; color: var(--teal);
+  }
+  .team-pi-photo-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #e8f5f0, #b0d8c8);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 0.75rem;
+  }
+  .pi-avatar {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: var(--teal); display: flex; align-items: center;
+    justify-content: center; font-family: var(--serif);
+    font-size: 1.8rem; color: white;
+  }
+  .team-pi-name {
+    font-family: var(--serif); font-size: 1.6rem;
+    color: var(--gray-900); margin-bottom: 0.25rem;
+  }
+  .team-pi-title { font-size: 0.9rem; color: var(--teal); font-weight: 500; margin-bottom: 0.5rem; }
+  .team-pi-affil { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 1.5rem; }
+  .team-pi-bio { font-size: 0.95rem; color: var(--gray-700); line-height: 1.75; margin-bottom: 1.5rem; }
+  .team-pi-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .pi-link {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--teal); text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s; text-transform: uppercase;
+  }
+  .pi-link:hover { border-color: var(--teal); }
+
+  .members-section-title {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--gray-500);
+    margin-bottom: 1.5rem; font-style: italic;
+  }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+  }
+  .team-card { text-align: center; }
+  .team-card-photo {
+    width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif); font-size: 1.2rem;
+    color: white; font-weight: 400;
+  }
+  .team-card-name { font-size: 0.9rem; font-weight: 500; color: var(--gray-900); }
+  .team-card-role { font-size: 0.78rem; color: var(--gray-500); }
+  .team-card-email { margin-top: 0.3rem; }
+
+  /* Alumni */
+  .alumni-block { }
+  .alumni-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem;
+  }
+  .alumni-name {
+    font-size: 0.82rem; color: var(--gray-700);
+    padding: 0.25rem 0.7rem;
+    border: 1px solid var(--gray-300);
+    border-radius: 1px;
+    white-space: nowrap;
+  }
+  .open-positions {
+    margin-top: 3rem; padding: 2rem; background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+  }
+  .open-positions h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--teal-dark); margin-bottom: 0.5rem; }
+  .open-positions p { font-size: 0.9rem; color: var(--teal-dark); }
+
+  /* ── NEWS ── */
+  #news { background: var(--white); }
+  .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .news-card {
+    border-top: 2px solid var(--gray-100); padding-top: 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .news-card:hover { border-color: var(--teal); }
+  .news-date {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem;
+  }
+  .news-card h3 { font-size: 1rem; font-weight: 500; color: var(--gray-900); margin-bottom: 0.5rem; line-height: 1.4; }
+  .news-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.65; }
+  .news-type {
+    display: inline-block; font-size: 0.65rem; padding: 0.2rem 0.5rem;
+    border: 1px solid var(--gray-300); color: var(--gray-500);
+    border-radius: 1px; text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--gray-50); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .contact-info h3 {
+    font-family: var(--serif); font-size: 1.1rem;
+    margin-bottom: 1.25rem; color: var(--gray-900);
+  }
+  .contact-detail {
+    display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start;
+  }
+  .contact-icon {
+    width: 18px; height: 18px; margin-top: 0.1rem; flex-shrink: 0;
+    color: var(--teal);
+  }
+  .contact-text { font-size: 0.9rem; color: var(--gray-700); line-height: 1.6; }
+  .contact-text strong { color: var(--gray-900); font-weight: 500; display: block; }
+  .contact-form h3 {
+    font-family: var(--serif); font-size: 1.1rem;
+    margin-bottom: 1.25rem; color: var(--gray-900);
+  }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label {
+    display: block; font-size: 0.78rem; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--gray-500); margin-bottom: 0.4rem;
+  }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 0.7rem 0.9rem;
+    border: 1px solid var(--gray-300); background: var(--white);
+    font-family: var(--sans); font-size: 0.9rem; color: var(--gray-900);
+    outline: none; transition: border-color 0.2s; border-radius: 0;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    border-color: var(--teal);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--gray-900); color: var(--gray-300);
+    padding: 3rem 2rem;
+  }
+  .footer-inner {
+    max-width: var(--max-w); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: var(--serif); color: var(--white); font-size: 1.1rem; }
+  .footer-logo span { color: var(--teal-mid); font-style: italic; }
+  .footer-copy { font-size: 0.8rem; color: var(--gray-500); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 0.8rem; color: var(--gray-500); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal-mid); }
+
+  /* ── UTILS ── */
+  .divider { height: 1px; background: var(--gray-100); }
+  .text-teal { color: var(--teal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    #home { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-visual { order: -1; }
+    .research-grid { grid-template-columns: 1fr; gap: 0; }
+    .team-grid { grid-template-columns: repeat(2,1fr); }
+    .news-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .team-pi { grid-template-columns: 1fr; }
+    .nav-links { gap: 1.25rem; }
+  }
+  @media (max-width: 600px) {
+    .nav-links li:not(:first-child):not(:last-child) { display: none; }
+    .team-grid { grid-template-columns: repeat(2,1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">Zhang<span>'s Lab</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Singapore Institute of Food and Biotechnology Innovation</p>
+    <h1 class="hero-name">ZHANG<br><em>Congqiang</em><br>Simon</h1>
+    <p class="hero-title">Principal Investigator &amp; Group Leader<br>Synthetic Biology &amp; Metabolic Engineering</p>
+    <p class="hero-desc">
+      We engineer microbial cell factories to produce chemicals, fuels, and food ingredients—turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology.
+    </p>
+    <div class="btn-group">
+      <a href="#research" class="btn btn-primary">Our Research</a>
+      <a href="#publications" class="btn btn-outline">Publications</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-placeholder">
+        <div class="avatar-circle">ZC</div>
+        <span class="avatar-label">Replace with photo</span>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">40+</div>
+        <div class="hero-stat-label">Publications</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">12</div>
+        <div class="hero-stat-label">Team Members</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">8</div>
+        <div class="hero-stat-label">Active Projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-inner">
+    <p class="section-label">Research</p>
+    <h2 class="section-title">Engineering Biology for Sustainable Production</h2>
+    <p class="section-lead">Our lab focuses on designing and optimizing microbial cell factories through metabolic engineering, synthetic biology, and systems biology approaches.</p>
+
+    <div class="research-grid">
+      <!-- Card 1: Microbial Cell Factory -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="6" stroke="#0F6E56" stroke-width="1.5"/>
+            <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M7.76 7.76l2.83 2.83M21.41 21.41l2.83 2.83M7.76 24.24l2.83-2.83M21.41 10.59l2.83-2.83" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Microbial Cell Factory</h3>
+        <p>Engineering <em>E. coli</em>, yeast, and non-model microorganisms as efficient platforms for biosynthesis of target molecules through rational and evolutionary strategies.</p>
+        <div class="research-tags">
+          <span class="tag">E. coli</span>
+          <span class="tag">Yeast</span>
+          <span class="tag">Fungi</span>
+        </div>
+      </div>
+      <!-- Card 2: Biocatalysis and Biosynthesis -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 6h16v4H8V6zM10 10v16M22 10v16" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 18h12" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10" cy="10" r="2" fill="#0F6E56"/>
+            <circle cx="22" cy="10" r="2" fill="#0F6E56"/>
+          </svg>
+        </div>
+        <h3>Biocatalysis and Biosynthesis</h3>
+        <p>Engineering microbes to produce isoprenoids, food ingredients, flavours and fragrances, specialty chemicals from renewable carbon sources.</p>
+        <div class="research-tags">
+          <span class="tag">Terpenoids</span>
+          <span class="tag">Specialty chemicals</span>
+          <span class="tag">Biofuels</span>
+        </div>
+      </div>
+      <!-- Card 3: Synthetic Pathway Design -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="8" height="8" rx="1" stroke="#0F6E56" stroke-width="1.5"/>
+            <rect x="18" y="6" width="8" height="8" rx="1" stroke="#0F6E56" stroke-width="1.5"/>
+            <rect x="6" y="18" width="8" height="8" rx="1" stroke="#1D9E75" stroke-width="1.5"/>
+            <rect x="18" y="18" width="8" height="8" rx="1" stroke="#1D9E75" stroke-width="1.5"/>
+            <path d="M14 10h4M22 14v4M14 22h-4M10 14v-4" stroke="#0F6E56" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Synthetic Pathway Design</h3>
+        <p>Designing, constructing, and optimizing novel biosynthetic pathways using DNA assembly tools, protein engineering, and computational pathway design frameworks.</p>
+        <div class="research-tags">
+          <span class="tag">Pathway design</span>
+          <span class="tag">Protein engineering</span>
+          <span class="tag">Computation</span>
+        </div>
+      </div>
+      <!-- Card 4: Genomic Editing & Omics -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 26L10 16l6 5 6-10 6 8" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="10" cy="16" r="2" fill="#1D9E75"/>
+            <circle cx="16" cy="21" r="2" fill="#1D9E75"/>
+            <circle cx="22" cy="11" r="2" fill="#0F6E56"/>
+          </svg>
+        </div>
+        <h3>Genomic Editing &amp; Omics</h3>
+        <p>Applying CRISPR-based genome editing, omics technologies, and AI-guided modeling to understand and rewire cellular metabolism for precision strain engineering.</p>
+        <div class="research-tags">
+          <span class="tag">CRISPR</span>
+          <span class="tag">Flux analysis</span>
+          <span class="tag">AI-guided design</span>
+        </div>
+      </div>
+      <!-- Card 5: Waste Valorisation -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 22c0-5 4-8 10-8s10 3 10 8" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 14V6" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 10l4-4 4 4" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 26h16" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="10" cy="24" r="1.5" fill="#1D9E75"/>
+            <circle cx="16" cy="24" r="1.5" fill="#1D9E75"/>
+            <circle cx="22" cy="24" r="1.5" fill="#1D9E75"/>
+          </svg>
+        </div>
+        <h3>Waste Valorisation</h3>
+        <p>Developing microbial and enzymatic platforms to upcycle C1 &amp; C2 feedstocks (methanol, CO<sub>2</sub>, ethylene glycol) and plastic waste (PET) into value-added chemicals and food ingredients.</p>
+        <div class="research-tags">
+          <span class="tag">C1/C2 feedstocks</span>
+          <span class="tag">PET upcycling</span>
+          <span class="tag">Circular economy</span>
+        </div>
+      </div>
+      <!-- Card 6: Bioprocess Scale-up -->
+      <div class="research-card">
+        <div class="research-icon">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 26h20" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 6v20M10 12l6-6 6 6" stroke="#1D9E75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 20h4v6H8zM20 16h4v10h-4z" stroke="#0F6E56" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3>Novel Bioprocess &amp; Scale-up</h3>
+        <p>Translating laboratory-scale microbial production to pilot and industrial bioreactor conditions through fermentation process optimization and techno-economic analysis.</p>
+        <div class="research-tags">
+          <span class="tag">Fermentation</span>
+          <span class="tag">Bioprocess</span>
+          <span class="tag">Scale-up</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-inner">
+    <p class="section-label">Publications</p>
+    <h2 class="section-title">Selected Research Articles</h2>
+    <p class="section-lead">Representative publications from our group. For a complete list, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a> or the <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" style="color:var(--teal);">A*STAR researcher page</a>.</p>
+
+    <div class="pub-list">
+
+      <!-- 2026 — Genomic editing (Metabolic Engineering) -->
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S1096717626000479" target="_blank" style="color:inherit;text-decoration:none;">Latest advances in genomic editing for microbial cell factory engineering</a>
+            <span class="pub-badge">New</span>
+          </div>
+          <div class="pub-authors">Zhang C, et al.</div>
+          <div class="pub-journal">Metabolic Engineering</div>
+        </div>
+      </div>
+
+      <!-- 2026 — AUCS (ACS Synthetic Biology) -->
+      <div class="pub-item">
+        <div class="pub-year">2026</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">Arabinose-inducible univariant control system (AUCS) for microbial production of proteins, enzymes, and metabolites</a>
+            <span class="pub-badge">New</span>
+          </div>
+          <div class="pub-authors">Zhang C, Shukal S.</div>
+          <div class="pub-journal">ACS Synthetic Biology</div>
+        </div>
+      </div>
+
+      <!-- 2025 — PET plastic upcycling -->
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S0734975025001715" target="_blank" style="color:inherit;text-decoration:none;">Bio-upcycling PET waste: advances in enzymatic hydrolysis and biosynthesis of value-added products</a>
+          </div>
+          <div class="pub-authors">Zhou Y, Zhang J, You S, Zhang C, Qi W.</div>
+          <div class="pub-journal">Biotechnology Advances</div>
+        </div>
+      </div>
+
+      <!-- 2025 — Pleostene / mushroom sesquiterpene synthases (J. Agric. Food Chem.) -->
+      <div class="pub-item">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acs.jafc.5c06398" target="_blank" style="color:inherit;text-decoration:none;">Discovery and characterization of two novel sesquiterpene synthases producing pleostene in oyster and honey mushrooms</a>
+          </div>
+          <div class="pub-authors">Zhang C, Wibowo M, Shukal S, Basri N, Thong A, Heng MY, Chen X, Kanagasundaram Y, Ang EL.</div>
+          <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
+        </div>
+      </div>
+
+      <!-- 2024 — Microaerobic fermentation / geraniol (ACS Sustainable Chem. Eng.) -->
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acssuschemeng.3c06030" target="_blank" style="color:inherit;text-decoration:none;">Microaerobic fermentation enables high-titer biosynthesis of the rose monoterpenes geraniol and geranyl acetate in <em>Escherichia coli</em></a>
+          </div>
+          <div class="pub-authors">Shukal S, Ong L, Rehka T, Chen X, Zhang C.</div>
+          <div class="pub-journal">ACS Sustainable Chemistry &amp; Engineering</div>
+        </div>
+      </div>
+
+      <!-- 2024 — CRISPR interference review (Engineering Microbiology) -->
+      <div class="pub-item">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.engmic.2023.100123" target="_blank" style="color:inherit;text-decoration:none;">Advances and applications of CRISPR/Cas-mediated interference in <em>Escherichia coli</em></a>
+          </div>
+          <div class="pub-authors">Lim X, Zhang C, Chen X.</div>
+          <div class="pub-journal">Engineering Microbiology</div>
+        </div>
+      </div>
+
+      <!-- 2023 — Nerolidol (J. Agric. Food Chem.) -->
+      <div class="pub-item">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acs.jafc.3c01161" target="_blank" style="color:inherit;text-decoration:none;">High-yield biosynthesis of <em>trans</em>-nerolidol from sugar and glycerol</a>
+          </div>
+          <div class="pub-authors">Tan N, Ong L, Shukal S, Chen X, Zhang C.</div>
+          <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
+        </div>
+      </div>
+
+      <!-- 2023 — Linker diversity / zeaxanthin (Metab. Eng. Commun.) -->
+      <div class="pub-item">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.mec.2023.e00222" target="_blank" style="color:inherit;text-decoration:none;">Exploring linker sequence diversity to fuse carotene cyclase and hydroxylase for zeaxanthin biosynthesis</a>
+          </div>
+          <div class="pub-authors">Bouin A, Zhang C, Lindley ND, Truan G, Lautier T.</div>
+          <div class="pub-journal">Metabolic Engineering Communications</div>
+        </div>
+      </div>
+
+      <!-- 2023 — Fungal TPS structure (ACS Catalysis) -->
+      <div class="pub-item">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acscatal.2c05598" target="_blank" style="color:inherit;text-decoration:none;">Structural understanding of fungal terpene synthases for the formation of linear or cyclic terpene products</a>
+          </div>
+          <div class="pub-authors">Rehka T, Deepti S, Lin F, Lim CC, Jobichen C, Zhang C.</div>
+          <div class="pub-journal">ACS Catalysis</div>
+        </div>
+      </div>
+
+      <!-- 2022 — Next-gen feedstocks review (Front. Bioeng. Biotechnol.) -->
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:inherit;text-decoration:none;">Microbial utilization of next-generation feedstocks for the biomanufacturing of value-added chemicals and food ingredients</a>
+          </div>
+          <div class="pub-authors">Zhang C, Ottenheim C, Weingarten M, Ji LH.</div>
+          <div class="pub-journal">Frontiers in Bioengineering and Biotechnology</div>
+        </div>
+      </div>
+
+      <!-- 2022 — CRISPR-Cas9 BL21 (Microbial Cell Factories) -->
+      <div class="pub-item">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1186/s12934-022-01746-z" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering of <em>Escherichia coli</em> BL21 using simplified CRISPR-Cas9 and asymmetric homology arms recombineering</a>
+          </div>
+          <div class="pub-authors">Shukal S, Lim XH, Zhang C, Chen X.</div>
+          <div class="pub-journal">Microbial Cell Factories</div>
+        </div>
+      </div>
+
+      <!-- 2021 — Glycosylated carotenoids (Bioresources & Bioprocessing) -->
+      <div class="pub-item">
+        <div class="pub-year">2021</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1186/s40643-021-00415-2" target="_blank" style="color:inherit;text-decoration:none;">High-level de novo biosynthesis of glycosylated zeaxanthin and astaxanthin in <em>Escherichia coli</em></a>
+          </div>
+          <div class="pub-authors">Lautier T, Zhang C, et al.</div>
+          <div class="pub-journal">Bioresources and Bioprocessing</div>
+        </div>
+      </div>
+
+      <!-- 2020 — Terpenoid flavor/fragrance review (J. Agric. Food Chem.) -->
+      <div class="pub-item">
+        <div class="pub-year">2020</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1021/acs.jafc.9b06203" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering strategies for sustainable terpenoid flavor and fragrance synthesis</a>
+          </div>
+          <div class="pub-authors">Chen X, Zhang C, Lindley ND.</div>
+          <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
+        </div>
+      </div>
+
+      <!-- 2019 — Viridiflorol / amorphadiene (Metabolic Engineering) -->
+      <div class="pub-item">
+        <div class="pub-year">2019</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.ymben.2019.06.002" target="_blank" style="color:inherit;text-decoration:none;">Systematic engineering for high-yield production of viridiflorol and amorphadiene in auxotrophic <em>Escherichia coli</em></a>
+          </div>
+          <div class="pub-authors">Shukal S, Chen X, Zhang C.</div>
+          <div class="pub-journal">Metabolic Engineering</div>
+        </div>
+      </div>
+
+      <!-- 2018 — MHP / astaxanthin flagship (Nature Communications) -->
+      <div class="pub-item">
+        <div class="pub-year">2018</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:inherit;text-decoration:none;">Multidimensional heuristic process for high-yield production of astaxanthin and fragrance molecules in <em>Escherichia coli</em></a>
+          </div>
+          <div class="pub-authors">Zhang C, Seow VY, Chen X, Too HP.</div>
+          <div class="pub-journal">Nature Communications</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pub-more btn-group">
+      <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar ↗</a>
+      <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" class="btn btn-outline">A*STAR Profile ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-inner">
+    <p class="section-label">Team</p>
+    <h2 class="section-title">People</h2>
+    <p class="section-lead">A multidisciplinary team of biologists, chemists, and engineers united by the goal of sustainable biomanufacturing.</p>
+
+    <!-- PI Profile -->
+    <div class="team-pi">
+      <div class="team-pi-photo">
+        <div class="team-pi-photo-inner">
+          <div class="pi-avatar">ZC</div>
+          <span style="font-size:0.75rem;color:var(--teal-dark);opacity:0.6">Replace with photo</span>
+        </div>
+      </div>
+      <div>
+        <p class="team-pi-name">ZHANG Congqiang (Simon) <span style="font-weight:300;color:var(--gray-500);font-family:var(--sans);font-size:1.1rem;">张聪强</span></p>
+        <p class="team-pi-title">Principal Investigator</p>
+        <p class="team-pi-affil">Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR</p>
+        <p class="team-pi-bio">
+          Dr. Zhang Congqiang (Simon) is a Principal Investigator at the Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR, where he leads a team in synthetic biology and metabolic engineering. His research focuses on engineering microbial cell factories for sustainable production of chemicals, fuels, food ingredients, and natural products.
+        </p>
+        <p class="team-pi-bio">
+          He received his undergraduate and master's training in chemical engineering at Tianjin University, China, and completed his PhD in Chemical and Pharmaceutical Engineering in a joint programme between the National University of Singapore and MIT. He has co-authored over 30 papers and holds 10 international patents. He serves as Associate Editor for <em>Advanced Biotechnology</em> and <em>Frontiers in Bioengineering and Biotechnology</em>, and is Secretary of the BioEnergy Society of Singapore.
+        </p>
+        <div class="team-pi-links">
+          <a href="mailto:congqiang_zhang@a-star.edu.sg" class="pi-link">Email</a>
+          <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="pi-link">Google Scholar</a>
+          <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" class="pi-link">A*STAR Profile</a>
+          <a href="https://orcid.org/0000-0003-1070-8806" target="_blank" class="pi-link">ORCID</a>
+          <a href="https://www.linkedin.com/in/congqiang-zhang-64683791/" target="_blank" class="pi-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Senior Scientists -->
+    <p class="members-section-title">Senior Scientists</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-photo" style="background:var(--teal);">KS</div>
+        <div class="team-card-name">KIM Seohyoung</div>
+        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-email"><a href="mailto:Kim_Seohyoung@a-star.edu.sg" style="font-size:0.72rem;color:var(--teal);text-decoration:none;">Kim_Seohyoung@a-star.edu.sg</a></div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#185FA5;">LY</div>
+        <div class="team-card-name">LIU Yanbin</div>
+        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-email"><a href="mailto:Liu_Yanbin@a-star.edu.sg" style="font-size:0.72rem;color:var(--teal);text-decoration:none;">Liu_Yanbin@a-star.edu.sg</a></div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#534AB7;">TN</div>
+        <div class="team-card-name">NGUYEN Thao</div>
+        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-email"><a href="mailto:Thao_Nguyen@a-star.edu.sg" style="font-size:0.72rem;color:var(--teal);text-decoration:none;">Thao_Nguyen@a-star.edu.sg</a></div>
+      </div>
+    </div>
+
+    <!-- Scientist -->
+    <p class="members-section-title" style="margin-top:2.5rem;">Scientist</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#BA7517;">LX</div>
+        <div class="team-card-name">LIM Xiao Hui</div>
+        <div class="team-card-role">Scientist</div>
+        <div class="team-card-email"><a href="mailto:Lim_Xiao_Hui@a-star.edu.sg" style="font-size:0.72rem;color:var(--teal);text-decoration:none;">Lim_Xiao_Hui@a-star.edu.sg</a></div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#0F6E56;">SS</div>
+        <div class="team-card-name">SHUKAL Sudha Devi</div>
+        <div class="team-card-role">Senior Research Staff</div>
+        <div class="team-card-email"><a href="mailto:sudha_devi@a-star.edu.sg" style="font-size:0.72rem;color:var(--teal);text-decoration:none;">sudha_devi@a-star.edu.sg</a></div>
+      </div>
+    </div>
+
+    <!-- Current Students -->
+    <p class="members-section-title" style="margin-top:2.5rem;">Current Students</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#993556;">OL</div>
+        <div class="team-card-name">ONG Jian Ting (Leonard)</div>
+        <div class="team-card-role">PhD Student</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#3C3489;">WSH</div>
+        <div class="team-card-name">WANG Sihang 王思航</div>
+        <div class="team-card-role">Master's Student</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#185FA5;">QJH</div>
+        <div class="team-card-name">QIU Jiahao 邱嘉豪</div>
+        <div class="team-card-role">Master's Student</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#639922;">LA</div>
+        <div class="team-card-name">LEE Alvin</div>
+        <div class="team-card-role">Student</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card-photo" style="background:#BA7517;">SH</div>
+        <div class="team-card-name">SIAH Hayden</div>
+        <div class="team-card-role">Student</div>
+      </div>
+    </div>
+
+    <!-- Alumni — Former Staff -->
+    <div class="alumni-block" style="margin-top:3rem;">
+      <p class="members-section-title">Former Staff</p>
+      <div class="alumni-list">
+        <span class="alumni-name">Dr. HUANG Ching-Ning</span>
+        <span class="alumni-name">Nicola TAN</span>
+        <span class="alumni-name">ONG Jing Sen</span>
+        <span class="alumni-name">LIM Chin-Chin</span>
+        <span class="alumni-name">Amy YAP</span>
+        <span class="alumni-name">CHAU Yong Hui Tiffany</span>
+      </div>
+    </div>
+
+    <!-- Alumni — Former Students -->
+    <div class="alumni-block" style="margin-top:2rem;">
+      <p class="members-section-title">Former Students</p>
+      <div class="alumni-list">
+        <span class="alumni-name">ZHANG Xinyi 张昕怡</span>
+        <span class="alumni-name">WAN Qing 万青</span>
+        <span class="alumni-name">ZHOU Yu 周煜</span>
+        <span class="alumni-name">HE Yihui 何轶慧</span>
+        <span class="alumni-name">LI Yixin 李一鑫</span>
+        <span class="alumni-name">Aurélie BOUIN</span>
+        <span class="alumni-name">ZHANG Ruixuan 张蕊暄</span>
+        <span class="alumni-name">Misaki TSUCHIDA</span>
+        <span class="alumni-name">Ying Lin CHEE</span>
+        <span class="alumni-name">SEAH Wan Teng Christalle</span>
+        <span class="alumni-name">Ruoheng LIAO</span>
+        <span class="alumni-name">Prabhakar SAH</span>
+        <span class="alumni-name">Kai Ting NG</span>
+        <span class="alumni-name">Sam Yee NG</span>
+        <span class="alumni-name">Shutong LIU</span>
+        <span class="alumni-name">Martynas BALTUSIS</span>
+        <span class="alumni-name">Kezia Kanaya CLAIRINE</span>
+        <span class="alumni-name">Junxian LIU</span>
+        <span class="alumni-name">George GOH</span>
+      </div>
+    </div>
+
+    <div class="open-positions">
+      <h3>We are recruiting</h3>
+      <p>We welcome motivated PhD students with backgrounds in metabolic engineering, synthetic biology, biochemistry, or chemical engineering. Please contact Dr. Zhang with your CV and research interests.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" style="background:var(--gray-50);padding:5rem 2rem;">
+  <div class="section-inner">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-title">Life in the Lab</h2>
+    <p class="section-lead">Moments from team events, lab gatherings, and outings.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;">
+      <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
+        <img src="group-photo-2.jpg" alt="Zhang Lab — Chinese New Year celebration at SIFBI"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Chinese New Year celebration at SIFBI</div>
+      </div>
+      <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
+        <img src="group-photo-1.jpg" alt="Zhang Lab — Group gathering in the office"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Group gathering in the lab</div>
+      </div>
+      <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
+        <img src="group-photo-3.jpg" alt="Zhang Lab — Team outing"
+             style="width:100%;height:100%;object-fit:cover;display:block;object-position:center top;transition:transform 0.4s ease;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Team outing</div>
+      </div>
+    </div>
+
+    <style>
+      #gallery img:hover { transform: scale(1.04); }
+    </style>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-inner">
+    <p class="section-label">News</p>
+    <h2 class="section-title">Latest Updates</h2>
+    <p class="section-lead">Recent news from the Zhang Lab.</p>
+
+    <div class="news-grid">
+      <div class="news-card">
+        <span class="news-type">Research Highlight</span>
+        <div class="news-date">A*STAR Research</div>
+        <h3><a href="https://research.a-star.edu.sg/articles/highlights/sniffing-out-scalable-solutions-for-aromatic-compounds/" target="_blank" style="color:inherit;text-decoration:none;">Sniffing out scalable solutions for aromatic compounds ↗</a></h3>
+        <p>Our work on engineering <em>E. coli</em> to produce rose-scent monoterpenes geraniol and geranyl acetate at high titer using innovative microaerobic bioprocesses.</p>
+      </div>
+      <div class="news-card">
+        <span class="news-type">Research Highlight</span>
+        <div class="news-date">A*STAR Research</div>
+        <h3><a href="https://research.a-star.edu.sg/articles/highlights/mushroom-blueprint-scores-biotech-breakthroughs/" target="_blank" style="color:inherit;text-decoration:none;">Mushroom blueprint scores biotech breakthroughs ↗</a></h3>
+        <p>Structural elucidation of fungal terpene synthases opens new avenues for engineering linalool and nerolidol biosynthesis through rational enzyme design.</p>
+      </div>
+      <div class="news-card">
+        <span class="news-type">Research Highlight</span>
+        <div class="news-date">A*STAR Research</div>
+        <h3><a href="https://research.a-star.edu.sg/articles/highlights/manufacturing-natures-sweet-smells/" target="_blank" style="color:inherit;text-decoration:none;">Manufacturing nature's sweet smells ↗</a></h3>
+        <p>High-yield microbial production of <em>trans</em>-nerolidol — a fragrance ingredient widely used in food and cosmetics — achieved from simple sugar and glycerol feedstocks.</p>
+      </div>
+      <div class="news-card">
+        <span class="news-type">Research Highlight</span>
+        <div class="news-date">A*STAR Research</div>
+        <h3><a href="https://research.a-star.edu.sg/articles/highlights/bacteria-turn-natures-rainbow-into-therapeutics/" target="_blank" style="color:inherit;text-decoration:none;">Bacteria turn nature's rainbow into therapeutics ↗</a></h3>
+        <p>Engineering <em>E. coli</em> to biosynthesize glycosylated carotenoids including zeaxanthin and astaxanthin glucosides with potential nutraceutical and therapeutic applications.</p>
+      </div>
+      <div class="news-card">
+        <span class="news-type">Publication</span>
+        <div class="news-date">2026</div>
+        <h3>New paper in ACS Synthetic Biology: AUCS control system</h3>
+        <p>We report a new arabinose-inducible univariant control system that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
+      </div>
+      <div class="news-card">
+        <span class="news-type">Recruitment</span>
+        <div class="news-date">Open positions</div>
+        <h3>We are hiring PhD students</h3>
+        <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? Contact Dr. Zhang with your CV and a brief statement of research interests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-lead">We welcome inquiries from prospective collaborators, students, and the media.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Lab Information</h3>
+
+        <div class="contact-detail">
+          <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 1.5C6.51 1.5 4.5 3.51 4.5 6c0 3.375 4.5 10.5 4.5 10.5S13.5 9.375 13.5 6c0-2.49-2.01-4.5-4.5-4.5z" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="9" cy="6" r="1.5" stroke="#0F6E56" stroke-width="1.2"/>
+          </svg>
+          <div class="contact-text">
+            <strong>Address</strong>
+            Singapore Institute of Food and Biotechnology Innovation (SIFBI)<br>
+            31 Biopolis Way, Nanos, Singapore 138669
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3h12a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="#0F6E56" stroke-width="1.2"/>
+            <path d="M2 4l7 6 7-6" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <div class="contact-text">
+            <strong>Email</strong>
+            congqiang_zhang@a-star.edu.sg
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="14" height="14" rx="2" stroke="#0F6E56" stroke-width="1.2"/>
+            <path d="M6 6h6M6 9h6M6 12h3" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <div class="contact-text">
+            <strong>Prospective Students</strong>
+            We are actively recruiting PhD students and postdoctoral researchers. Please attach your CV and a brief statement of research interests.
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="9" cy="9" r="7" stroke="#0F6E56" stroke-width="1.2"/>
+            <path d="M9 5v4l3 2" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="contact-text">
+            <strong>Office Hours</strong>
+            By appointment. Response within 3–5 business days.
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Inquiry type</label>
+          <select>
+            <option value="">Select…</option>
+            <option>PhD/Postdoc application</option>
+            <option>Research collaboration</option>
+            <option>Media / press</option>
+            <option>General inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Your message…"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="alert('This is a template — connect this form to your backend or a service like Formspree.')">Send message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Zhang<span>'s Lab</span></div>
+      <div class="footer-copy" style="margin-top:0.5rem;">© 2025 Zhang Lab · Singapore Institute of Food and Biotechnology Innovation</div>
+    </div>
+    <div class="footer-links">
+      <a href="#research">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#team">Team</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.a-star.edu.sg/sifbi" target="_blank">SIFBI ↗</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Smooth active nav link highlighting
+  const sections = document.querySelectorAll('section[id], div[id="home"]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--teal)' : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+  // Subtle fade-in on scroll
+  const fadeEls = document.querySelectorAll('.research-card, .pub-item, .news-card, .team-card');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    fadeObserver.observe(el);
+  });
+</script>
+</body>
+</html>
