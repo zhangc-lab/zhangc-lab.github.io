@@ -73,88 +73,55 @@
   #home {
     min-height: 100vh;
     padding-top: var(--nav-h);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    max-width: var(--max-w); margin: 0 auto;
-    align-items: center;
-    padding-left: 2rem; padding-right: 2rem;
-    gap: 5rem;
+    display: block;
   }
-  .hero-text { padding: 4rem 0; }
-  .hero-eyebrow {
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--teal);
-    margin-bottom: 1.25rem;
+  .hero-photo-panel {
+    position: relative; overflow: hidden;
+    width: 100%;
+    height: calc(100vh - var(--nav-h));
   }
-  .hero-name {
-    font-family: var(--serif); font-size: clamp(2.6rem, 4vw, 3.8rem);
-    line-height: 1.1; color: var(--gray-900); margin-bottom: 0.25rem;
-  }
-  .hero-name em { color: var(--teal); font-style: italic; }
-  .hero-title {
-    font-size: 1.05rem; color: var(--gray-500); font-weight: 300;
-    margin-bottom: 2rem; line-height: 1.5;
-  }
-  .hero-desc {
-    font-size: 1rem; color: var(--gray-700); line-height: 1.75;
-    max-width: 48ch; margin-bottom: 2.5rem;
-  }
-  .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.7rem 1.5rem; border-radius: 2px;
-    font-size: 0.875rem; font-weight: 500; text-decoration: none;
-    transition: all 0.2s; cursor: pointer; border: none;
-    letter-spacing: 0.02em;
-  }
-  .btn-primary { background: var(--teal); color: var(--white); }
-  .btn-primary:hover { background: var(--teal-dark); }
-  .btn-outline {
-    background: transparent; color: var(--teal);
-    border: 1.5px solid var(--teal);
-  }
-  .btn-outline:hover { background: var(--teal-light); }
-
-  .hero-visual {
-    display: flex; flex-direction: column; gap: 1rem;
-    padding: 2rem 0;
-  }
-  .hero-photo-wrap {
-    width: 100%; aspect-ratio: 3/4; max-height: 480px;
-    background: var(--gray-100);
-    border-radius: 0;
-    overflow: hidden; position: relative;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-photo-placeholder {
+  .hero-photo-panel img {
     width: 100%; height: 100%;
-    background: linear-gradient(160deg, #e8f5f0 0%, #c8e8da 50%, #a0d4be 100%);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 1rem;
+    object-fit: cover; object-position: center;
+    display: block;
   }
-  .avatar-circle {
-    width: 120px; height: 120px; border-radius: 50%;
-    background: var(--teal); display: flex; align-items: center;
-    justify-content: center; font-family: var(--serif); font-size: 2.5rem;
-    color: white; letter-spacing: -0.02em;
+  .hero-photo-panel::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(8, 80, 65, 0.65) 0%,
+      rgba(8, 80, 65, 0.35) 50%,
+      rgba(0,0,0,0.18) 100%
+    );
   }
-  .avatar-label { font-size: 0.8rem; color: var(--teal-dark); opacity: 0.7; }
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    border: 1px solid var(--gray-100);
+  .hero-quote {
+    position: absolute; inset: 0; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+    padding: 3.5rem 4rem;
   }
-  .hero-stat {
-    padding: 1.25rem 1rem; text-align: center;
-    border-right: 1px solid var(--gray-100);
+  .hero-quote-inner {
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 2px;
+    padding: 1.75rem 2rem;
+    max-width: 46ch;
   }
-  .hero-stat:last-child { border-right: none; }
-  .hero-stat-num {
-    font-family: var(--serif); font-size: 1.8rem;
-    color: var(--teal); line-height: 1;
+  .hero-quote-text {
+    font-family: var(--serif); font-size: 1.15rem; font-style: italic;
+    color: rgba(255,255,255,0.95); line-height: 1.7;
+    margin-bottom: 0.75rem;
   }
-  .hero-stat-label {
-    font-size: 0.75rem; color: var(--gray-500);
-    text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem;
+  .hero-quote-source {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.6);
+  }
+  @media (max-width: 900px) {
+    .hero-photo-panel { height: 80vw; }
+    .hero-quote { padding: 2rem; align-items: flex-end; justify-content: flex-start; }
+    .hero-quote-inner { max-width: 100%; }
   }
 
   /* ── SECTION BASE ── */
@@ -396,20 +363,103 @@
   .footer-links a { font-size: 0.8rem; color: var(--gray-500); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--teal-mid); }
 
-  /* ── UTILS ── */
-  .divider { height: 1px; background: var(--gray-100); }
-  .text-teal { color: var(--teal); }
+  /* ── FIGURE CAROUSEL ── */
+  .fig-carousel { position: relative; }
+  .fig-slides { overflow: hidden; }
+  .fig-slide { display: none; }
+  .fig-slide.active { display: block; animation: figFadeIn 0.4s ease; }
+  .fig-slide img {
+    display: block;
+    height: 420px;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+  @keyframes figFadeIn { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: translateX(0); } }
+  .fig-controls {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: 1rem; justify-content: center;
+  }
+  .fig-btn {
+    width: 36px; height: 36px; border-radius: 2px;
+    border: 1.5px solid var(--gray-300); background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-700);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .fig-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .fig-dots { display: flex; gap: 0.5rem; }
+  .fig-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gray-300); cursor: pointer;
+    transition: background 0.25s, transform 0.25s;
+    border: none; padding: 0;
+  }
+  .fig-dot.active { background: var(--teal); transform: scale(1.25); }
+  .fig-counter {
+    font-size: 0.75rem; color: var(--gray-500);
+    min-width: 3rem; text-align: center;
+    font-feature-settings: "tnum";
+  }
+  .fig-pause { margin-left: 0.25rem; }
 
-  /* ── RESPONSIVE ── */
+  /* ── GALLERY ── */
+  #gallery img:hover { transform: scale(1.04); }
+
+  /* ── COLLABORATORS ── */
+  #collaborators { background: var(--white); }
+  .collab-region { margin-bottom: 3rem; }
+  .collab-region-title {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gray-500);
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: 0.6rem; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .collab-region-title svg { flex-shrink: 0; }
+  .collab-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--gray-100);
+  }
+  .collab-card {
+    background: var(--white); padding: 1.5rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.3rem;
+    transition: background 0.2s;
+    position: relative;
+  }
+  .collab-card:hover { background: #fafffe; }
+  .collab-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px; background: var(--teal);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  }
+  .collab-card:hover::before { transform: scaleY(1); }
+  .collab-name {
+    font-family: var(--serif); font-size: 1rem;
+    color: var(--gray-900); line-height: 1.2;
+  }
+  .collab-role { font-size: 0.8rem; color: var(--gray-500); font-weight: 300; }
+  .collab-inst {
+    font-size: 0.8rem; color: var(--teal); font-weight: 400; margin-top: 0.2rem;
+  }
+  .collab-inst a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  .collab-inst a:hover { border-color: var(--teal); }
+  .collab-flag {
+    font-size: 1rem; position: absolute; top: 1.25rem; right: 1.25rem;
+    opacity: 0.6;
+  }
+  @media (max-width: 900px) { .collab-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px) { .collab-grid { grid-template-columns: 1fr; } }
   @media (max-width: 900px) {
-    #home { grid-template-columns: 1fr; gap: 2rem; }
-    .hero-visual { order: -1; }
     .research-grid { grid-template-columns: 1fr; gap: 0; }
     .team-grid { grid-template-columns: repeat(2,1fr); }
     .news-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .team-pi { grid-template-columns: 1fr; }
     .nav-links { gap: 1.25rem; }
+    .fig-two-col { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 600px) {
     .nav-links li:not(:first-child):not(:last-child) { display: none; }
@@ -428,6 +478,8 @@
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#team">Team</a></li>
+      <li><a href="#collaborators">Collaborators</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -436,38 +488,15 @@
 
 <!-- HERO -->
 <section id="home">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Singapore Institute of Food and Biotechnology Innovation</p>
-    <h1 class="hero-name">ZHANG<br><em>Congqiang</em><br>Simon</h1>
-    <p class="hero-title">Principal Investigator &amp; Group Leader<br>Synthetic Biology &amp; Metabolic Engineering</p>
-    <p class="hero-desc">
-      We engineer microbial cell factories to produce chemicals, fuels, and food ingredients—turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology.
-    </p>
-    <div class="btn-group">
-      <a href="#research" class="btn btn-primary">Our Research</a>
-      <a href="#publications" class="btn btn-outline">Publications</a>
-    </div>
-  </div>
-
-  <div class="hero-visual">
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-placeholder">
-        <div class="avatar-circle">ZC</div>
-        <span class="avatar-label">Replace with photo</span>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">40+</div>
-        <div class="hero-stat-label">Publications</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">10</div>
-        <div class="hero-stat-label">Team Members</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">4</div>
-        <div class="hero-stat-label">Active Projects</div>
+  <!-- Full-width photo with overlay quote -->
+  <div class="hero-photo-panel">
+    <img src="group-photo-2.webp" alt="Zhang Lab team at SIFBI">
+    <div class="hero-quote">
+      <div class="hero-quote-inner">
+        <p class="hero-quote-text">
+          "We engineer microbial cell factories to produce chemicals, fuels, and food ingredients — turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology."
+        </p>
+        <span class="hero-quote-source">Zhang Lab · SIFBI, A*STAR</span>
       </div>
     </div>
   </div>
@@ -591,7 +620,73 @@
           <span class="tag">Scale-up</span>
         </div>
       </div>
-    </div>
+    </div><!-- end research-grid -->
+
+    <!-- Research figures carousel -->
+    <div style="margin-top:3.5rem;">
+      <p class="members-section-title" style="margin-bottom:1.25rem;">Selected Research Figures</p>
+
+      <div class="fig-carousel" id="figCarousel">
+        <!-- Slides -->
+        <div class="fig-slides">
+
+          <div class="fig-slide">
+            <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
+              <img src="figure-c1c2-embedded.svg"
+                   alt="C1 and C2 feedstocks network and thermodynamics"
+                   >
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+                <strong style="color:var(--gray-700);">Figure 1.</strong>
+                Overview of C1 &amp; C2 feedstock generation routes (A) and thermodynamic landscape of key carbon substrates (B), illustrating the chemical space accessible for microbial waste valorisation.
+              </p>
+            </div>
+          </div>
+
+          <div class="fig-slide">
+            <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
+              <img src="figure-ionone-embedded.svg"
+                   alt="Apocarotenoid biosynthesis — α-ionone, β-ionone and retinol"
+                   >
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+                <strong style="color:var(--gray-700);">Figure 2.</strong>
+                Modular biosynthetic pathway for producing apocarotenoid flavour &amp; fragrance molecules (α-ionone, β-ionone) and nutraceutical retinol from glucose via lycopene.
+              </p>
+            </div>
+          </div>
+
+          <div class="fig-slide">
+            <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
+              <img src="figure-nerolidol-embedded.svg"
+                   alt="trans-Nerolidol biosynthetic pathway"
+                   >
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+                <strong style="color:var(--gray-700);">Figure 3.</strong>
+                Biosynthetic pathway for high-yield production of <em>trans</em>-nerolidol, a woody/floral fragrance compound, from sugar and glycerol feedstocks in engineered <em>E. coli</em>.
+              </p>
+            </div>
+          </div>
+
+        </div><!-- end slides -->
+
+        <!-- Controls -->
+        <div class="fig-controls">
+          <button class="fig-btn" id="figPrev" aria-label="Previous figure">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="fig-dots" id="figDots"></div>
+          <button class="fig-btn" id="figNext" aria-label="Next figure">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="fig-counter" id="figCounter">1 / 3</span>
+          <button class="fig-btn fig-pause" id="figPause" title="Pause auto-advance" aria-label="Pause">
+            <svg id="figPauseIcon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>
+              <rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </div><!-- end carousel -->
+    </div><!-- end research figures -->
   </div>
 </section>
 
@@ -743,7 +838,7 @@
         <div class="pub-year">2021</div>
         <div>
           <div class="pub-title">
-            <a href="https://doi.org/10.1186/s40643-021-00415-2" target="_blank" style="color:inherit;text-decoration:none;">High-level de novo biosynthesis of glycosylated zeaxanthin and astaxanthin in <em>Escherichia coli</em></a>
+            <a href="https://doi.org/10.1186/s40643-021-00415-0" target="_blank" style="color:inherit;text-decoration:none;">High-level de novo biosynthesis of glycosylated zeaxanthin and astaxanthin in <em>Escherichia coli</em></a>
           </div>
           <div class="pub-authors">Lautier T, Zhang C, et al.</div>
           <div class="pub-journal">Bioresources and Bioprocessing</div>
@@ -815,10 +910,7 @@
         <p class="team-pi-title">Principal Investigator</p>
         <p class="team-pi-affil">Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR</p>
         <p class="team-pi-bio">
-          Dr. Zhang Congqiang (Simon) is a Principal Investigator at the Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR, where he leads a team in synthetic biology and metabolic engineering. His research focuses on engineering microbial cell factories for sustainable production of chemicals, fuels, food ingredients, and natural products.
-        </p>
-        <p class="team-pi-bio">
-          He received his undergraduate and master's training in chemical engineering at Tianjin University, China, and completed his PhD in Chemical and Pharmaceutical Engineering in a joint programme between the National University of Singapore (NUS) and Massachusetts Institute of Technology (MIT). He has co-authored over 40 papers and holds 10+ international patents. He serves as Associate Editor for <em>Advanced Biotechnology</em> and <em>Frontiers in Bioengineering and Biotechnology</em>, a guest editor for <em>Scientific Report</em> and <em>Food Wellness</em>, and is Secretary of the BioEnergy Society of Singapore.
+          Dr. Zhang Congqiang (Simon) leads synthetic biology research at A*STAR's SIFBI, where he engineers microbes into "cell factories" for sustainable chemicals, food and energy. An NUS-MIT PhD graduate with extensive publications and patents, Simon actively influences the biotech landscape through his leadership in the BioEnergy Society of Singapore and as an editor for prestigious journals including Nature Portfolio, Elsevier, and Wiley-VCH.
         </p>
         <div class="team-pi-links">
           <a href="mailto:congqiang_zhang@a-star.edu.sg" class="pi-link">Email</a>
@@ -947,34 +1039,209 @@
   </div>
 </section>
 
+<!-- COLLABORATORS -->
+<section id="collaborators" style="background:var(--gray-50);">
+  <div class="section-inner">
+    <p class="section-label">Collaborators</p>
+    <h2 class="section-title">Research Collaborators</h2>
+    <p class="section-lead">We are fortunate to work with outstanding scientists and groups across Singapore and around the world. Our collaborations span synthetic biology, metabolic engineering, enzymology, and bioprocess engineering.</p>
+
+    <!-- Featured collaborator: Dr. Chen Xixian -->
+    <div style="margin-bottom:3rem;">
+      <p class="members-section-title" style="margin-bottom:1.25rem;">Primary Collaborator</p>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;
+                  padding:2rem 2.5rem;background:var(--white);
+                  border-left:3px solid var(--teal);position:relative;overflow:hidden;">
+        <!-- decorative teal accent -->
+        <div style="position:absolute;top:0;right:0;width:160px;height:160px;
+                    background:var(--teal-light);border-radius:50%;
+                    transform:translate(50%,-50%);opacity:0.4;pointer-events:none;"></div>
+        <!-- Avatar -->
+        <div style="width:80px;height:80px;border-radius:50%;background:var(--teal);
+                    display:flex;align-items:center;justify-content:center;
+                    font-family:var(--serif);font-size:1.4rem;color:white;flex-shrink:0;">CX</div>
+        <div>
+          <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.2rem;">
+            <span style="font-family:var(--serif);font-size:1.35rem;color:var(--gray-900);">Dr. CHEN Xixian</span>
+            <span style="font-size:0.65rem;padding:0.2rem 0.6rem;background:var(--teal);color:white;
+                         text-transform:uppercase;letter-spacing:0.07em;font-weight:500;border-radius:1px;">Key Collaborator</span>
+            <span style="font-size:1rem;">🇸🇬</span>
+          </div>
+          <p style="font-size:0.85rem;color:var(--teal);font-weight:500;margin-bottom:0.5rem;">Principal Investigator &amp; Long-term Research Partner</p>
+          <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:1rem;">
+            <a href="https://www.a-star.edu.sg/sifbi" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;"
+               onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='transparent'">
+              Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR
+            </a>
+          </p>
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;max-width:65ch;">
+            Dr. Chen Xixian is a close and longstanding collaborator whose work on terpenoid and carotenoid biosynthesis has been central to many of our joint publications. Together, our groups have co-authored more than 15 papers spanning microbial cell factory design, synthetic pathway engineering, CRISPR-based genome editing, and bioprocess optimization.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Singapore -->
+    <div class="collab-region">
+      <div class="collab-region-title">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
+        Singapore
+      </div>
+      <div class="collab-grid">
+
+        <div class="collab-card">
+          <span class="collab-flag">🇸🇬</span>
+          <div class="collab-name">Dr. JI Lianghui</div>
+          <div class="collab-role">Senior Scientist</div>
+          <div class="collab-inst">
+            <a href="https://www.a-star.edu.sg/tll" target="_blank">Temasek Life Sciences Laboratory (TLL), A*STAR</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇸🇬</span>
+          <div class="collab-name">Prof. ZHOU Kang</div>
+          <div class="collab-role">Associate Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇸🇬</span>
+          <div class="collab-name">Prof. LEONG Susanna</div>
+          <div class="collab-role">Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇸🇬</span>
+          <div class="collab-name">Prof. WONG Adison</div>
+          <div class="collab-role">Associate Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇸🇬</span>
+          <div class="collab-name">Prof. POH Chueh Loo</div>
+          <div class="collab-role">Associate Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.nus.edu.sg" target="_blank">National University of Singapore (NUS)</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- France -->
+    <div class="collab-region">
+      <div class="collab-region-title">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
+        France
+      </div>
+      <div class="collab-grid">
+
+        <div class="collab-card">
+          <span class="collab-flag">🇫🇷</span>
+          <div class="collab-name">Dr. LAUTIER Thomas</div>
+          <div class="collab-role">Researcher</div>
+          <div class="collab-inst">
+            <a href="https://www.toulouse-biotechnology-institute.fr" target="_blank">Toulouse Biotechnology Institute (TBI), INSA Toulouse</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇫🇷</span>
+          <div class="collab-name">Prof. SOUCAILLE Philippe</div>
+          <div class="collab-role">Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.toulouse-biotechnology-institute.fr" target="_blank">Toulouse Biotechnology Institute (TBI), INSA Toulouse</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Germany -->
+    <div class="collab-region">
+      <div class="collab-region-title">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
+        Germany
+      </div>
+      <div class="collab-grid">
+
+        <div class="collab-card">
+          <span class="collab-flag">🇩🇪</span>
+          <div class="collab-name">Prof. RÜHL Martin</div>
+          <div class="collab-role">Professor of Fungal Biotechnology</div>
+          <div class="collab-inst">
+            <a href="https://scholar.google.com/citations?view_op=view_org&hl=en&org=5433096937151665997" target="_blank">Justus Liebig University Giessen</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- China -->
+    <div class="collab-region">
+      <div class="collab-region-title">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
+        China
+      </div>
+      <div class="collab-grid">
+
+        <div class="collab-card">
+          <span class="collab-flag">🇨🇳</span>
+          <div class="collab-name">Prof. LI Xun</div>
+          <div class="collab-role">Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.njfu.edu.cn/english/" target="_blank">Nanjing Forestry University</a>
+          </div>
+        </div>
+
+        <div class="collab-card">
+          <span class="collab-flag">🇨🇳</span>
+          <div class="collab-name">Prof. QI Wei</div>
+          <div class="collab-role">Professor</div>
+          <div class="collab-inst">
+            <a href="https://www.tju.edu.cn/english/" target="_blank">Tianjin University</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- GALLERY -->
 <section id="gallery" style="background:var(--gray-50);padding:5rem 2rem;">
   <div class="section-inner">
     <p class="section-label">Gallery</p>
-    <h2 class="section-title">Life in the Lab</h2>
+    <h2 class="section-title">Life in the Lab and Outside</h2>
     <p class="section-lead">Moments from team events, lab gatherings, and outings.</p>
 
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2rem;">
       <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
-        <img src="group-photo-2.jpg" alt="Zhang Lab — Chinese New Year celebration at SIFBI"
+        <img src="group-photo-2.webp" alt="Zhang Lab — Chinese New Year celebration at SIFBI"
              style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;">
         <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Chinese New Year celebration at SIFBI</div>
       </div>
       <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
-        <img src="group-photo-1.jpg" alt="Zhang Lab — Group gathering in the office"
+        <img src="group-photo-1.webp" alt="Zhang Lab — Group gathering in the office"
              style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;">
         <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Group gathering in the lab</div>
       </div>
       <div style="overflow:hidden;border-radius:0;aspect-ratio:4/3;position:relative;">
-        <img src="group-photo-3.jpg" alt="Zhang Lab — Team outing"
+        <img src="group-photo-3.webp" alt="Zhang Lab — Team outing"
              style="width:100%;height:100%;object-fit:cover;display:block;object-position:center top;transition:transform 0.4s ease;">
         <div style="position:absolute;bottom:0;left:0;right:0;padding:0.75rem 1rem;background:linear-gradient(transparent,rgba(0,0,0,0.55));color:white;font-size:0.78rem;">Team outing</div>
       </div>
     </div>
-
-    <style>
-      #gallery img:hover { transform: scale(1.04); }
-    </style>
   </div>
 </section>
 
@@ -1124,6 +1391,7 @@
       <a href="#research">Research</a>
       <a href="#publications">Publications</a>
       <a href="#team">Team</a>
+      <a href="#collaborators">Collaborators</a>
       <a href="#contact">Contact</a>
       <a href="https://www.a-star.edu.sg/sifbi" target="_blank">SIFBI ↗</a>
     </div>
@@ -1149,7 +1417,7 @@
   document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
 
   // Subtle fade-in on scroll
-  const fadeEls = document.querySelectorAll('.research-card, .pub-item, .news-card, .team-card');
+  const fadeEls = document.querySelectorAll('.research-card, .pub-item, .news-card, .team-card, .collab-card');
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1165,6 +1433,73 @@
     el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
     fadeObserver.observe(el);
   });
+
+  // ── Figure Carousel ──
+  (function() {
+    const slides   = Array.from(document.querySelectorAll('.fig-slide'));
+    const dotsWrap = document.getElementById('figDots');
+    const counter  = document.getElementById('figCounter');
+    const prevBtn  = document.getElementById('figPrev');
+    const nextBtn  = document.getElementById('figNext');
+    const pauseBtn = document.getElementById('figPause');
+    const pauseIcon = document.getElementById('figPauseIcon');
+    const INTERVAL = 5000;
+    let current = 0, timer = null, paused = false;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'fig-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Figure ${i+1}`);
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(idx, dir) {
+      slides[current].classList.remove('active');
+      dotsWrap.children[current].classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dotsWrap.children[current].classList.add('active');
+      counter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), INTERVAL);
+    }
+
+    function togglePause() {
+      paused = !paused;
+      if (paused) {
+        clearInterval(timer);
+        // Show play icon
+        pauseIcon.innerHTML = '<polygon points="4,2 14,8 4,14" fill="currentColor"/>';
+        pauseBtn.title = 'Resume auto-advance';
+      } else {
+        startTimer();
+        // Show pause icon
+        pauseIcon.innerHTML = '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
+        pauseBtn.title = 'Pause auto-advance';
+      }
+    }
+
+    // Show first slide
+    slides[0].classList.add('active');
+    goTo(0);
+    startTimer();
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); if (!paused) startTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); if (!paused) startTimer(); });
+    pauseBtn.addEventListener('click', togglePause);
+
+    // Keyboard support
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('figCarousel')) return;
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); if (!paused) startTimer(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); if (!paused) startTimer(); }
+    });
+  })();
 </script>
 </body>
 </html>
