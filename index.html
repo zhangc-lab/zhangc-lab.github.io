@@ -7,6 +7,27 @@
 <meta name="google-site-verification" content="9OUf6Sj1uJAanLBMs9BOZvY2rn3lrYAaqYrojgK3Hlc" />
 <meta name="description" content="Official website of the Zhang Lab at SIFBI, A*STAR. Metabolic engineering, synthetic biology, and biosynthesis.">
 
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<!-- Canonical URL — replace with your production URL once deployed -->
+<link rel="canonical" href="https://zhangc-lab.github.io">
+
+<!-- Open Graph / Facebook / LinkedIn -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zhangc-lab.github.io">
+<meta property="og:title" content="Zhang Lab | SIFBI, A*STAR">
+<meta property="og:description" content="Engineering microbial cell factories for sustainable production of chemicals, fuels, and food ingredients. SIFBI, A*STAR, Singapore.">
+<meta property="og:image" content="https://zhangc-lab.github.io/group-photo-2.webp">
+<meta property="og:image:alt" content="Zhang Lab team at SIFBI, A*STAR">
+<meta property="og:site_name" content="Zhang Lab">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zhang Lab | SIFBI, A*STAR">
+<meta name="twitter:description" content="Engineering microbial cell factories for sustainable production of chemicals, fuels, and food ingredients.">
+<meta name="twitter:image" content="https://zhangc-lab.github.io/group-photo-2.webp">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -59,8 +80,13 @@
   .nav-logo {
     font-family: var(--serif); font-size: 1.25rem;
     color: var(--gray-900); text-decoration: none; letter-spacing: -0.01em;
+    display: inline-flex; align-items: center; gap: 0.6rem;
   }
-  .nav-logo span { color: var(--teal); font-style: italic; }
+  .nav-logo-text { color: var(--gray-900); }
+  .nav-logo-text em { color: var(--teal); font-style: italic; }
+  .nav-logo-mark {
+    width: 32px; height: 32px; display: block; flex-shrink: 0;
+  }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
@@ -200,6 +226,7 @@
     margin-bottom: 0.35rem; line-height: 1.5;
   }
   .pub-authors { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 0.25rem; }
+  .pub-authors strong { color: var(--gray-900); font-weight: 600; }
   .pub-journal { font-size: 0.85rem; color: var(--teal); font-weight: 400; font-style: italic; }
   .pub-badge {
     display: inline-block; font-size: 0.65rem; padding: 0.15rem 0.5rem;
@@ -208,6 +235,42 @@
     margin-left: 0.5rem; vertical-align: middle;
   }
   .pub-more { margin-top: 2rem; }
+
+  .pub-badge--patent {
+    background: var(--gray-100); color: var(--gray-700);
+  }
+  .pub-badge--patent::before {
+    content: '◆ '; font-size: 0.7em; vertical-align: 0.05em; opacity: 0.7;
+  }
+  .pub-item[data-type="patent"] .pub-journal {
+    color: var(--gray-500); font-style: normal;
+  }
+
+  .pub-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.25rem;
+    margin: 1.5rem 0 2rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .pub-tab {
+    background: none; border: none;
+    padding: 0.7rem 1rem; cursor: pointer;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+    color: var(--gray-500); letter-spacing: 0.06em; text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+  }
+  .pub-tab:hover { color: var(--teal); }
+  .pub-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .pub-tab-count {
+    font-size: 0.68rem; font-weight: 500; padding: 0.12rem 0.5rem;
+    background: var(--gray-100); color: var(--gray-500);
+    border-radius: 999px; letter-spacing: 0;
+    font-feature-settings: "tnum";
+  }
+  .pub-tab.active .pub-tab-count { background: var(--teal-light); color: var(--teal-dark); }
+  .pub-item.is-hidden { display: none !important; }
 
   /* ── TEAM ── */
   #team { background: var(--gray-50); }
@@ -218,7 +281,8 @@
     border-left: 3px solid var(--teal);
   }
   .team-pi-photo {
-    aspect-ratio: 3/4; background: var(--gray-100);
+    aspect-ratio: 1 / 1; background: var(--gray-100);
+    overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     font-family: var(--serif); font-size: 3rem; color: var(--teal);
   }
@@ -250,19 +314,38 @@
   }
   .pi-link:hover { border-color: var(--teal); }
 
-  .-section-title {
-    font-family: var(--serif); font-size: 1.1rem; color: var(--gray-500);
-    margin-bottom: 1.5rem; font-style: italic;
+  .-section-title,
+  .members-section-title {
+    font-family: var(--serif); font-size: 1.1rem; color: var(--gray-700);
+    margin-bottom: 1.25rem; font-style: italic;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .members-section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--gray-100);
   }
   .team-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
   }
   .team-card { text-align: center; }
   .team-card-photo {
-    width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 0.75rem;
+    width: 84px; height: 84px; border-radius: 50%; margin: 0 auto 0.9rem;
     display: flex; align-items: center; justify-content: center;
-    font-family: var(--serif); font-size: 1.2rem;
-    color: white; font-weight: 400;
+    font-family: var(--serif); font-size: 1.3rem; font-weight: 400;
+    color: white; letter-spacing: 0.02em;
+    position: relative; overflow: hidden;
+    box-shadow: 0 4px 14px rgba(15, 110, 86, 0.16);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  /* Subtle highlight for depth */
+  .team-card-photo::after {
+    content: ''; position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 30% 22%, rgba(255,255,255,0.22), transparent 58%);
+    pointer-events: none;
+  }
+  .team-card:hover .team-card-photo {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(15, 110, 86, 0.26);
   }
   .team-card-name { font-size: 0.9rem; font-weight: 500; color: var(--gray-900); }
   .team-card-role { font-size: 0.78rem; color: var(--gray-500); }
@@ -287,7 +370,40 @@
   .open-positions h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--teal-dark); margin-bottom: 0.5rem; }
   .open-positions p { font-size: 0.9rem; color: var(--teal-dark); }
 
-  /* ── NEWS ── */
+
+  /* ── HERO NEWS STRIP ── */
+  .hero-news {
+    background: var(--white); padding: 3rem 2rem 2rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .hero-news-inner { max-width: var(--max-w); margin: 0 auto; }
+  .hero-news-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-news-label::after {
+    content: ''; display: block; height: 1px; flex: 1;
+    background: var(--gray-100);
+  }
+  .hero-news-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .hero-news-more {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--teal); text-decoration: none;
+    border-bottom: 1px solid transparent; transition: border-color 0.2s;
+  }
+  .hero-news-more:hover { border-color: var(--teal); }
+  @media (max-width: 900px) {
+    .hero-news-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  /* ── LAB LIFE (gallery moved into Team) ── */
+  .lab-life { margin-top: 2rem; }
+
+  /* ── NEWS (legacy, kept for hero-news cards reusing news-card class) ── */
   #news { background: var(--white); }
   .news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   .news-card {
@@ -345,6 +461,88 @@
     border-color: var(--teal);
   }
   .form-group textarea { resize: vertical; min-height: 120px; }
+
+  /* ── JOINING THE LAB ── */
+  #join { background: var(--white); }
+  .join-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px;
+    background: var(--gray-300); margin-top: 2.5rem;
+  }
+  .join-block {
+    background: var(--white); padding: 2.25rem;
+    position: relative; overflow: hidden;
+    transition: background 0.25s;
+  }
+  .join-block:hover { background: #fafffe; }
+  .join-block::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--teal);
+    transition: height 0.35s cubic-bezier(.4,0,.2,1);
+  }
+  .join-block:hover::before { height: 100%; }
+  .join-block h3 {
+    font-family: var(--serif); font-size: 1.2rem;
+    color: var(--gray-900); margin-bottom: 1rem; line-height: 1.25;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .join-block h3 .join-step {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal);
+    background: var(--teal-light); padding: 0.18rem 0.55rem;
+    border-radius: 1px; font-family: var(--sans); font-style: normal;
+  }
+  .join-block > p { font-size: 0.9rem; color: var(--gray-700); line-height: 1.7; margin-bottom: 1rem; }
+  .join-block ul { list-style: none; padding: 0; margin: 0; }
+  .join-block li {
+    font-size: 0.88rem; color: var(--gray-700); line-height: 1.65;
+    padding-left: 1.1rem; position: relative; margin-bottom: 0.55rem;
+  }
+  .join-block li::before {
+    content: ''; position: absolute; left: 0; top: 0.6rem;
+    width: 5px; height: 5px; border-radius: 50%; background: var(--teal-mid);
+  }
+  .join-block a {
+    color: var(--teal); text-decoration: none;
+    border-bottom: 1px solid var(--teal-light); transition: border-color 0.2s;
+  }
+  .join-block a:hover { border-color: var(--teal); }
+  .join-cta {
+    margin-top: 2.5rem; padding: 1.75rem 2rem; background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; justify-content: space-between;
+  }
+  .join-cta-text { font-size: 0.95rem; color: var(--teal-dark); max-width: 50ch; }
+  .join-cta-text strong {
+    display: block; font-family: var(--serif); font-size: 1.15rem;
+    margin-bottom: 0.25rem; color: var(--teal-dark);
+  }
+  @media (max-width: 900px) {
+    .join-grid { grid-template-columns: 1fr; gap: 0; }
+    .join-cta { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-radius: 1px; cursor: pointer; text-decoration: none;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--white);
+    border-color: var(--teal);
+  }
+  .btn-primary:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+  .btn-outline {
+    background: transparent; color: var(--teal);
+    border-color: var(--teal);
+  }
+  .btn-outline:hover { background: var(--teal); color: var(--white); }
+  .btn-group { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
   /* ── FOOTER ── */
   footer {
@@ -511,15 +709,16 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="nav-logo">Zhang<span>'s Lab</span></a>
+    <a href="#home" class="nav-logo">
+      <img src="logo.svg" alt="" class="nav-logo-mark" width="32" height="32">
+      <span class="nav-logo-text">Zhang<em>'s Lab</em></span>
+    </a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#research">Research</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#team">Team</a></li>
       <li><a href="#collaborators">Collaborators</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#news">News</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -529,7 +728,7 @@
 <section id="home">
   <!-- Full-width photo with overlay quote -->
   <div class="hero-photo-panel">
-    <img src="group-photo-2.webp" alt="Zhang Lab team at SIFBI">
+    <img src="group-photo-2.webp" alt="Zhang Lab team at SIFBI" loading="eager" fetchpriority="high" decoding="async">
     <div class="hero-quote">
       <div class="hero-quote-inner">
         <p class="hero-quote-text">
@@ -537,6 +736,34 @@
         </p>
         <span class="hero-quote-source">Zhang Lab · SIFBI, A*STAR</span>
       </div>
+    </div>
+  </div>
+
+  <!-- Recent news strip (top 3) -->
+  <div class="hero-news">
+    <div class="hero-news-inner">
+      <p class="hero-news-label">Recent updates</p>
+      <div class="hero-news-grid">
+        <div class="news-card">
+                <span class="news-type">Publication</span>
+                <div class="news-date">2026</div>
+                <h3><a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">New paper in ACS Synthetic Biology: AUCS control system ↗</a></h3>
+                <p>We report a new arabinose-inducible univariant control system (AUCS) that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
+              </div>
+        <div class="news-card">
+                <span class="news-type">Recruitment</span>
+                <div class="news-date">Ongoing</div>
+                <h3>We are hiring PhD students</h3>
+                <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? See the <a href="join.html" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">Joining the Lab page</a>, or email Dr. Zhang with your CV and a brief statement of research interests.</p>
+              </div>
+        <div class="news-card">
+                <span class="news-type">Research Highlight</span>
+                <div class="news-date">2024 · A*STAR Research</div>
+                <h3><a href="https://research.a-star.edu.sg/articles/highlights/sniffing-out-scalable-solutions-for-aromatic-compounds/" target="_blank" style="color:inherit;text-decoration:none;">Sniffing out scalable solutions for aromatic compounds ↗</a></h3>
+                <p>Our work on engineering <em>E. coli</em> to produce rose-scent monoterpenes geraniol and geranyl acetate at high titer using innovative microaerobic bioprocesses.</p>
+              </div>
+      </div>
+      <a href="#publications" class="hero-news-more">See all publications &amp; patents →</a>
     </div>
   </div>
 </section>
@@ -671,7 +898,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-c1c2-embedded.svg" alt="C1 and C2 feedstocks network and thermodynamics">
+              <img src="figure-c1c2-embedded.svg" alt="C1 and C2 feedstocks network and thermodynamics" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 1.</strong>
                 Overview of C1 &amp; C2 feedstock generation routes and thermodynamic landscape of key carbon substrates for microbial waste valorisation. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
@@ -681,7 +908,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-bioeconomy.svg" alt="Bioeconomy overview using C1 and C2 feedstocks">
+              <img src="figure-bioeconomy.svg" alt="Bioeconomy overview using C1 and C2 feedstocks" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 2.</strong>
                 Overview of the bioeconomy using C1 and C2 feedstocks — connecting renewable carbon sources to high-value bioproducts through microbial biotransformation. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
@@ -691,7 +918,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-autotrophy.svg" alt="Autotrophic microbial production pathways">
+              <img src="figure-autotrophy.svg" alt="Autotrophic microbial production pathways" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 3.</strong>
                 Autotrophic biosynthesis pathways — engineering microbes to fix CO<sub>2</sub> and other one-carbon feedstocks into value-added chemicals. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
@@ -701,7 +928,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-mhp.svg" alt="MHP multidimensional heuristic process products">
+              <img src="figure-mhp.svg" alt="MHP multidimensional heuristic process products" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 4.</strong>
                 Multidimensional heuristic process (MHP) — a systematic strategy for high-yield co-production of astaxanthin and fragrance molecules in <em>E. coli</em>. <a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1038/s41467-018-04211-x</a>
@@ -711,7 +938,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-carotenoids.svg" alt="Carotenoids and apocarotenoids biosynthesis">
+              <img src="figure-carotenoids.svg" alt="Carotenoids and apocarotenoids biosynthesis" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 5.</strong>
                 Biosynthetic landscape of carotenoids and apocarotenoids — from lycopene to astaxanthin, zeaxanthin, and fragrance ionones via engineered microbial pathways. <a href="https://doi.org/10.5772/intechopen.79061" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.5772/intechopen.79061</a>
@@ -721,7 +948,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-ionone-embedded.svg" alt="Apocarotenoid biosynthesis — α-ionone, β-ionone and retinol">
+              <img src="figure-ionone-embedded.svg" alt="Apocarotenoid biosynthesis — α-ionone, β-ionone and retinol" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 6.</strong>
                 Modular biosynthetic pathway for producing apocarotenoid flavour &amp; fragrance molecules (α-ionone, β-ionone) and nutraceutical retinol from glucose via lycopene. <a href="https://doi.org/10.1002/bit.26462" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1002/bit.26462</a>
@@ -731,7 +958,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-nerolidol-embedded.svg" alt="trans-Nerolidol biosynthetic pathway">
+              <img src="figure-nerolidol-embedded.svg" alt="trans-Nerolidol biosynthetic pathway" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 7.</strong>
                 Biosynthetic pathway for high-yield production of <em>trans</em>-nerolidol, a woody/floral fragrance compound, from sugar and glycerol feedstocks in engineered <em>E. coli</em>. <a href="https://doi.org/10.1021/acs.jafc.3c01161" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acs.jafc.3c01161</a>
@@ -741,7 +968,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-diterpenes.svg" alt="Diterpene biosynthesis pathways">
+              <img src="figure-diterpenes.svg" alt="Diterpene biosynthesis pathways" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 8.</strong>
                 Diterpene biosynthetic pathways — engineering microbial hosts to produce high-value diterpenoid natural products from renewable carbon sources. <a href="https://doi.org/10.1016/j.engmic.2022.100058" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1016/j.engmic.2022.100058</a>
@@ -751,7 +978,7 @@
 
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
-              <img src="figure-aucs.svg" alt="Arabinose-Inducible Univariant Control System (AUCS)">
+              <img src="figure-aucs.svg" alt="Arabinose-Inducible Univariant Control System (AUCS)" loading="lazy" decoding="async">
               <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
                 <strong style="color:var(--gray-700);">Figure 9.</strong>
                 Arabinose-Inducible Univariant Control System (AUCS) — a precision gene expression tool for tunable microbial production of proteins, enzymes, and metabolites. <a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acssynbio.5c00602</a>
@@ -786,195 +1013,330 @@
 <!-- PUBLICATIONS -->
 <section id="publications">
   <div class="section-inner">
-    <p class="section-label">Publications</p>
-    <h2 class="section-title">Selected Research Articles</h2>
-    <p class="section-lead">Representative publications from our group. For a complete list, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a>.</p>
+    <p class="section-label">Publications &amp; Patents</p>
+    <h2 class="section-title">Publications &amp; Patents</h2>
+    <p class="section-lead">Representative peer-reviewed papers and granted/pending patents from our group. For the complete publication record, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a>.</p>
+
+    <div class="pub-tabs" role="tablist" aria-label="Filter publications and patents">
+      <button class="pub-tab active" data-filter="all" role="tab" aria-selected="true" type="button">All <span class="pub-tab-count">27</span></button>
+      <button class="pub-tab" data-filter="original" role="tab" aria-selected="false" type="button">Original Research <span class="pub-tab-count">11</span></button>
+      <button class="pub-tab" data-filter="review" role="tab" aria-selected="false" type="button">Reviews <span class="pub-tab-count">5</span></button>
+      <button class="pub-tab" data-filter="patent" role="tab" aria-selected="false" type="button">Patents <span class="pub-tab-count">11</span></button>
+    </div>
 
     <div class="pub-list">
 
       <!-- 2026 — Genomic editing (Metabolic Engineering) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2026</div>
         <div>
           <div class="pub-title">
             <a href="https://www.sciencedirect.com/science/article/abs/pii/S1096717626000479" target="_blank" style="color:inherit;text-decoration:none;">Systematic study of genomic loci in Escherichia coli B and K12 for genomic integration: application in plasmid-free astaxanthin production</a>
             <span class="pub-badge">New</span>
           </div>
-          <div class="pub-authors"> Nguyen N., Ong L., Zhang C.</div>
+          <div class="pub-authors"> Nguyen N., Ong L., <strong>Zhang C</strong>.</div>
           <div class="pub-journal">Metabolic Engineering</div>
         </div>
       </div>
-
       <!-- 2026 — AUCS (ACS Synthetic Biology) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2026</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">Arabinose-inducible univariant control system (AUCS) for microbial production of proteins, enzymes, and metabolites</a>
             <span class="pub-badge">New</span>
           </div>
-          <div class="pub-authors">Zhang C, Shukal S.</div>
+          <div class="pub-authors"><strong>Zhang C</strong>, Shukal S.</div>
           <div class="pub-journal">ACS Synthetic Biology</div>
         </div>
       </div>
-
       <!-- 2025 — PET plastic upcycling -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="review">
         <div class="pub-year">2025</div>
         <div>
           <div class="pub-title">
             <a href="https://www.sciencedirect.com/science/article/abs/pii/S0734975025001715" target="_blank" style="color:inherit;text-decoration:none;">Bio-upcycling PET waste: advances in enzymatic hydrolysis and biosynthesis of value-added products</a>
           </div>
-          <div class="pub-authors">Zhou Y, Zhang J, You S, Zhang C, Qi W.</div>
+          <div class="pub-authors">Zhou Y, Zhang J, You S, <strong>Zhang C</strong>, Qi W.</div>
           <div class="pub-journal">Biotechnology Advances</div>
         </div>
       </div>
-
       <!-- 2025 — Pleostene / mushroom sesquiterpene synthases (J. Agric. Food Chem.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2025</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acs.jafc.5c06398" target="_blank" style="color:inherit;text-decoration:none;">Discovery and characterization of two novel sesquiterpene synthases producing pleostene in oyster and honey mushrooms</a>
           </div>
-          <div class="pub-authors">Zhang C, Wibowo M, Shukal S, Basri N, Thong A, Heng MY, Chen X, Kanagasundaram Y, Ang EL.</div>
+          <div class="pub-authors"><strong>Zhang C</strong>, Wibowo M, Shukal S, Basri N, Thong A, Heng MY, Chen X, Kanagasundaram Y, Ang EL.</div>
           <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
         </div>
       </div>
-
+      <!-- Patent: US-12378561-B2 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/US12378561B2/en" target="_blank" style="color:inherit;text-decoration:none;">Production of carotenoids and apocarotenoids</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Heng-Phon Too</div>
+          <div class="pub-journal">US-12378561-B2 · Granted Aug 2025 · A*STAR, Singapore</div>
+        </div>
+      </div>
+      <!-- Patent: US-2025188479-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/US20250188479A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis Of Rose Aromas</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors">Jian Ting Leonard Ong, Chin Chin Lim, <strong>Congqiang Simon Zhang</strong>, Sudha Devi D/O Manbahal Shukal, Xixian Chen, Rehka T</div>
+          <div class="pub-journal">US-2025188479-A1 · Pending · published Jun 2025 · A*STAR, Singapore</div>
+        </div>
+      </div>
+      <!-- Patent: US-2025154451-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/US20250154451A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis Of Linalool</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Sudha Devi D/O Manbahal Shukal, Nicola Yen Min (Chen Yuanming) Tan, Jian Ting Leonard Ong, Chin Chin Lim</div>
+          <div class="pub-journal">US-2025154451-A1 · Pending · published May 2025 · A*STAR, Singapore</div>
+        </div>
+      </div>
+      <!-- Patent: WO-2025034163-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/WO2025034163A1/en" target="_blank" style="color:inherit;text-decoration:none;">Compositions with aroma and methods thereof</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors">Melanie WEINGARTEN, <strong>Congqiang ZHANG</strong></div>
+          <div class="pub-journal">WO-2025034163-A1 · PCT pending · published Feb 2025 · A*STAR, Singapore</div>
+        </div>
+      </div>
+      <!-- Patent: WO-2025034162-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/WO2025034162A1/en" target="_blank" style="color:inherit;text-decoration:none;">Spirocyclo terpene compounds and their biosynthesis thereof</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors">Yee Hwee LIM, <strong>Congqiang ZHANG</strong>, Yifeng WEI, Guangrong PEH, Choon Boon CHEONG, Rehka T.</div>
+          <div class="pub-journal">WO-2025034162-A1 · PCT pending · published Feb 2025 · A*STAR, Singapore</div>
+        </div>
+      </div>
+      <!-- Patent: EP-4486906-A2 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2025</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/EP4486906A2/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis of apocarotenoids by controlling oxidative stress</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors">Ching-Ning Huang, Xixian Chen, <strong>Congqiang ZHANG</strong></div>
+          <div class="pub-journal">EP-4486906-A2 · Pending · published Jan 2025 · A*STAR · Fermatics Pte Ltd</div>
+        </div>
+      </div>
       <!-- 2024 — Microaerobic fermentation / geraniol (ACS Sustainable Chem. Eng.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acssuschemeng.3c06030" target="_blank" style="color:inherit;text-decoration:none;">Microaerobic fermentation enables high-titer biosynthesis of the rose monoterpenes geraniol and geranyl acetate in <em>Escherichia coli</em></a>
           </div>
-          <div class="pub-authors">Shukal S, Ong L, Rehka T, Chen X, Zhang C.</div>
+          <div class="pub-authors">Shukal S, Ong L, Rehka T, Chen X, <strong>Zhang C</strong>.</div>
           <div class="pub-journal">ACS Sustainable Chemistry &amp; Engineering</div>
         </div>
       </div>
-
       <!-- 2024 — CRISPR interference review (Engineering Microbiology) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="review">
         <div class="pub-year">2024</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1016/j.engmic.2023.100123" target="_blank" style="color:inherit;text-decoration:none;">Advances and applications of CRISPR/Cas-mediated interference in <em>Escherichia coli</em></a>
           </div>
-          <div class="pub-authors">Lim X, Zhang C, Chen X.</div>
+          <div class="pub-authors">Lim X, <strong>Zhang C</strong>, Chen X.</div>
           <div class="pub-journal">Engineering Microbiology</div>
         </div>
       </div>
-
+      <!-- Patent: US-2024240209-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/US20240240209A1/en" target="_blank" style="color:inherit;text-decoration:none;">Synthesis of enantiopure <em>cis</em>-α-irone from a renewable carbon source</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors">Xixian Chen, <strong>Congqiang Zhang</strong>, Rehka T, Sudha Shukal, Derek Smith, Isabelle André, Esque JEREMY</div>
+          <div class="pub-journal">US-2024240209-A1 · Pending · published Jul 2024 · A*STAR · Institut National De Recherche Pour L' Agriculture, L'Alimentation Et L'Environment, CNRS, INSA Toulouse</div>
+        </div>
+      </div>
+      <!-- Patent: WO-2024107105-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2024</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/WO2024107105A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis of isoprenoid</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang ZHANG</strong>, Nicola Tan, Xixian Chen, Sudha Devi D/O Manbahal SHUKAL, Jian Ting Leonard ONG, Chin Chin LIM</div>
+          <div class="pub-journal">WO-2024107105-A1 · PCT pending · published May 2024 · A*STAR, Singapore</div>
+        </div>
+      </div>
       <!-- 2023 — Nerolidol (J. Agric. Food Chem.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2023</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acs.jafc.3c01161" target="_blank" style="color:inherit;text-decoration:none;">High-yield biosynthesis of <em>trans</em>-nerolidol from sugar and glycerol</a>
           </div>
-          <div class="pub-authors">Tan N, Ong L, Shukal S, Chen X, Zhang C.</div>
+          <div class="pub-authors">Tan N, Ong L, Shukal S, Chen X, <strong>Zhang C</strong>.</div>
           <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
         </div>
       </div>
-
       <!-- 2023 — Linker diversity / zeaxanthin (Metab. Eng. Commun.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2023</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1016/j.mec.2023.e00222" target="_blank" style="color:inherit;text-decoration:none;">Exploring linker sequence diversity to fuse carotene cyclase and hydroxylase for zeaxanthin biosynthesis</a>
           </div>
-          <div class="pub-authors">Bouin A, Zhang C, Lindley ND, Truan G, Lautier T.</div>
+          <div class="pub-authors">Bouin A, <strong>Zhang C</strong>, Lindley ND, Truan G, Lautier T.</div>
           <div class="pub-journal">Metabolic Engineering Communications</div>
         </div>
       </div>
-
       <!-- 2023 — Fungal TPS structure (ACS Catalysis) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2023</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acscatal.2c05598" target="_blank" style="color:inherit;text-decoration:none;">Structural understanding of fungal terpene synthases for the formation of linear or cyclic terpene products</a>
           </div>
-          <div class="pub-authors">Rehka T, Deepti S, Lin F, Lim CC, Jobichen C, Zhang C.</div>
+          <div class="pub-authors">Rehka T, Deepti S, Lin F, Lim CC, Jobichen C, <strong>Zhang C</strong>.</div>
           <div class="pub-journal">ACS Catalysis</div>
         </div>
       </div>
-
+      <!-- 2023 — IPK review (Biotechnology Advances) -->
+      <div class="pub-item" data-type="review">
+        <div class="pub-year">2023</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://doi.org/10.1016/j.biotechadv.2023.108124" target="_blank" style="color:inherit;text-decoration:none;">Development of isopentenyl phosphate kinases and their application in terpenoid biosynthesis</a>
+          </div>
+          <div class="pub-authors">Zhang X, Wang X, Zhang Y, Wang F, <strong>Zhang C</strong>, Li X.</div>
+          <div class="pub-journal">Biotechnology Advances</div>
+        </div>
+      </div>
       <!-- 2022 — Next-gen feedstocks review (Front. Bioeng. Biotechnol.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="review">
         <div class="pub-year">2022</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:inherit;text-decoration:none;">Microbial utilization of next-generation feedstocks for the biomanufacturing of value-added chemicals and food ingredients</a>
           </div>
-          <div class="pub-authors">Zhang C, Ottenheim C, Weingarten M, Ji LH.</div>
+          <div class="pub-authors"><strong>Zhang C</strong>, Ottenheim C, Weingarten M, Ji LH.</div>
           <div class="pub-journal">Frontiers in Bioengineering and Biotechnology</div>
         </div>
       </div>
-
       <!-- 2022 — CRISPR-Cas9 BL21 (Microbial Cell Factories) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2022</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1186/s12934-022-01746-z" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering of <em>Escherichia coli</em> BL21 using simplified CRISPR-Cas9 and asymmetric homology arms recombineering</a>
           </div>
-          <div class="pub-authors">Shukal S, Lim XH, Zhang C, Chen X.</div>
+          <div class="pub-authors">Shukal S, Lim XH, <strong>Zhang C</strong>, Chen X.</div>
           <div class="pub-journal">Microbial Cell Factories</div>
         </div>
       </div>
-
+      <!-- Patent: WO-2022245301-A2 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2022</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/WO2022245301A2/en" target="_blank" style="color:inherit;text-decoration:none;">De novo biosynthesis of glycosylated carotenoids</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang ZHANG</strong>, Xixian Chen</div>
+          <div class="pub-journal">WO-2022245301-A2 · PCT pending · published Nov 2022 · A*STAR, Singapore</div>
+        </div>
+      </div>
       <!-- 2021 — Glycosylated carotenoids (Bioresources & Bioprocessing) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2021</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1186/s40643-021-00415-0" target="_blank" style="color:inherit;text-decoration:none;">High-level de novo biosynthesis of glycosylated zeaxanthin and astaxanthin in <em>Escherichia coli</em></a>
           </div>
-          <div class="pub-authors">Lautier T, Zhang C, et al.</div>
+          <div class="pub-authors">Lautier T, <strong>Zhang C</strong>, et al.</div>
           <div class="pub-journal">Bioresources and Bioprocessing</div>
         </div>
       </div>
-
+      <!-- Patent: SG-11202102032X-A -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2021</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/SG11202102032XA/en" target="_blank" style="color:inherit;text-decoration:none;">Methods for terpenoid production</a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Rühl Martin, Heng-Phon Too</div>
+          <div class="pub-journal">SG-11202102032X-A · Pending · published Mar 2021 · A*STAR · Justus Liebig University Giessen</div>
+        </div>
+      </div>
+      <!-- Patent: US-2021040520-A1 -->
+      <div class="pub-item" data-type="patent">
+        <div class="pub-year">2021</div>
+        <div>
+          <div class="pub-title">
+            <a href="https://patents.google.com/patent/US20210040520A1/en" target="_blank" style="color:inherit;text-decoration:none;">Viridiflorol production in auxotrophic <em>Escherichia coli</em></a>
+            <span class="pub-badge pub-badge--patent">Patent</span>
+          </div>
+          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Sudha Shukal</div>
+          <div class="pub-journal">US-2021040520-A1 · Pending · published Feb 2021 · A*STAR, Singapore</div>
+        </div>
+      </div>
       <!-- 2020 — Terpenoid flavor/fragrance review (J. Agric. Food Chem.) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="review">
         <div class="pub-year">2020</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acs.jafc.9b06203" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering strategies for sustainable terpenoid flavor and fragrance synthesis</a>
           </div>
-          <div class="pub-authors">Chen X, Zhang C, Lindley ND.</div>
+          <div class="pub-authors">Chen X, <strong>Zhang C</strong>, Lindley ND.</div>
           <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
         </div>
       </div>
-
       <!-- 2019 — Viridiflorol / amorphadiene (Metabolic Engineering) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2019</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1016/j.ymben.2019.06.002" target="_blank" style="color:inherit;text-decoration:none;">Systematic engineering for high-yield production of viridiflorol and amorphadiene in auxotrophic <em>Escherichia coli</em></a>
           </div>
-          <div class="pub-authors">Shukal S, Chen X, Zhang C.</div>
+          <div class="pub-authors">Shukal S, Chen X, <strong>Zhang C</strong>.</div>
           <div class="pub-journal">Metabolic Engineering</div>
         </div>
       </div>
-
       <!-- 2018 — MHP / astaxanthin flagship (Nature Communications) -->
-      <div class="pub-item">
+      <div class="pub-item" data-type="original">
         <div class="pub-year">2018</div>
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:inherit;text-decoration:none;">Multidimensional heuristic process for high-yield production of astaxanthin and fragrance molecules in <em>Escherichia coli</em></a>
           </div>
-          <div class="pub-authors">Zhang C, Seow VY, Chen X, Too HP.</div>
+          <div class="pub-authors"><strong>Zhang C</strong>, Seow VY, Chen X, Too HP.</div>
           <div class="pub-journal">Nature Communications</div>
         </div>
       </div>
-
-    </div>
+</div>
 
     <div class="pub-more btn-group">
       <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar ↗</a>
@@ -993,10 +1355,7 @@
     <!-- PI Profile -->
     <div class="team-pi">
       <div class="team-pi-photo">
-        <div class="team-pi-photo-inner">
-          <div class="pi-avatar">ZC</div>
-          <span style="font-size:0.75rem;color:var(--teal-dark);opacity:0.6">Replace with photo</span>
-        </div>
+        <img src="pi-headshot.webp" alt="Dr. ZHANG Congqiang (Simon)" width="280" height="280" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div>
         <p class="team-pi-name">ZHANG Congqiang (Simon) <span style="font-weight:300;color:var(--gray-500);font-family:var(--sans);font-size:1.1rem;">张聪强</span></p>
@@ -1019,17 +1378,17 @@
     <p class="members-section-title">Senior Scientists</p>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-card-photo" style="background:var(--teal);">KS</div>
+        <div class="team-card-photo" style="background:#0F6E56;">KS</div>
         <div class="team-card-name"><a href="mailto:Kim_Seohyoung@a-star.edu.sg">Dr. KIM Seohyoung</a></div>
         <div class="team-card-role">Senior Scientist</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#185FA5;">LY</div>
+        <div class="team-card-photo" style="background:#34736C;">LY</div>
         <div class="team-card-name"><a href="mailto:Liu_Yanbin@a-star.edu.sg">Dr. LIU Yanbin</a></div>
         <div class="team-card-role">Senior Scientist</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#534AB7;">TN</div>
+        <div class="team-card-photo" style="background:#4F7C5A;">TN</div>
         <div class="team-card-name"><a href="mailto:Thao_Nguyen@a-star.edu.sg">Dr. NGUYEN Thao</a></div>
         <div class="team-card-role">Senior Scientist</div>
       </div>
@@ -1039,12 +1398,12 @@
     <p class="members-section-title" style="margin-top:2.5rem;">Scientist</p>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-card-photo" style="background:#BA7517;">LX</div>
+        <div class="team-card-photo" style="background:#1D9E75;">LX</div>
         <div class="team-card-name"><a href="mailto:Lim_Xiao_Hui@a-star.edu.sg">Dr. LIM Xiao Hui</a></div>
         <div class="team-card-role">Scientist</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#0F6E56;">SS</div>
+        <div class="team-card-photo" style="background:#085041;">SS</div>
         <div class="team-card-name"><a href="mailto:sudha_devi@a-star.edu.sg">SHUKAL Sudha</a></div>
         <div class="team-card-role">Lead Research Officer</div>
       </div>
@@ -1054,27 +1413,27 @@
     <p class="members-section-title" style="margin-top:2.5rem;">Current Students</p>
     <div class="team-grid">
       <div class="team-card">
-        <div class="team-card-photo" style="background:#993556;">OL</div>
+        <div class="team-card-photo" style="background:#2F6F87;">OL</div>
         <div class="team-card-name">ONG Jian Ting (Leonard)</div>
         <div class="team-card-role">PhD Student</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#3C3489;">WSH</div>
+        <div class="team-card-photo" style="background:#0F6E56;">WSH</div>
         <div class="team-card-name">WANG Sihang 王思航</div>
         <div class="team-card-role">Master's Student</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#185FA5;">QJH</div>
+        <div class="team-card-photo" style="background:#34736C;">QJH</div>
         <div class="team-card-name">QIU Jiahao 邱嘉豪</div>
         <div class="team-card-role">Master's Student</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#639922;">LA</div>
+        <div class="team-card-photo" style="background:#4F7C5A;">LA</div>
         <div class="team-card-name">LEE Alvin</div>
         <div class="team-card-role">Student</div>
       </div>
       <div class="team-card">
-        <div class="team-card-photo" style="background:#BA7517;">SH</div>
+        <div class="team-card-photo" style="background:#1D9E75;">SH</div>
         <div class="team-card-name">SIAH Hayden</div>
         <div class="team-card-role">Student</div>
       </div>
@@ -1120,9 +1479,28 @@
       </div>
     </div>
 
+    <!-- Lab life: gallery photos -->
+    <div class="lab-life">
+      <p class="members-section-title" style="margin-top:3rem;margin-bottom:1.25rem;">Life in the lab and outside</p>
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-item--wide">
+          <img src="group-photo-2.webp" alt="Zhang Lab — Chinese New Year celebration at SIFBI" loading="lazy" decoding="async">
+          <div class="gallery-caption">Chinese New Year celebration at SIFBI</div>
+        </div>
+        <div class="gallery-item">
+          <img src="group-photo-1.webp" alt="Zhang Lab — Group gathering in the office" loading="lazy" decoding="async">
+          <div class="gallery-caption">Group gathering in the lab</div>
+        </div>
+        <div class="gallery-item">
+          <img src="group-photo-3.webp" alt="Zhang Lab — Team outing" loading="lazy" decoding="async">
+          <div class="gallery-caption">Team outing</div>
+        </div>
+      </div>
+    </div>
+
     <div class="open-positions">
-      <h3>We are recruiting</h3>
-      <p>We welcome motivated PhD students with backgrounds in metabolic engineering, synthetic biology, biochemistry, or chemical engineering. Please contact Dr. Zhang with your CV and research interests.</p>
+      <h3>Join us</h3>
+      <p>We welcome motivated PhD students and visiting researchers. <a href="join.html" style="color:var(--teal-dark);text-decoration:none;border-bottom:1px solid var(--teal-dark);">See the full Joining the Lab page →</a> for backgrounds we look for, scholarship pathways, and how to apply.</p>
     </div>
   </div>
 </section>
@@ -1324,78 +1702,6 @@
   </div>
 </section>
 
-<!-- GALLERY -->
-<section id="gallery" style="background:var(--gray-50);padding:5rem 2rem;">
-  <div class="section-inner">
-    <p class="section-label">Gallery</p>
-    <h2 class="section-title">Life in the Lab and Outside</h2>
-    <p class="section-lead">Moments from team events, lab gatherings, and outings.</p>
-
-    <div class="gallery-grid">
-      <div class="gallery-item gallery-item--wide">
-        <img src="group-photo-2.webp" alt="Zhang Lab — Chinese New Year celebration at SIFBI">
-        <div class="gallery-caption">Chinese New Year celebration at SIFBI</div>
-      </div>
-      <div class="gallery-item">
-        <img src="group-photo-1.webp" alt="Zhang Lab — Group gathering in the office">
-        <div class="gallery-caption">Group gathering in the lab</div>
-      </div>
-      <div class="gallery-item">
-        <img src="group-photo-3.webp" alt="Zhang Lab — Team outing">
-        <div class="gallery-caption">Team outing</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NEWS -->
-<section id="news">
-  <div class="section-inner">
-    <p class="section-label">News</p>
-    <h2 class="section-title">Latest Updates</h2>
-    <p class="section-lead">Recent news from the Zhang Lab.</p>
-
-    <div class="news-grid">
-      <div class="news-card">
-        <span class="news-type">Research Highlight</span>
-        <div class="news-date">A*STAR Research</div>
-        <h3><a href="https://research.a-star.edu.sg/articles/highlights/sniffing-out-scalable-solutions-for-aromatic-compounds/" target="_blank" style="color:inherit;text-decoration:none;">Sniffing out scalable solutions for aromatic compounds ↗</a></h3>
-        <p>Our work on engineering <em>E. coli</em> to produce rose-scent monoterpenes geraniol and geranyl acetate at high titer using innovative microaerobic bioprocesses.</p>
-      </div>
-      <div class="news-card">
-        <span class="news-type">Research Highlight</span>
-        <div class="news-date">A*STAR Research</div>
-        <h3><a href="https://research.a-star.edu.sg/articles/highlights/mushroom-blueprint-scores-biotech-breakthroughs/" target="_blank" style="color:inherit;text-decoration:none;">Mushroom blueprint scores biotech breakthroughs ↗</a></h3>
-        <p>Structural elucidation of fungal terpene synthases opens new avenues for engineering linalool and nerolidol biosynthesis through rational enzyme design.</p>
-      </div>
-      <div class="news-card">
-        <span class="news-type">Research Highlight</span>
-        <div class="news-date">A*STAR Research</div>
-        <h3><a href="https://research.a-star.edu.sg/articles/highlights/manufacturing-natures-sweet-smells/" target="_blank" style="color:inherit;text-decoration:none;">Manufacturing nature's sweet smells ↗</a></h3>
-        <p>High-yield microbial production of <em>trans</em>-nerolidol — a fragrance ingredient widely used in food and cosmetics — achieved from simple sugar and glycerol feedstocks.</p>
-      </div>
-      <div class="news-card">
-        <span class="news-type">Research Highlight</span>
-        <div class="news-date">A*STAR Research</div>
-        <h3><a href="https://research.a-star.edu.sg/articles/highlights/bacteria-turn-natures-rainbow-into-therapeutics/" target="_blank" style="color:inherit;text-decoration:none;">Bacteria turn nature's rainbow into therapeutics ↗</a></h3>
-        <p>Engineering <em>E. coli</em> to biosynthesize glycosylated carotenoids including zeaxanthin and astaxanthin glucosides with potential nutraceutical and therapeutic applications.</p>
-      </div>
-      <div class="news-card">
-        <span class="news-type">Publication</span>
-        <div class="news-date">2026</div>
-        <h3>New paper in ACS Synthetic Biology: AUCS control system</h3>
-        <p>We report a new arabinose-inducible univariant control system that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
-      </div>
-      <div class="news-card">
-        <span class="news-type">Recruitment</span>
-        <div class="news-date">Open positions</div>
-        <h3>We are hiring PhD students</h3>
-        <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? Contact Dr. Zhang with your CV and a brief statement of research interests.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
@@ -1455,29 +1761,43 @@
 
       <div class="contact-form">
         <h3>Send a Message</h3>
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" placeholder="Your full name">
-        </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="your@email.com">
-        </div>
-        <div class="form-group">
-          <label>Inquiry type</label>
-          <select>
-            <option value="">Select…</option>
-            <option>PhD/Postdoc application</option>
-            <option>Research collaboration</option>
-            <option>Media / press</option>
-            <option>General inquiry</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Your message…"></textarea>
-        </div>
-        <button class="btn btn-primary" onclick="alert('This is a template — connect this form to your backend or a service like Formspree.')">Send message</button>
+        <!--
+          TO ACTIVATE THIS FORM:
+          1. Sign up at https://formspree.io (free tier: 50 submissions/month)
+          2. Create a new form, copy the endpoint (looks like https://formspree.io/f/abcdwxyz)
+          3. Replace YOUR_FORMSPREE_ID below with your endpoint ID
+          Alternative services (drop-in replacements): web3forms.com, getform.io, basin
+        -->
+        <form id="contactForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+          <div class="form-group">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" placeholder="Your full name" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" placeholder="your@email.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="contact-type">Inquiry type</label>
+            <select id="contact-type" name="inquiry_type">
+              <option value="">Select…</option>
+              <option>PhD/Postdoc application</option>
+              <option>Research collaboration</option>
+              <option>Media / press</option>
+              <option>General inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" placeholder="Your message…" required></textarea>
+          </div>
+          <!-- Honeypot anti-spam: humans won't fill this hidden field -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+          <!-- Subject line that will appear in the notification email -->
+          <input type="hidden" name="_subject" value="Zhang Lab website — new contact form submission">
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p id="contactStatus" role="status" aria-live="polite" style="margin-top:0.75rem;font-size:0.85rem;color:var(--gray-500);"></p>
+        </form>
       </div>
     </div>
   </div>
@@ -1488,7 +1808,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-logo">Zhang<span>'s Lab</span></div>
-      <div class="footer-copy" style="margin-top:0.5rem;">© 2025 Zhang Lab · Singapore Institute of Food and Biotechnology Innovation</div>
+      <div class="footer-copy" style="margin-top:0.5rem;">© <span id="footerYear">2026</span> Zhang Lab · Singapore Institute of Food and Biotechnology Innovation</div>
     </div>
     <div class="footer-links">
       <a href="#research">Research</a>
@@ -1502,6 +1822,12 @@
 </footer>
 
 <script>
+  // Auto-update footer year
+  (function () {
+    const y = document.getElementById('footerYear');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+
   // Smooth active nav link highlighting
   const sections = document.querySelectorAll('section[id], div[id="home"]');
   const navLinks = document.querySelectorAll('.nav-links a');
@@ -1539,6 +1865,8 @@
 
   // ── Figure Carousel ──
   (function() {
+    const carousel = document.getElementById('figCarousel');
+    if (!carousel) return;
     const slides   = Array.from(document.querySelectorAll('.fig-slide'));
     const dotsWrap = document.getElementById('figDots');
     const counter  = document.getElementById('figCounter');
@@ -1547,43 +1875,51 @@
     const pauseBtn = document.getElementById('figPause');
     const pauseIcon = document.getElementById('figPauseIcon');
     const INTERVAL = 5000;
-    let current = 0, timer = null, paused = false;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let current = 0, timer = null, paused = reducedMotion, hovering = false;
 
     // Build dots
     slides.forEach((_, i) => {
       const d = document.createElement('button');
       d.className = 'fig-dot' + (i === 0 ? ' active' : '');
       d.setAttribute('aria-label', `Figure ${i+1}`);
-      d.addEventListener('click', () => goTo(i));
+      if (i === 0) d.setAttribute('aria-current', 'true');
+      d.addEventListener('click', () => { goTo(i); restartTimer(); });
       dotsWrap.appendChild(d);
     });
 
-    function goTo(idx, dir) {
+    function goTo(idx) {
       slides[current].classList.remove('active');
-      dotsWrap.children[current].classList.remove('active');
+      const oldDot = dotsWrap.children[current];
+      oldDot.classList.remove('active');
+      oldDot.removeAttribute('aria-current');
       current = (idx + slides.length) % slides.length;
       slides[current].classList.add('active');
-      dotsWrap.children[current].classList.add('active');
+      const newDot = dotsWrap.children[current];
+      newDot.classList.add('active');
+      newDot.setAttribute('aria-current', 'true');
       counter.textContent = `${current + 1} / ${slides.length}`;
     }
 
     function startTimer() {
       clearInterval(timer);
+      if (paused || hovering || reducedMotion) return;
       timer = setInterval(() => goTo(current + 1), INTERVAL);
     }
+    function restartTimer() { startTimer(); }
 
     function togglePause() {
       paused = !paused;
       if (paused) {
         clearInterval(timer);
-        // Show play icon
         pauseIcon.innerHTML = '<polygon points="4,2 14,8 4,14" fill="currentColor"/>';
         pauseBtn.title = 'Resume auto-advance';
+        pauseBtn.setAttribute('aria-label', 'Resume auto-advance');
       } else {
         startTimer();
-        // Show pause icon
         pauseIcon.innerHTML = '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
         pauseBtn.title = 'Pause auto-advance';
+        pauseBtn.setAttribute('aria-label', 'Pause auto-advance');
       }
     }
 
@@ -1592,15 +1928,106 @@
     goTo(0);
     startTimer();
 
-    prevBtn.addEventListener('click', () => { goTo(current - 1); if (!paused) startTimer(); });
-    nextBtn.addEventListener('click', () => { goTo(current + 1); if (!paused) startTimer(); });
+    // If user prefers reduced motion, start in paused state visually
+    if (reducedMotion) {
+      pauseIcon.innerHTML = '<polygon points="4,2 14,8 4,14" fill="currentColor"/>';
+      pauseBtn.title = 'Resume auto-advance';
+    }
+
+    prevBtn.addEventListener('click', () => { goTo(current - 1); restartTimer(); });
+    nextBtn.addEventListener('click', () => { goTo(current + 1); restartTimer(); });
     pauseBtn.addEventListener('click', togglePause);
 
-    // Keyboard support
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => { hovering = true; clearInterval(timer); });
+    carousel.addEventListener('mouseleave', () => { hovering = false; startTimer(); });
+
+    // Touch swipe (mobile)
+    let touchStartX = 0, touchStartY = 0;
+    carousel.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    carousel.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      const dy = e.changedTouches[0].screenY - touchStartY;
+      // Only treat as swipe if mostly horizontal and >40px
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        if (dx < 0) goTo(current + 1); else goTo(current - 1);
+        restartTimer();
+      }
+    }, { passive: true });
+
+    // Keyboard support — only when carousel is in viewport
+    let inView = false;
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { inView = e.isIntersecting; });
+    }, { threshold: 0.3 }).observe(carousel);
+
     document.addEventListener('keydown', e => {
-      if (!document.getElementById('figCarousel')) return;
-      if (e.key === 'ArrowLeft')  { goTo(current - 1); if (!paused) startTimer(); }
-      if (e.key === 'ArrowRight') { goTo(current + 1); if (!paused) startTimer(); }
+      if (!inView) return;
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); restartTimer(); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); restartTimer(); }
+    });
+  })();
+
+  // ── Publication filter tabs ──
+  (function () {
+    const tabs = document.querySelectorAll('.pub-tab');
+    const items = document.querySelectorAll('.pub-item');
+    if (!tabs.length || !items.length) return;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+        tabs.forEach(t => {
+          const isActive = t === tab;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+        items.forEach(item => {
+          const show = filter === 'all' || item.dataset.type === filter;
+          item.classList.toggle('is-hidden', !show);
+        });
+      });
+    });
+  })();
+
+  // ── Contact Form (AJAX submission to Formspree) ──
+  (function () {
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('contactStatus');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Guard against unconfigured endpoint
+      if (form.action.includes('YOUR_FORMSPREE_ID')) {
+        status.style.color = 'crimson';
+        status.textContent = 'Form not yet configured. The site owner needs to add a Formspree endpoint.';
+        return;
+      }
+      status.style.color = 'var(--gray-500)';
+      status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          status.style.color = 'var(--teal)';
+          status.textContent = 'Thanks — your message was sent. We\'ll be in touch soon.';
+        } else {
+          const data = await res.json().catch(() => ({}));
+          status.style.color = 'crimson';
+          status.textContent = (data.errors && data.errors.map(e => e.message).join(', ')) ||
+                               'Sorry, something went wrong. Please email congqiang_zhang@a-star.edu.sg directly.';
+        }
+      } catch (err) {
+        status.style.color = 'crimson';
+        status.textContent = 'Network error. Please email congqiang_zhang@a-star.edu.sg directly.';
+      }
     });
   })();
 </script>

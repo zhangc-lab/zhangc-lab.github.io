@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Zhang Lab logo">
+  <title>Zhang Lab</title>
+  <g fill="none" stroke-linecap="round">
+    <!-- Top bar of Z -->
+    <line x1="16" y1="16" x2="48" y2="16" stroke="#0F6E56" stroke-width="4"/>
+    <!-- Bottom bar of Z -->
+    <line x1="16" y1="48" x2="48" y2="48" stroke="#0F6E56" stroke-width="4"/>
+    <!-- Diagonal: two interweaving DNA-like strands -->
+    <path d="M 48 16 C 30 24, 34 40, 16 48" stroke="#0F6E56" stroke-width="2.8"/>
+    <path d="M 48 16 C 34 24, 30 40, 16 48" stroke="#1D9E75" stroke-width="2.8"/>
+    <!-- Subtle base-pair dots where the strands cross -->
+    <circle cx="32" cy="32" r="1.6" fill="#0F6E56" stroke="none"/>
+  </g>
+</svg>
