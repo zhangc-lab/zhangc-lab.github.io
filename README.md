@@ -60,24 +60,14 @@ GitHub Pages typically rebuilds within 1–2 minutes.
 
 ## Configuration TODO
 
-Before going fully live, two values still need to be replaced:
-
-1. **Contact form endpoint** — the form in the Contact section currently points at a Formspree placeholder. To activate it:
-   - Sign up at <https://formspree.io> (free tier covers 50 submissions / month)
-   - Create a new form, copy your endpoint ID
-   - In `index.html`, search for `YOUR_FORMSPREE_ID` and replace it with the real ID
-   - The submit handler will detect the unconfigured state and warn the visitor until this is done
-
-2. **Patents section content** — the Patents section currently has 3 placeholder entries inferred from published research. To populate with real patent data, edit `index.html` and replace each `<div class="patent-item">` block using the template at the top of the patent-list section. Required fields per patent: year, patent/application number, status (granted/filed/PCT pending), title, inventors, assignee, and a link to the patent record (Google Patents or the assigning office).
-
-3. **Optional**: replace the GitHub Pages URL with a custom domain — set up a `CNAME` file and update the `canonical`, `og:url`, `og:image`, and `twitter:image` meta tags in `index.html`.
+**Optional**: replace the GitHub Pages URL with a custom domain — set up a `CNAME` file and update the `canonical`, `og:url`, `og:image`, and `twitter:image` meta tags in `index.html` and `join.html`.
 
 ## Tech notes
 
 - **Pure static site**: HTML + CSS + vanilla JS, no frameworks, no build pipeline.
 - **Fonts**: DM Sans + DM Serif Display from Google Fonts.
 - **Images**: WebP for photos (small, retina-ready), SVG for figures and icons (scalable, crisp).
-- **Accessibility**: semantic HTML, paired form labels, `aria-current` on the active carousel dot, `aria-live` status region for form feedback, `prefers-reduced-motion` respected on the carousel.
+- **Accessibility**: semantic HTML, `aria-current` on the active carousel dot, `aria-modal` and focus management on the figure lightbox, `prefers-reduced-motion` respected on the carousel.
 - **Performance**: lazy-loading on all non-hero images, optimized WebP photos, hero image hinted with `fetchpriority="high"`.
 - **Social previews**: Open Graph + Twitter Card meta tags for clean LinkedIn / X / WhatsApp / Slack link previews.
 - **SEO**: descriptive `<title>`, `<meta description>`, canonical URL, Google Site Verification token included.
@@ -93,7 +83,7 @@ The site is organised as a single-page main site with one supporting sub-page.
 - **Publications & Patents** — unified chronological list (2018 – 2026) with filter tabs: All / Original Research / Reviews / Patents. The PI's name is bolded throughout. 16 papers + 11 patents = 27 entries.
 - **Team** — PI profile, senior scientists, current students, alumni (former staff and former students), plus a "Life in the lab" gallery strip and a brief "We are recruiting" teaser pointing to the Join page
 - **Collaborators** — primary collaborator (Dr. Chen Xixian) plus partners across Singapore, France, Germany, and China
-- **Contact** — lab address, email, and a working contact form (once configured)
+- **Contact** — lab address, email, prospective-students note, and office hours
 
 **join.html** is a dedicated page covering joining the lab — backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP, joint NUS/NTU/SIT PhDs, postdoc fellowships), example projects, and how to apply. Linked from the recruiting teaser on the main page.
 
