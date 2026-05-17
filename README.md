@@ -14,24 +14,20 @@ A single self-contained static site — no build step, no dependencies.
 
 ```
 zhangc-lab.github.io/
-├── index.html            # Main single-page site (HTML + CSS + JS in one file)
-├── join.html             # Standalone "Joining the Lab" page (linked from index.html)
-├── favicon.svg           # Browser tab icon (white "Z" + DNA helix on teal)
-├── logo.svg              # Lab logo for the navigation header
-├── pi-headshot.webp      # PI photo (Dr. Zhang Congqiang)
-├── group-photo-1.webp    # Lab gathering
-├── group-photo-2.webp    # Hero / Chinese New Year celebration
-├── group-photo-3.webp    # Team outing
-├── figure-aucs.svg       # Research figure: AUCS expression system
-├── figure-autotrophy.svg # Research figure: autotrophic pathways
-├── figure-bioeconomy.svg # Research figure: C1/C2 bioeconomy
-├── figure-c1c2-embedded.svg
-├── figure-carotenoids.svg
-├── figure-diterpenes.svg
-├── figure-ionone-embedded.svg
-├── figure-mhp.svg
-├── figure-nerolidol-embedded.svg
-└── README.md             # This file
+├── index.html                       # Main single-page site (HTML + CSS + JS)
+├── join.html                        # "Joining the Lab" page (linked from index.html)
+├── research-cell-factory.html       # Research sub-page: Microbial Cell Factory
+├── research-biocatalysis.html       # Research sub-page: Biocatalysis & Biosynthesis
+├── update-gallery.py                # Regenerate photos/manifest.json after adding photos
+├── favicon.svg                      # Browser tab icon
+├── logo.svg                         # Lab logo for the navigation header
+├── pi-headshot.webp                 # PI photo
+├── group-photo-2.webp               # Hero image (also OG / Twitter card)
+├── photos/                          # Gallery photos (drop new files here)
+│   ├── manifest.json                # Auto-generated photo list (run update-gallery.py to refresh)
+│   └── *.webp / *.jpg / *.png       # Photo files
+├── figure-*.svg                     # 9 research figures (carousel + sub-pages)
+└── README.md                        # This file
 ```
 
 ## Local preview
@@ -58,9 +54,31 @@ git push
 
 GitHub Pages typically rebuilds within 1–2 minutes.
 
+## Updating the gallery
+
+Photos for the Team → Gallery tab live in the `photos/` folder.
+
+1. Drop new images into `photos/` (`.webp`, `.jpg`, `.jpeg`, `.png`, or `.gif`).
+2. (Optional) Name them `YYYY-MM-something.ext` for nice auto-captions —
+   e.g. `2026-04-legoland-trip.webp` → caption "Legoland trip", date "April 2026".
+3. Run:
+   ```bash
+   python3 update-gallery.py            # update manifest.json
+   python3 update-gallery.py --dry      # preview what would change, no write
+   ```
+4. Existing entries in `manifest.json` are preserved on re-run, so any captions
+   you hand-edit later will survive subsequent runs.
+5. Commit and push:
+   ```bash
+   git add photos/ && git commit -m "Update gallery" && git push
+   ```
+
+The site loads `photos/manifest.json` over `fetch()` when the Gallery tab is
+first opened, so no other code needs to change.
+
 ## Configuration TODO
 
-**Optional**: replace the GitHub Pages URL with a custom domain — set up a `CNAME` file and update the `canonical`, `og:url`, `og:image`, and `twitter:image` meta tags in `index.html` and `join.html`.
+**Optional**: replace the GitHub Pages URL with a custom domain — set up a `CNAME` file and update the `canonical`, `og:url`, `og:image`, and `twitter:image` meta tags in `index.html`, `join.html`, `research-cell-factory.html`, and `research-biocatalysis.html`.
 
 ## Tech notes
 
@@ -79,9 +97,9 @@ The site is organised as a single-page main site with one supporting sub-page.
 **index.html** has six sections, all reachable via the top nav:
 
 - **Home** — hero photo with mission statement, plus a 3-card "Recent updates" strip below the hero showing the latest publication, recruitment notice, and research highlight
-- **Research** — 6 thematic areas (cell factories, biocatalysis, pathway design, omics, waste valorisation, bioprocess scale-up) plus an auto-advancing carousel of 9 selected research figures with DOIs
+- **Research** — 6 thematic areas (cell factories, biocatalysis, pathway design, omics, waste valorisation, bioprocess scale-up) plus an auto-advancing carousel of 9 selected research figures with DOIs. **Each card is clickable**: Microbial Cell Factory and Biocatalysis link to dedicated sub-pages (`research-cell-factory.html`, `research-biocatalysis.html`); the other four link directly to a representative paper.
 - **Publications & Patents** — unified chronological list (2018 – 2026) with filter tabs: All / Original Research / Reviews / Patents. The PI's name is bolded throughout. 16 papers + 11 patents = 27 entries.
-- **Team** — PI profile, senior scientists, current students, alumni (former staff and former students), plus a "Life in the lab" gallery strip and a brief "We are recruiting" teaser pointing to the Join page
+- **Team** — Two tabs at the top: **Team** shows PI profile, senior scientists, current students, and alumni; **Gallery** shows an auto-rotating slideshow of lab photos with thumbnails and click-to-enlarge (uses the figure lightbox). Recruiting teaser at the bottom links to the Join page.
 - **Collaborators** — primary collaborator (Dr. Chen Xixian) plus partners across Singapore, France, Germany, and China
 - **Contact** — lab address, email, prospective-students note, and office hours
 

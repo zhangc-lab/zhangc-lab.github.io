@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://zhangc-lab.github.io">
 <meta property="og:title" content="Zhang Lab | SIFBI, A*STAR">
 <meta property="og:description" content="Engineering microbial cell factories for sustainable production of chemicals, fuels, and food ingredients. SIFBI, A*STAR, Singapore.">
-<meta property="og:image" content="https://zhangc-lab.github.io/group-photo-2.webp">
+<meta property="og:image" content="https://zhangc-lab.github.io/photos/2026-cny-celebration.webp">
 <meta property="og:image:alt" content="Zhang Lab team at SIFBI, A*STAR">
 <meta property="og:site_name" content="Zhang Lab">
 
@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Zhang Lab | SIFBI, A*STAR">
 <meta name="twitter:description" content="Engineering microbial cell factories for sustainable production of chemicals, fuels, and food ingredients.">
-<meta name="twitter:image" content="https://zhangc-lab.github.io/group-photo-2.webp">
+<meta name="twitter:image" content="https://zhangc-lab.github.io/photos/2026-cny-celebration.webp">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,16 +102,29 @@
     display: block;
   }
   .hero-photo-panel {
-    position: relative; overflow: hidden;
     width: 100%;
     height: calc(100vh - var(--nav-h));
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    grid-template-rows: 1fr 140px;
+    gap: 6px;
+    background: var(--gray-100);
   }
-  .hero-photo-panel img {
+  .hero-stage {
+    grid-column: 1; grid-row: 1;
+    position: relative; overflow: hidden;
+  }
+  .hero-stage img.hero-img {
     width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
+    object-fit: cover; object-position: center 30%;  /* keep faces visible on tall crops */
     display: block;
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 1.4s ease-in-out;
+    will-change: opacity;
   }
-  .hero-photo-panel::after {
+  .hero-stage img.hero-img.is-active { opacity: 1; }
+  .hero-stage::after {
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(
@@ -120,7 +133,102 @@
       rgba(8, 80, 65, 0.35) 50%,
       rgba(0,0,0,0.18) 100%
     );
+    pointer-events: none;
   }
+  /* Thumbnail strips */
+  .hero-thumbs-right {
+    grid-column: 2; grid-row: 1;
+    display: grid; grid-template-rows: 1fr 1fr; gap: 6px;
+  }
+  .hero-thumbs-bottom {
+    grid-column: 1 / -1; grid-row: 2;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+  }
+  .hero-thumb {
+    position: relative; overflow: hidden;
+    display: block; text-decoration: none;
+    background: var(--gray-200, var(--gray-100));
+  }
+  .hero-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;  /* keep faces in frame */
+    display: block;
+    transition: transform 0.5s ease, filter 0.3s ease;
+  }
+  .hero-thumb::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(8, 80, 65, 0.0);
+    transition: background 0.25s;
+    pointer-events: none;
+  }
+  .hero-thumb:hover img { transform: scale(1.06); }
+  .hero-thumb:hover::after { background: rgba(8, 80, 65, 0.18); }
+  .hero-thumb-label {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0.5rem 0.7rem;
+    color: white; font-size: 0.7rem; letter-spacing: 0.03em;
+    background: linear-gradient(transparent, rgba(0,0,0,0.55));
+    z-index: 1;
+    line-height: 1.3;
+    opacity: 0; transform: translateY(4px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .hero-thumb:hover .hero-thumb-label { opacity: 1; transform: translateY(0); }
+  @media (max-width: 900px) {
+    .hero-photo-panel {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 110px;
+    }
+    .hero-thumbs-right { display: none; }  /* hide right strip on tablet+ phone */
+    .hero-thumbs-bottom { grid-column: 1; grid-row: 2; }
+  }
+  @media (max-width: 600px) {
+    .hero-photo-panel {
+      grid-template-rows: 1fr 90px;
+      gap: 4px;
+    }
+    .hero-thumbs-bottom { gap: 4px; }
+  }
+  /* Floating CTA — sits in the top-right "safe area" above the people in the photo */
+  .hero-gallery-cta {
+    position: absolute; top: 1.5rem; right: 1.5rem; z-index: 3;
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    padding: 0.6rem 1rem 0.6rem 0.9rem;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    color: white; text-decoration: none;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    cursor: pointer;
+  }
+  .hero-gallery-cta:hover {
+    background: rgba(255, 255, 255, 0.24);
+    border-color: rgba(255, 255, 255, 0.55);
+    transform: translateY(-1px);
+  }
+  .hero-gallery-cta-icon { font-size: 1rem; line-height: 1; }
+  .hero-gallery-cta-arrow {
+    display: inline-block;
+    transition: transform 0.25s;
+  }
+  .hero-gallery-cta:hover .hero-gallery-cta-arrow { transform: translateX(3px); }
+  @media (max-width: 600px) {
+    .hero-gallery-cta {
+      top: 1rem; right: 1rem;
+      padding: 0.5rem 0.85rem 0.5rem 0.75rem;
+      font-size: 0.7rem;
+    }
+    .hero-gallery-cta-text { display: none; }  /* icon-only on narrowest screens */
+  }
+  @media (max-width: 380px) {
+    .hero-gallery-cta-arrow { display: none; }
+  }
+
   .hero-quote {
     position: absolute; inset: 0; z-index: 2;
     display: flex; align-items: flex-end; justify-content: flex-end;
@@ -186,8 +294,23 @@
     background: var(--white); padding: 2rem 1.75rem;
     position: relative; overflow: hidden;
     transition: background 0.25s;
+    color: inherit; text-decoration: none; display: block;
   }
   .research-card:hover { background: #fafffe; }
+  /* "Read more" arrow indicator on each card */
+  .research-card-cta {
+    margin-top: 1.25rem;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--teal);
+    opacity: 0.65; transition: opacity 0.25s;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .research-card:hover .research-card-cta { opacity: 1; }
+  .research-card-cta-arrow {
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+  .research-card:hover .research-card-cta-arrow { transform: translateX(3px); }
   .research-card::before {
     content: ''; position: absolute; top: 0; left: 0;
     width: 3px; height: 0;
@@ -368,11 +491,47 @@
     white-space: nowrap;
   }
   .open-positions {
-    margin-top: 3rem; padding: 2rem; background: var(--teal-light);
-    border-left: 3px solid var(--teal);
+    margin-top: 3rem; padding: 2rem 2.25rem;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+    border-radius: 2px;
+    color: white;
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(15, 110, 86, 0.20);
   }
-  .open-positions h3 { font-family: var(--serif); font-size: 1.15rem; color: var(--teal-dark); margin-bottom: 0.5rem; }
-  .open-positions p { font-size: 0.9rem; color: var(--teal-dark); }
+  /* Decorative DNA-like accent */
+  .open-positions::after {
+    content: ''; position: absolute; right: -40px; top: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .open-positions-text { flex: 1 1 60%; min-width: 280px; position: relative; z-index: 1; }
+  .open-positions h3 {
+    font-family: var(--serif); font-size: 1.5rem;
+    color: white; margin-bottom: 0.4rem; line-height: 1.2;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .open-positions p { font-size: 0.95rem; color: rgba(255,255,255,0.92); margin: 0; line-height: 1.55; }
+  .open-positions-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+    background: white; color: var(--teal-dark);
+    text-decoration: none; font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    border-radius: 2px; border: 2px solid white;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    position: relative; z-index: 1; flex-shrink: 0;
+  }
+  .open-positions-cta:hover {
+    background: transparent; color: white;
+    transform: translateX(3px);
+  }
+  @media (max-width: 600px) {
+    .open-positions { padding: 1.5rem; flex-direction: column; align-items: flex-start; }
+    .open-positions h3 { font-size: 1.25rem; }
+  }
 
 
   /* ── HERO NEWS STRIP ── */
@@ -393,13 +552,28 @@
   .hero-news-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
   }
+  .hero-news-links {
+    margin-top: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 1.25rem 2rem; align-items: center;
+  }
   .hero-news-more {
-    display: inline-block; margin-top: 1.5rem;
+    display: inline-block;
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em;
     text-transform: uppercase; color: var(--teal); text-decoration: none;
-    border-bottom: 1px solid transparent; transition: border-color 0.2s;
+    border-bottom: 1px solid transparent; transition: border-color 0.2s, color 0.2s;
   }
   .hero-news-more:hover { border-color: var(--teal); }
+  .hero-news-more--accent {
+    padding: 0.55rem 1rem;
+    background: var(--teal-light); color: var(--teal-dark);
+    border-radius: 2px; border: 1px solid var(--teal-light);
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .hero-news-more--accent:hover {
+    background: var(--teal); color: white;
+    border-color: var(--teal); border-bottom-color: var(--teal);
+    transform: translateX(2px);
+  }
   @media (max-width: 900px) {
     .hero-news-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   }
@@ -428,6 +602,45 @@
     margin-bottom: 0.75rem;
   }
 
+  /* Highlighted news card — used for the active recruitment notice */
+  .news-card--highlight {
+    border-top-color: var(--teal) !important;
+    border-top-width: 3px !important;
+    background: linear-gradient(180deg, var(--teal-light) 0%, rgba(225,245,238,0.4) 100%);
+    padding: 1.5rem 1.25rem 1.25rem !important;
+    margin-top: -3px;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(15, 110, 86, 0.10);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .news-card--highlight:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(15, 110, 86, 0.18);
+    border-top-color: var(--teal-dark) !important;
+  }
+  .news-card--highlight .news-type {
+    background: var(--teal); color: white; border-color: var(--teal);
+    font-weight: 600;
+  }
+  .news-card--highlight .news-date { color: var(--teal-dark); font-weight: 600; }
+  .news-card--highlight h3 {
+    color: var(--teal-dark); font-weight: 600; font-size: 1.05rem;
+  }
+  .news-card--highlight p { color: var(--gray-700); }
+  .news-card--highlight a { color: var(--teal-dark); }
+  .news-card--highlight .news-cta {
+    display: inline-block; margin-top: 0.85rem;
+    padding: 0.55rem 1rem;
+    background: var(--teal); color: white; text-decoration: none;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase; border-radius: 1px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .news-card--highlight .news-cta:hover {
+    background: var(--teal-dark);
+    transform: translateX(2px);
+  }
+
   /* ── CONTACT ── */
   #contact { background: var(--gray-50); }
   .contact-grid { display: grid; grid-template-columns: 1fr; gap: 0; max-width: 640px; }
@@ -444,6 +657,30 @@
   }
   .contact-text { font-size: 0.9rem; color: var(--gray-700); line-height: 1.6; }
   .contact-text strong { color: var(--gray-900); font-weight: 500; display: block; }
+  /* Highlighted contact entry — used for the active recruitment notice */
+  .contact-detail--highlight {
+    background: linear-gradient(180deg, var(--teal-light) 0%, rgba(225,245,238,0.4) 100%);
+    border-left: 3px solid var(--teal);
+    padding: 1rem 1.25rem !important;
+    margin: 0.5rem 0 1.5rem -1rem;
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 4px 12px rgba(15, 110, 86, 0.10);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .contact-detail--highlight:hover {
+    transform: translateX(2px);
+    box-shadow: 0 8px 18px rgba(15, 110, 86, 0.16);
+  }
+  .contact-detail--highlight .contact-icon { color: var(--teal-dark); }
+  .contact-detail--highlight .contact-text { color: var(--gray-700); }
+  .contact-detail--highlight .contact-text strong {
+    color: var(--teal-dark); font-weight: 600;
+    font-size: 0.95rem; margin-bottom: 0.25rem;
+  }
+  .contact-detail--highlight .contact-text a {
+    color: var(--teal-dark); font-weight: 500;
+    border-bottom-color: var(--teal-dark) !important;
+  }
 
   /* ── JOINING THE LAB ── */
   #join { background: var(--white); }
@@ -722,6 +959,107 @@
   }
   .team-card-name a:hover { color: var(--teal); border-color: var(--teal); }
 
+  
+  /* ── TEAM TABS + GALLERY SLIDESHOW ── */
+  .team-tabs {
+    display: flex; flex-wrap: wrap; gap: 0.25rem;
+    margin: 1.5rem 0 2rem;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .team-tab {
+    background: none; border: none;
+    padding: 0.7rem 1rem; cursor: pointer;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 500;
+    color: var(--gray-500); letter-spacing: 0.06em; text-transform: uppercase;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .team-tab:hover { color: var(--teal); }
+  .team-tab.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .team-panel { display: block; }
+  .team-panel.is-hidden { display: none; }
+
+  .gallery-slideshow {
+    margin-top: 1rem;
+    display: grid; grid-template-columns: 1fr; gap: 1rem;
+  }
+  .slideshow-stage {
+    position: relative; width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--gray-100);
+    overflow: hidden; cursor: zoom-in;
+    border-radius: 2px;
+  }
+  .slideshow-stage img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center 25%;  /* slight upward bias keeps faces visible */
+    display: block;
+    animation: slideFadeIn 0.5s ease;
+  }
+  @keyframes slideFadeIn { from { opacity: 0.4; } to { opacity: 1; } }
+  .slideshow-overlay {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1.25rem 1.5rem 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.62));
+    color: white;
+    pointer-events: none;
+  }
+  .slideshow-caption {
+    font-size: 0.95rem; line-height: 1.5;
+    margin: 0 0 0.2rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  }
+  .slideshow-meta {
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    opacity: 0.85; margin: 0;
+  }
+  .slideshow-controls {
+    display: flex; align-items: center; gap: 0.6rem;
+    justify-content: center;
+  }
+  .slideshow-btn {
+    width: 36px; height: 36px; border-radius: 2px;
+    border: 1.5px solid var(--gray-300); background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--gray-700);
+    transition: border-color 0.2s, color 0.2s;
+    font-family: var(--sans);
+  }
+  .slideshow-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .slideshow-counter {
+    font-size: 0.75rem; color: var(--gray-500);
+    min-width: 4rem; text-align: center;
+    font-feature-settings: "tnum";
+  }
+  .slideshow-thumbs {
+    display: flex; gap: 0.5rem; overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+  }
+  .slideshow-thumb {
+    flex-shrink: 0;
+    width: 80px; height: 56px;
+    border: 2px solid transparent; border-radius: 2px;
+    overflow: hidden; cursor: pointer;
+    background: var(--gray-100);
+    transition: border-color 0.2s, transform 0.2s, opacity 0.2s;
+    opacity: 0.65;
+    padding: 0;
+  }
+  .slideshow-thumb:hover { opacity: 1; transform: translateY(-1px); }
+  .slideshow-thumb.active { border-color: var(--teal); opacity: 1; }
+  .slideshow-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slideshow-empty {
+    padding: 3rem 1.5rem; text-align: center;
+    color: var(--gray-500); font-size: 0.9rem;
+    background: var(--gray-50);
+  }
+  @media (max-width: 600px) {
+    .slideshow-thumb { width: 64px; height: 48px; }
+    .slideshow-caption { font-size: 0.85rem; }
+  }
+
   /* ── COLLABORATORS ── */
   #collaborators { background: var(--white); }
   .collab-region { margin-bottom: 3rem; }
@@ -824,16 +1162,25 @@
 <!-- HERO -->
 <section id="home">
   <!-- Full-width photo with overlay quote -->
-  <div class="hero-photo-panel">
-    <img src="group-photo-2.webp" alt="Zhang Lab team at SIFBI" loading="eager" fetchpriority="high" decoding="async">
-    <div class="hero-quote">
-      <div class="hero-quote-inner">
-        <p class="hero-quote-text">
-          "We engineer microbial cell factories to produce chemicals, fuels, and food ingredients — turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology."
-        </p>
-        <span class="hero-quote-source">Zhang Lab · SIFBI, A*STAR</span>
+  <div class="hero-photo-panel" id="heroPhotoPanel">
+    <div class="hero-stage" id="heroStage">
+      <img src="photos/2026-cny-celebration.webp" alt="Zhang Lab team at SIFBI" loading="eager" fetchpriority="high" decoding="async" class="hero-img is-active">
+      <a class="hero-gallery-cta" href="#team-gallery" aria-label="Browse the photo gallery">
+        <span class="hero-gallery-cta-icon">📷</span>
+        <span class="hero-gallery-cta-text">Photo Gallery</span>
+        <span class="hero-gallery-cta-arrow">→</span>
+      </a>
+      <div class="hero-quote">
+        <div class="hero-quote-inner">
+          <p class="hero-quote-text">
+            "We engineer microbial cell factories to produce chemicals, fuels, and food ingredients — turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology."
+          </p>
+          <span class="hero-quote-source">Zhang Lab · SIFBI, A*STAR</span>
+        </div>
       </div>
     </div>
+    <div class="hero-thumbs-right" id="heroThumbsRight" aria-label="Gallery preview"></div>
+    <div class="hero-thumbs-bottom" id="heroThumbsBottom" aria-label="Gallery preview"></div>
   </div>
 
   <!-- Recent news strip (newest first) -->
@@ -841,6 +1188,13 @@
     <div class="hero-news-inner">
       <p class="hero-news-label">Recent updates</p>
       <div class="hero-news-grid">
+        <div class="news-card news-card--highlight">
+          <span class="news-type">📣 Recruitment · Open</span>
+          <div class="news-date">Ongoing · Apply now</div>
+          <h3>We are hiring PhD students</h3>
+          <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? Read about backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), and how to apply.</p>
+          <a href="join.html" class="news-cta">Join the Lab →</a>
+        </div>
         <div class="news-card">
           <span class="news-type">Milestone</span>
           <div class="news-date">14 Apr 2026</div>
@@ -854,17 +1208,11 @@
           <p>The whole group spent three days at LEGOLAND in Johor Bahru — rides, building competitions, and a chance to recharge together away from the bench.</p>
         </div>
         <div class="news-card">
-                <span class="news-type">Publication</span>
-                <div class="news-date">2026</div>
-                <h3><a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">New paper in ACS Synthetic Biology: AUCS control system ↗</a></h3>
-                <p>We report a new arabinose-inducible univariant control system (AUCS) that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
-              </div>
-        <div class="news-card">
-                <span class="news-type">Recruitment</span>
-                <div class="news-date">Ongoing</div>
-                <h3>We are hiring PhD students</h3>
-                <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? See the <a href="join.html" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">Joining the Lab page</a>, or email Dr. Zhang with your CV and a brief statement of research interests.</p>
-              </div>
+          <span class="news-type">Publication</span>
+          <div class="news-date">2026</div>
+          <h3><a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">New paper in ACS Synthetic Biology: AUCS control system ↗</a></h3>
+          <p>We report a new arabinose-inducible univariant control system (AUCS) that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
+        </div>
         <div class="news-card">
                 <span class="news-type">Research Highlight</span>
                 <div class="news-date">2024 · A*STAR Research</div>
@@ -872,7 +1220,10 @@
                 <p>Our work on engineering <em>E. coli</em> to produce rose-scent monoterpenes geraniol and geranyl acetate at high titer using innovative microaerobic bioprocesses.</p>
               </div>
       </div>
-      <a href="#publications" class="hero-news-more">See all publications &amp; patents →</a>
+      <div class="hero-news-links">
+        <a href="#publications" class="hero-news-more">See all publications &amp; patents →</a>
+        <a href="news.html" class="hero-news-more hero-news-more--accent">More news →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -886,7 +1237,7 @@
 
     <div class="research-grid">
       <!-- Card 1: Microbial Cell Factory -->
-      <div class="research-card">
+      <a class="research-card" href="research-cell-factory.html">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16" cy="16" r="6" stroke="#0F6E56" stroke-width="1.5"/>
@@ -901,9 +1252,10 @@
           <span class="tag">Yeast</span>
           <span class="tag">Fungi</span>
         </div>
-      </div>
+        <span class="research-card-cta">Read more <span class="research-card-cta-arrow">→</span></span>
+      </a>
       <!-- Card 2: Biocatalysis and Biosynthesis -->
-      <div class="research-card">
+      <a class="research-card" href="research-biocatalysis.html">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8 6h16v4H8V6zM10 10v16M22 10v16" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
@@ -919,9 +1271,10 @@
           <span class="tag">Specialty chemicals</span>
           <span class="tag">Biofuels</span>
         </div>
-      </div>
+        <span class="research-card-cta">Read more <span class="research-card-cta-arrow">→</span></span>
+      </a>
       <!-- Card 3: Synthetic Pathway Design -->
-      <div class="research-card">
+      <a class="research-card" href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" rel="noopener">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="6" y="6" width="8" height="8" rx="1" stroke="#0F6E56" stroke-width="1.5"/>
@@ -938,9 +1291,10 @@
           <span class="tag">Protein engineering</span>
           <span class="tag">Computation</span>
         </div>
-      </div>
+        <span class="research-card-cta">Flagship paper <span class="research-card-cta-arrow">↗</span></span>
+      </a>
       <!-- Card 4: Genomic Editing & Omics -->
-      <div class="research-card">
+      <a class="research-card" href="https://www.sciencedirect.com/science/article/abs/pii/S1096717626000479" target="_blank" rel="noopener">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 26L10 16l6 5 6-10 6 8" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -956,9 +1310,10 @@
           <span class="tag">Flux analysis</span>
           <span class="tag">AI-guided design</span>
         </div>
-      </div>
+        <span class="research-card-cta">Latest paper (2026) <span class="research-card-cta-arrow">↗</span></span>
+      </a>
       <!-- Card 5: Waste Valorisation -->
-      <div class="research-card">
+      <a class="research-card" href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" rel="noopener">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 22c0-5 4-8 10-8s10 3 10 8" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
@@ -977,9 +1332,10 @@
           <span class="tag">PET upcycling</span>
           <span class="tag">Circular economy</span>
         </div>
-      </div>
+        <span class="research-card-cta">Review paper <span class="research-card-cta-arrow">↗</span></span>
+      </a>
       <!-- Card 6: Bioprocess Scale-up -->
-      <div class="research-card">
+      <a class="research-card" href="https://doi.org/10.1021/acssuschemeng.3c06030" target="_blank" rel="noopener">
         <div class="research-icon">
           <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 26h20" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round"/>
@@ -994,7 +1350,8 @@
           <span class="tag">Bioprocess</span>
           <span class="tag">Scale-up</span>
         </div>
-      </div>
+        <span class="research-card-cta">Bioprocess paper <span class="research-card-cta-arrow">↗</span></span>
+      </a>
     </div><!-- end research-grid -->
 
     <!-- Research figures carousel -->
@@ -1125,13 +1482,13 @@
   <div class="section-inner">
     <p class="section-label">Publications &amp; Patents</p>
     <h2 class="section-title">Publications &amp; Patents</h2>
-    <p class="section-lead">Representative peer-reviewed papers and granted/pending patents from our group. For the complete publication record, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a>.</p>
+    <p class="section-lead">A selection of recent peer-reviewed papers and granted/pending patents. For the complete record, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a> or the <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" style="color:var(--teal);">A*STAR researcher page</a>.</p>
 
     <div class="pub-tabs" role="tablist" aria-label="Filter publications and patents">
-      <button class="pub-tab active" data-filter="all" role="tab" aria-selected="true" type="button">All <span class="pub-tab-count">27</span></button>
-      <button class="pub-tab" data-filter="original" role="tab" aria-selected="false" type="button">Original Research <span class="pub-tab-count">11</span></button>
-      <button class="pub-tab" data-filter="review" role="tab" aria-selected="false" type="button">Reviews <span class="pub-tab-count">5</span></button>
-      <button class="pub-tab" data-filter="patent" role="tab" aria-selected="false" type="button">Patents <span class="pub-tab-count">11</span></button>
+      <button class="pub-tab active" data-filter="all" role="tab" aria-selected="true" type="button">Selected <span class="pub-tab-count">10</span></button>
+      <button class="pub-tab" data-filter="original" role="tab" aria-selected="false" type="button">Original Research <span class="pub-tab-count">5</span></button>
+      <button class="pub-tab" data-filter="review" role="tab" aria-selected="false" type="button">Reviews <span class="pub-tab-count">2</span></button>
+      <button class="pub-tab" data-filter="patent" role="tab" aria-selected="false" type="button">Patents <span class="pub-tab-count">3</span></button>
     </div>
 
     <div class="pub-list">
@@ -1218,42 +1575,6 @@
           <div class="pub-journal">US-2025154451-A1 · Pending · published May 2025 · A*STAR, Singapore</div>
         </div>
       </div>
-      <!-- Patent: WO-2025034163-A1 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/WO2025034163A1/en" target="_blank" style="color:inherit;text-decoration:none;">Compositions with aroma and methods thereof</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors">Melanie WEINGARTEN, <strong>Congqiang ZHANG</strong></div>
-          <div class="pub-journal">WO-2025034163-A1 · PCT pending · published Feb 2025 · A*STAR, Singapore</div>
-        </div>
-      </div>
-      <!-- Patent: WO-2025034162-A1 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/WO2025034162A1/en" target="_blank" style="color:inherit;text-decoration:none;">Spirocyclo terpene compounds and their biosynthesis thereof</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors">Yee Hwee LIM, <strong>Congqiang ZHANG</strong>, Yifeng WEI, Guangrong PEH, Choon Boon CHEONG, Rehka T.</div>
-          <div class="pub-journal">WO-2025034162-A1 · PCT pending · published Feb 2025 · A*STAR, Singapore</div>
-        </div>
-      </div>
-      <!-- Patent: EP-4486906-A2 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2025</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/EP4486906A2/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis of apocarotenoids by controlling oxidative stress</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors">Ching-Ning Huang, Xixian Chen, <strong>Congqiang ZHANG</strong></div>
-          <div class="pub-journal">EP-4486906-A2 · Pending · published Jan 2025 · A*STAR · Fermatics Pte Ltd</div>
-        </div>
-      </div>
       <!-- 2024 — Microaerobic fermentation / geraniol (ACS Sustainable Chem. Eng.) -->
       <div class="pub-item" data-type="original">
         <div class="pub-year">2024</div>
@@ -1276,30 +1597,6 @@
           <div class="pub-journal">Engineering Microbiology</div>
         </div>
       </div>
-      <!-- Patent: US-2024240209-A1 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2024</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/US20240240209A1/en" target="_blank" style="color:inherit;text-decoration:none;">Synthesis of enantiopure <em>cis</em>-α-irone from a renewable carbon source</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors">Xixian Chen, <strong>Congqiang Zhang</strong>, Rehka T, Sudha Shukal, Derek Smith, Isabelle André, Esque JEREMY</div>
-          <div class="pub-journal">US-2024240209-A1 · Pending · published Jul 2024 · A*STAR · Institut National De Recherche Pour L' Agriculture, L'Alimentation Et L'Environment, CNRS, INSA Toulouse</div>
-        </div>
-      </div>
-      <!-- Patent: WO-2024107105-A1 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2024</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/WO2024107105A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis of isoprenoid</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors"><strong>Congqiang ZHANG</strong>, Nicola Tan, Xixian Chen, Sudha Devi D/O Manbahal SHUKAL, Jian Ting Leonard ONG, Chin Chin LIM</div>
-          <div class="pub-journal">WO-2024107105-A1 · PCT pending · published May 2024 · A*STAR, Singapore</div>
-        </div>
-      </div>
       <!-- 2023 — Nerolidol (J. Agric. Food Chem.) -->
       <div class="pub-item" data-type="original">
         <div class="pub-year">2023</div>
@@ -1311,147 +1608,13 @@
           <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
         </div>
       </div>
-      <!-- 2023 — Linker diversity / zeaxanthin (Metab. Eng. Commun.) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2023</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.mec.2023.e00222" target="_blank" style="color:inherit;text-decoration:none;">Exploring linker sequence diversity to fuse carotene cyclase and hydroxylase for zeaxanthin biosynthesis</a>
-          </div>
-          <div class="pub-authors">Bouin A, <strong>Zhang C</strong>, Lindley ND, Truan G, Lautier T.</div>
-          <div class="pub-journal">Metabolic Engineering Communications</div>
-        </div>
-      </div>
-      <!-- 2023 — Fungal TPS structure (ACS Catalysis) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2023</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1021/acscatal.2c05598" target="_blank" style="color:inherit;text-decoration:none;">Structural understanding of fungal terpene synthases for the formation of linear or cyclic terpene products</a>
-          </div>
-          <div class="pub-authors">Rehka T, Deepti S, Lin F, Lim CC, Jobichen C, <strong>Zhang C</strong>.</div>
-          <div class="pub-journal">ACS Catalysis</div>
-        </div>
-      </div>
-      <!-- 2023 — IPK review (Biotechnology Advances) -->
-      <div class="pub-item" data-type="review">
-        <div class="pub-year">2023</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.biotechadv.2023.108124" target="_blank" style="color:inherit;text-decoration:none;">Development of isopentenyl phosphate kinases and their application in terpenoid biosynthesis</a>
-          </div>
-          <div class="pub-authors">Zhang X, Wang X, Zhang Y, Wang F, <strong>Zhang C</strong>, Li X.</div>
-          <div class="pub-journal">Biotechnology Advances</div>
-        </div>
-      </div>
-      <!-- 2022 — Next-gen feedstocks review (Front. Bioeng. Biotechnol.) -->
-      <div class="pub-item" data-type="review">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:inherit;text-decoration:none;">Microbial utilization of next-generation feedstocks for the biomanufacturing of value-added chemicals and food ingredients</a>
-          </div>
-          <div class="pub-authors"><strong>Zhang C</strong>, Ottenheim C, Weingarten M, Ji LH.</div>
-          <div class="pub-journal">Frontiers in Bioengineering and Biotechnology</div>
-        </div>
-      </div>
-      <!-- 2022 — CRISPR-Cas9 BL21 (Microbial Cell Factories) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1186/s12934-022-01746-z" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering of <em>Escherichia coli</em> BL21 using simplified CRISPR-Cas9 and asymmetric homology arms recombineering</a>
-          </div>
-          <div class="pub-authors">Shukal S, Lim XH, <strong>Zhang C</strong>, Chen X.</div>
-          <div class="pub-journal">Microbial Cell Factories</div>
-        </div>
-      </div>
-      <!-- Patent: WO-2022245301-A2 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2022</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/WO2022245301A2/en" target="_blank" style="color:inherit;text-decoration:none;">De novo biosynthesis of glycosylated carotenoids</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors"><strong>Congqiang ZHANG</strong>, Xixian Chen</div>
-          <div class="pub-journal">WO-2022245301-A2 · PCT pending · published Nov 2022 · A*STAR, Singapore</div>
-        </div>
-      </div>
-      <!-- 2021 — Glycosylated carotenoids (Bioresources & Bioprocessing) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1186/s40643-021-00415-0" target="_blank" style="color:inherit;text-decoration:none;">High-level de novo biosynthesis of glycosylated zeaxanthin and astaxanthin in <em>Escherichia coli</em></a>
-          </div>
-          <div class="pub-authors">Lautier T, <strong>Zhang C</strong>, et al.</div>
-          <div class="pub-journal">Bioresources and Bioprocessing</div>
-        </div>
-      </div>
-      <!-- Patent: SG-11202102032X-A -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/SG11202102032XA/en" target="_blank" style="color:inherit;text-decoration:none;">Methods for terpenoid production</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Rühl Martin, Heng-Phon Too</div>
-          <div class="pub-journal">SG-11202102032X-A · Pending · published Mar 2021 · A*STAR · Justus Liebig University Giessen</div>
-        </div>
-      </div>
-      <!-- Patent: US-2021040520-A1 -->
-      <div class="pub-item" data-type="patent">
-        <div class="pub-year">2021</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://patents.google.com/patent/US20210040520A1/en" target="_blank" style="color:inherit;text-decoration:none;">Viridiflorol production in auxotrophic <em>Escherichia coli</em></a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
-          </div>
-          <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Sudha Shukal</div>
-          <div class="pub-journal">US-2021040520-A1 · Pending · published Feb 2021 · A*STAR, Singapore</div>
-        </div>
-      </div>
-      <!-- 2020 — Terpenoid flavor/fragrance review (J. Agric. Food Chem.) -->
-      <div class="pub-item" data-type="review">
-        <div class="pub-year">2020</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1021/acs.jafc.9b06203" target="_blank" style="color:inherit;text-decoration:none;">Metabolic engineering strategies for sustainable terpenoid flavor and fragrance synthesis</a>
-          </div>
-          <div class="pub-authors">Chen X, <strong>Zhang C</strong>, Lindley ND.</div>
-          <div class="pub-journal">Journal of Agricultural and Food Chemistry</div>
-        </div>
-      </div>
-      <!-- 2019 — Viridiflorol / amorphadiene (Metabolic Engineering) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2019</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1016/j.ymben.2019.06.002" target="_blank" style="color:inherit;text-decoration:none;">Systematic engineering for high-yield production of viridiflorol and amorphadiene in auxotrophic <em>Escherichia coli</em></a>
-          </div>
-          <div class="pub-authors">Shukal S, Chen X, <strong>Zhang C</strong>.</div>
-          <div class="pub-journal">Metabolic Engineering</div>
-        </div>
-      </div>
-      <!-- 2018 — MHP / astaxanthin flagship (Nature Communications) -->
-      <div class="pub-item" data-type="original">
-        <div class="pub-year">2018</div>
-        <div>
-          <div class="pub-title">
-            <a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:inherit;text-decoration:none;">Multidimensional heuristic process for high-yield production of astaxanthin and fragrance molecules in <em>Escherichia coli</em></a>
-          </div>
-          <div class="pub-authors"><strong>Zhang C</strong>, Seow VY, Chen X, Too HP.</div>
-          <div class="pub-journal">Nature Communications</div>
-        </div>
-      </div>
 </div>
 
-    <div class="pub-more btn-group">
-      <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar ↗</a>
+    <div class="pub-more btn-group" style="margin-top:1.5rem;">
+      <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-primary">Full list on Google Scholar ↗</a>
       <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" class="btn btn-outline">A*STAR Profile ↗</a>
     </div>
+    <p style="margin-top:0.85rem;font-size:0.82rem;color:var(--gray-500);">Showing the 10 most recent items here. The full publication list and earlier work are on Google Scholar.</p>
   </div>
 </section>
 
@@ -1461,6 +1624,15 @@
     <p class="section-label">Team</p>
     <h2 class="section-title">People</h2>
     <p class="section-lead">A multidisciplinary team of biologists, chemists, and engineers united by the goal of sustainable biomanufacturing.</p>
+
+    <!-- Team / Gallery tabs -->
+    <div class="team-tabs" role="tablist" aria-label="Team or Gallery view">
+      <button class="team-tab active" data-tab="team" role="tab" aria-selected="true" type="button">Team</button>
+      <button class="team-tab" data-tab="gallery" role="tab" aria-selected="false" type="button">📷 Gallery</button>
+    </div>
+
+    <!-- Team panel -->
+    <div class="team-panel" data-panel="team">
 
     <!-- PI Profile -->
     <div class="team-pi">
@@ -1589,28 +1761,43 @@
       </div>
     </div>
 
-    <!-- Lab life: gallery photos -->
-    <div class="lab-life">
-      <p class="members-section-title" style="margin-top:3rem;margin-bottom:1.25rem;">Life in the lab and outside</p>
-      <div class="gallery-grid">
-        <div class="gallery-item gallery-item--wide">
-          <img src="group-photo-2.webp" alt="Zhang Lab — Chinese New Year celebration at SIFBI" loading="lazy" decoding="async">
-          <div class="gallery-caption">Chinese New Year celebration at SIFBI</div>
+    </div><!-- end team-panel(team) -->
+
+    <!-- Gallery panel (loads photos/manifest.json) -->
+    <div class="team-panel is-hidden" data-panel="gallery">
+      <div class="gallery-slideshow" id="gallerySlideshow">
+        <div class="slideshow-stage" id="gallery-stage" role="button" tabindex="0" aria-label="Click to view full size">
+          <img id="gallery-img" src="" alt="" decoding="async">
+          <div class="slideshow-overlay">
+            <p class="slideshow-caption" id="gallery-caption"></p>
+            <p class="slideshow-meta" id="gallery-meta"></p>
+          </div>
         </div>
-        <div class="gallery-item">
-          <img src="group-photo-1.webp" alt="Zhang Lab — Group gathering in the office" loading="lazy" decoding="async">
-          <div class="gallery-caption">Group gathering in the lab</div>
+        <div class="slideshow-controls">
+          <button class="slideshow-btn" id="gallery-prev" type="button" aria-label="Previous photo">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="slideshow-btn" id="gallery-pause" type="button" aria-label="Pause auto-advance">
+            <svg id="galleryPauseIcon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>
+              <rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+          <button class="slideshow-btn" id="gallery-next" type="button" aria-label="Next photo">
+            <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <span class="slideshow-counter" id="gallery-counter">— / —</span>
         </div>
-        <div class="gallery-item">
-          <img src="group-photo-3.webp" alt="Zhang Lab — Team outing" loading="lazy" decoding="async">
-          <div class="gallery-caption">Team outing</div>
-        </div>
+        <div class="slideshow-thumbs" id="gallery-thumbs" role="tablist" aria-label="Photo thumbnails"></div>
       </div>
     </div>
 
     <div class="open-positions">
-      <h3>Join us</h3>
-      <p>We welcome motivated PhD students and visiting researchers. <a href="join.html" style="color:var(--teal-dark);text-decoration:none;border-bottom:1px solid var(--teal-dark);">See the full Joining the Lab page →</a> for backgrounds we look for, scholarship pathways, and how to apply.</p>
+      <div class="open-positions-text">
+        <h3>🚀 Join us — we are recruiting</h3>
+        <p>We welcome motivated PhD students and visiting researchers. Backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), example projects, and how to apply — all on one page.</p>
+      </div>
+      <a href="join.html" class="open-positions-cta">Joining the Lab →</a>
     </div>
   </div>
 </section>
@@ -1846,14 +2033,14 @@
           </div>
         </div>
 
-        <div class="contact-detail">
+        <div class="contact-detail contact-detail--highlight">
           <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="14" height="14" rx="2" stroke="#0F6E56" stroke-width="1.2"/>
-            <path d="M6 6h6M6 9h6M6 12h3" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/>
+            <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M6 6h6M6 9h6M6 12h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
           <div class="contact-text">
-            <strong>Prospective Students</strong>
-            We are actively recruiting PhD students and postdoctoral researchers. Please attach your CV and a brief statement of research interests.
+            <strong>📣 Prospective Students</strong>
+            We are actively recruiting PhD students and visiting researchers. <a href="join.html" style="text-decoration:none;border-bottom:1px solid var(--teal);transition:border-color 0.2s;">See the Joining the Lab page →</a> for backgrounds, scholarship pathways (AGS, ARAP, SRAP), and how to apply.
           </div>
         </div>
 
@@ -1910,6 +2097,12 @@
     <p id="lightboxCaption" class="lightbox-caption"></p>
   </div>
 </div>
+
+<!-- GALLERY-MANIFEST-START — auto-generated by update-gallery.py, do not hand-edit -->
+<script>
+  window.__GALLERY_MANIFEST = {"photos": [{"src": "photos/2026-team-outing.webp", "caption": "Team outing", "date": "2026"}, {"src": "photos/2026-cny-celebration.webp", "caption": "Cny celebration", "date": "2026"}, {"src": "photos/20250919_with TBI friend in Toulouse.jpg", "caption": "With TBI friend in Toulouse", "date": "September 2025"}, {"src": "photos/20250918_with Prof Holger Zorn in Frankurt.jpg", "caption": "With Prof Holger Zorn in Frankurt", "date": "September 2025"}, {"src": "photos/20250918_Thao presenting Bioflavour conference.jpg", "caption": "Thao presenting Bioflavour conference", "date": "September 2025"}, {"src": "photos/20250917_Bioflavour conference dinner.jpg", "caption": "Bioflavour conference dinner", "date": "September 2025"}, {"src": "photos/20250822_Lab gathering.jpg", "caption": "Lab gathering", "date": "August 2025"}, {"src": "photos/20250410_Lab gathering.jpg", "caption": "Lab gathering", "date": "April 2025"}, {"src": "photos/20250404_AStartCentral Essentials Bootcamp.jpg", "caption": "AStartCentral Essentials Bootcamp", "date": "April 2025"}, {"src": "photos/202501014_Simon presenting in CO2 fixation conference Tianjin.jpg", "caption": "Simon presenting in CO2 fixation conference Tianjin", "date": "January 2025"}, {"src": "photos/2025-lab-gathering.webp", "caption": "Lab gathering", "date": "2025"}, {"src": "photos/20240628_team BBQ.jpg", "caption": "Team BBQ", "date": "June 2024"}, {"src": "photos/20231010_EcoCTs Symposium.jpeg", "caption": "EcoCTs Symposium", "date": "October 2023"}, {"src": "photos/20231005_Enzyme Engineering Conference.jpg", "caption": "Enzyme Engineering Conference", "date": "October 2023"}, {"src": "photos/20230825_Team retreat2.jpg", "caption": "Team retreat2", "date": "August 2023"}, {"src": "photos/20230825_Team retreat1.jpg", "caption": "Team retreat1", "date": "August 2023"}, {"src": "photos/20230825_Team retreat.jpg", "caption": "Team retreat", "date": "August 2023"}, {"src": "photos/20230413第二届先进生物制造国际会议.JPG", "caption": "20230413第二届先进生物制造国际会议"}, {"src": "photos/20230118_lohei_Lohei.jpg", "caption": "Lohei Lohei", "date": "January 2023"}, {"src": "photos/20230118_lohei_CNY_02.jpg", "caption": "Lohei CNY 02", "date": "January 2023"}, {"src": "photos/20230118_lohei_CNY.jpg", "caption": "Lohei CNY", "date": "January 2023"}, {"src": "photos/20221123_team.jpg", "caption": "Team", "date": "November 2022"}, {"src": "photos/20220929_Bioflavour conference dinner.jpg", "caption": "Bioflavour conference dinner", "date": "September 2022"}, {"src": "photos/20220926_With Martin in Giessen University.jpg", "caption": "With Martin in Giessen University", "date": "September 2022"}, {"src": "photos/20220926_Sudha poster in Bioflavour conference.jpg", "caption": "Sudha poster in Bioflavour conference", "date": "September 2022"}, {"src": "photos/20220506_team gathering.jpg", "caption": "Team gathering", "date": "May 2022"}, {"src": "photos/20201218_team celebration.jpg", "caption": "Team celebration", "date": "December 2020"}, {"src": "photos/20201009_team birthday.jpg", "caption": "Team birthday", "date": "October 2020"}, {"src": "photos/20200124_team.jpg", "caption": "Team", "date": "January 2020"}, {"src": "photos/20190629_Team gathering.jpg", "caption": "Team gathering", "date": "June 2019"}, {"src": "photos/20190430_Team lunch.jpg", "caption": "Team lunch", "date": "April 2019"}, {"src": "photos/20180926_132006_Bioflavour conference.jpg", "caption": "132006 Bioflavour conference", "date": "September 2018"}, {"src": "photos/20180620_Applikon visit.jpg", "caption": "Applikon visit", "date": "June 2018"}]};
+</script>
+<!-- GALLERY-MANIFEST-END -->
 
 <script>
   // Auto-update footer year
@@ -2081,6 +2274,312 @@
       });
     });
   })();
+
+
+  // ── Hero photo auto-rotation + thumbnail strips ──
+  (function () {
+    const panel = document.getElementById('heroPhotoPanel');
+    const stage = document.getElementById('heroStage');
+    if (!panel || !stage) return;
+    const manifest = window.__GALLERY_MANIFEST;
+    if (!manifest || !Array.isArray(manifest.photos) || !manifest.photos.length) return;
+
+    // -- Populate thumbnail strips from manifest (always, regardless of motion preference) --
+    const rightWrap = document.getElementById('heroThumbsRight');
+    const bottomWrap = document.getElementById('heroThumbsBottom');
+
+    // Explicit click handler so navigation works even when the URL hash is already
+    // #team-gallery (in which case the browser does NOT fire hashchange).
+    function openGallery(e) {
+      // Only handle plain left clicks — let cmd/ctrl/middle-click work normally for new tabs
+      if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0)) return;
+      if (e) e.preventDefault();
+      // Activate the gallery tab via the helper if available, else fall back to hash
+      const galleryTab = document.querySelector('.team-tab[data-tab="gallery"]');
+      if (galleryTab) galleryTab.click();
+      // Set the hash for shareable URL
+      if (location.hash !== '#team-gallery') {
+        history.pushState ? history.pushState(null, '', '#team-gallery') : (location.hash = '#team-gallery');
+      }
+      // Scroll to the Team section
+      const teamSection = document.getElementById('team');
+      if (teamSection) {
+        requestAnimationFrame(() => teamSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      }
+    }
+
+    function makeThumb(photo) {
+      const a = document.createElement('a');
+      a.className = 'hero-thumb';
+      a.href = '#team-gallery';
+      a.setAttribute('aria-label', 'Browse gallery — ' + (photo.caption || 'photo'));
+      const img = document.createElement('img');
+      img.src = photo.src;
+      img.alt = photo.caption || '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      a.appendChild(img);
+      if (photo.caption) {
+        const label = document.createElement('span');
+        label.className = 'hero-thumb-label';
+        label.textContent = photo.caption;
+        a.appendChild(label);
+      }
+      a.addEventListener('click', openGallery);
+      return a;
+    }
+
+    // Distribute ALL available photos: up to 2 in right column, up to 3 in bottom row.
+    // No dedup — the main hero rotates and the thumbs show the full gallery preview.
+    const pool = manifest.photos.slice();
+
+    const rightCount = Math.min(2, pool.length);
+    pool.slice(0, rightCount).forEach(p => rightWrap.appendChild(makeThumb(p)));
+
+    const bottomStart = rightCount;
+    const bottomCount = Math.max(0, Math.min(3, pool.length - rightCount));
+    pool.slice(bottomStart, bottomStart + bottomCount).forEach(p => bottomWrap.appendChild(makeThumb(p)));
+
+    // If we still have empty bottom slots and there are more photos in the pool,
+    // wrap around so the bottom row is populated.
+    let fillIdx = 0;
+    while (bottomWrap.children.length < 3 && pool.length > 0) {
+      const p = pool[fillIdx % pool.length];
+      bottomWrap.appendChild(makeThumb(p));
+      fillIdx++;
+      if (fillIdx > 10) break;  // safety
+    }
+
+    // Also wire any other in-page link that targets the gallery (e.g. the floating
+    // "📷 Photo Gallery" pill on the hero) so they also navigate reliably.
+    document.querySelectorAll('a[href="#team-gallery"]').forEach(a => {
+      // Skip ones already wired (the thumb anchors got their handler in makeThumb)
+      if (a.classList.contains('hero-thumb')) return;
+      a.addEventListener('click', openGallery);
+    });
+
+    // -- Main photo crossfade rotation --
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
+
+    const HERO_INTERVAL = 3000;
+    const initial = stage.querySelector('img.hero-img');
+    if (!initial) return;
+
+    const initialFilename = (initial.getAttribute('src') || '').split('/').pop();
+    const sources = [initial.getAttribute('src')];
+    manifest.photos.forEach(p => {
+      const fname = (p.src || '').split('/').pop();
+      if (fname && fname !== initialFilename && !sources.includes(p.src)) {
+        sources.push(p.src);
+      }
+    });
+    if (sources.length < 2) return;
+
+    const overlay = stage.querySelector('.hero-quote');
+    const layers = [initial];
+    for (let i = 1; i < sources.length; i++) {
+      const img = document.createElement('img');
+      img.src = sources[i];
+      img.alt = 'Zhang Lab photo';
+      img.className = 'hero-img';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      if (overlay) {
+        stage.insertBefore(img, overlay);
+      } else {
+        stage.appendChild(img);
+      }
+      layers.push(img);
+    }
+
+    let current = 0;
+    setInterval(() => {
+      const next = (current + 1) % layers.length;
+      // Toggle classes — CSS handles the 1.4s crossfade
+      layers[current].classList.remove('is-active');
+      layers[next].classList.add('is-active');
+      current = next;
+    }, HERO_INTERVAL);
+  })();
+
+  // ── Team / Gallery tabs ──
+  (function () {
+    const tabs = document.querySelectorAll('.team-tab');
+    const panels = document.querySelectorAll('.team-panel');
+    if (!tabs.length || !panels.length) return;
+    let galleryInitialised = false;
+
+    function activate(tabName) {
+      tabs.forEach(t => {
+        const active = t.dataset.tab === tabName;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      panels.forEach(p => {
+        p.classList.toggle('is-hidden', p.dataset.panel !== tabName);
+      });
+      if (tabName === 'gallery' && !galleryInitialised) {
+        galleryInitialised = true;
+        window.__initGallery && window.__initGallery();
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activate(tab.dataset.tab));
+    });
+
+    // Deep-link: if URL is #team-gallery (or #gallery), auto-open Gallery tab
+    function checkHashForGallery() {
+      const h = (location.hash || '').toLowerCase();
+      if (h === '#team-gallery' || h === '#gallery') {
+        activate('gallery');
+        // Scroll to the Team section so the user sees the gallery
+        const teamSection = document.getElementById('team');
+        if (teamSection) {
+          // Use rAF so the panel switch lands before scroll
+          requestAnimationFrame(() => teamSection.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        }
+      }
+    }
+    checkHashForGallery();
+    window.addEventListener('hashchange', checkHashForGallery);
+  })();
+
+  // ── Gallery slideshow (loads photos/manifest.json) ──
+  window.__initGallery = function () {
+    const stage = document.getElementById('gallery-stage');
+    const img = document.getElementById('gallery-img');
+    const caption = document.getElementById('gallery-caption');
+    const meta = document.getElementById('gallery-meta');
+    const counter = document.getElementById('gallery-counter');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    const pauseBtn = document.getElementById('gallery-pause');
+    const pauseIcon = document.getElementById('galleryPauseIcon');
+    const thumbsWrap = document.getElementById('gallery-thumbs');
+    if (!stage) return;
+
+    const INTERVAL = 5000;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let photos = [];
+    let current = 0, timer = null, paused = reducedMotion, hovering = false;
+
+    function render() {
+      if (!photos.length) return;
+      const p = photos[current];
+      img.src = p.src;
+      img.alt = p.caption || '';
+      caption.textContent = p.caption || '';
+      meta.textContent = p.date || '';
+      counter.textContent = (current + 1) + ' / ' + photos.length;
+      Array.from(thumbsWrap.children).forEach((t, i) => {
+        const active = i === current;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      if (paused || hovering || reducedMotion || photos.length < 2) return;
+      timer = setInterval(() => { current = (current + 1) % photos.length; render(); }, INTERVAL);
+    }
+    function navigate(delta) {
+      current = (current + delta + photos.length) % photos.length;
+      render(); startTimer();
+    }
+    function togglePause() {
+      paused = !paused;
+      if (paused) {
+        clearInterval(timer);
+        pauseIcon.innerHTML = '<polygon points="3,2 13,8 3,14" fill="currentColor"/>';
+        pauseBtn.setAttribute('aria-label', 'Resume auto-advance');
+      } else {
+        startTimer();
+        pauseIcon.innerHTML = '<rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/>';
+        pauseBtn.setAttribute('aria-label', 'Pause auto-advance');
+      }
+    }
+
+    function showEmpty(msg) {
+      const slideshow = document.getElementById('gallerySlideshow');
+      slideshow.innerHTML = '<div class="slideshow-empty">' + msg + '</div>';
+    }
+
+    function buildGallery(loadedPhotos) {
+      photos = loadedPhotos || [];
+      if (!photos.length) {
+        showEmpty('No photos yet. Drop images into the photos/ folder and run update-gallery.py.');
+        return;
+      }
+      photos.forEach((p, i) => {
+        const t = document.createElement('button');
+        t.className = 'slideshow-thumb' + (i === 0 ? ' active' : '');
+        t.type = 'button';
+        t.setAttribute('role', 'tab');
+        t.setAttribute('aria-label', 'Photo ' + (i + 1) + (p.caption ? ': ' + p.caption : ''));
+        t.innerHTML = '<img src="' + p.src + '" alt="" loading="lazy" decoding="async">';
+        t.addEventListener('click', () => { current = i; render(); startTimer(); });
+        thumbsWrap.appendChild(t);
+      });
+      if (reducedMotion) {
+        pauseIcon.innerHTML = '<polygon points="3,2 13,8 3,14" fill="currentColor"/>';
+        pauseBtn.setAttribute('aria-label', 'Resume auto-advance');
+      }
+      render();
+      startTimer();
+    }
+
+    // Wire control listeners ONCE, up-front (must happen before any early returns)
+    prevBtn.addEventListener('click', () => navigate(-1));
+    nextBtn.addEventListener('click', () => navigate(1));
+    pauseBtn.addEventListener('click', togglePause);
+    stage.addEventListener('mouseenter', () => { hovering = true; clearInterval(timer); });
+    stage.addEventListener('mouseleave', () => { hovering = false; startTimer(); });
+
+    let tx = 0, ty = 0;
+    stage.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; ty = e.changedTouches[0].screenY; }, { passive: true });
+    stage.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].screenX - tx;
+      const dy = e.changedTouches[0].screenY - ty;
+      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) navigate(dx < 0 ? 1 : -1);
+    }, { passive: true });
+
+    function openInLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lightboxImg');
+      const lbCaption = document.getElementById('lightboxCaption');
+      const lbCounter = document.getElementById('lightboxCounter');
+      if (!lightbox || !photos.length) return;
+      const p = photos[current];
+      lbImg.src = p.src;
+      lbImg.alt = p.caption || '';
+      lbCaption.textContent = (p.caption || '') + (p.date ? ' · ' + p.date : '');
+      if (lbCounter) lbCounter.textContent = (current + 1) + ' / ' + photos.length;
+      lightbox.removeAttribute('hidden');
+      document.body.classList.add('lb-open');
+    }
+    stage.addEventListener('click', openInLightbox);
+    stage.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInLightbox(); }
+    });
+
+    // Load the photo set: prefer inline manifest, fall back to fetch over http(s)
+    if (window.__GALLERY_MANIFEST && Array.isArray(window.__GALLERY_MANIFEST.photos)) {
+      buildGallery(window.__GALLERY_MANIFEST.photos);
+    } else if (location.protocol === 'file:') {
+      showEmpty('Gallery manifest not embedded. Run update-gallery.py to generate it, or open this page through a local server.');
+    } else {
+      fetch('photos/manifest.json', { cache: 'no-cache' })
+        .then(r => { if (!r.ok) throw new Error('manifest fetch failed'); return r.json(); })
+        .then(data => buildGallery((data && data.photos) || []))
+        .catch(err => {
+          console.warn('Gallery manifest load failed:', err);
+          showEmpty('Could not load photo gallery (manifest.json missing or invalid).');
+        });
+    }
+  };
 
   // ── Figure Lightbox (click figure → full-screen viewer) ──
   (function () {
