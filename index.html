@@ -87,13 +87,28 @@
   .nav-logo-mark {
     width: 32px; height: 32px; display: block; flex-shrink: 0;
   }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
   .nav-links a {
     font-size: 0.875rem; font-weight: 400; letter-spacing: 0.04em;
     text-transform: uppercase; color: var(--gray-700);
     text-decoration: none; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--teal); }
+
+  /* Language toggle */
+  .lang-toggle {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--gray-500); background: transparent;
+    border: 1px solid var(--gray-200); border-radius: 999px;
+    padding: 0.32rem 0.7rem; cursor: pointer;
+    font-family: var(--sans);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .lang-toggle:hover { border-color: var(--teal); color: var(--teal); }
+  .lang-toggle .lang-opt { padding: 0 0.15rem; }
+  .lang-toggle .lang-opt.is-active { color: var(--teal); font-weight: 600; }
+  .lang-toggle .lang-sep { color: var(--gray-200); }
 
   /* ── HERO ── */
   #home {
@@ -1132,6 +1147,9 @@
     .nav-links::-webkit-scrollbar { display: none; }
     .nav-links li { flex-shrink: 0; }
     .nav-links a { font-size: 0.68rem; letter-spacing: 0.02em; white-space: nowrap; }
+    /* Hide secondary nav items so the language toggle always fits */
+    .nav-hide-mobile { display: none; }
+    .lang-toggle { padding: 0.28rem 0.55rem; font-size: 0.7rem; }
     .team-grid { grid-template-columns: repeat(2,1fr); }
   }
   @media (max-width: 420px) {
@@ -1150,11 +1168,18 @@
       <span class="nav-logo-text">Zhang<em>'s Lab</em></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#research">Research</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#team">Team</a></li>
-      <li><a href="#collaborators">Collaborators</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#research" data-i18n="nav.research">Research</a></li>
+      <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
+      <li><a href="#team" data-i18n="nav.team">Team</a></li>
+      <li class="nav-hide-mobile"><a href="#collaborators" data-i18n="nav.collaborators">Collaborators</a></li>
+      <li class="nav-hide-mobile"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+      <li>
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">
+          <span class="lang-opt is-active" data-lang-opt="en">EN</span>
+          <span class="lang-sep">|</span>
+          <span class="lang-opt" data-lang-opt="zh">中文</span>
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
@@ -1167,15 +1192,15 @@
       <img src="photos/2026-cny-celebration.webp" alt="Zhang Lab team at SIFBI" loading="eager" fetchpriority="high" decoding="async" class="hero-img is-active">
       <a class="hero-gallery-cta" href="#team-gallery" aria-label="Browse the photo gallery">
         <span class="hero-gallery-cta-icon">📷</span>
-        <span class="hero-gallery-cta-text">Photo Gallery</span>
+        <span class="hero-gallery-cta-text" data-i18n="hero.galleryCta">Photo Gallery</span>
         <span class="hero-gallery-cta-arrow">→</span>
       </a>
       <div class="hero-quote">
         <div class="hero-quote-inner">
-          <p class="hero-quote-text">
+          <p class="hero-quote-text" data-i18n="hero.quote">
             "We engineer microbial cell factories to produce chemicals, fuels, and food ingredients — turning renewable feedstocks into high-value products through precision metabolic design and synthetic biology."
           </p>
-          <span class="hero-quote-source">Zhang Lab · SIFBI, A*STAR</span>
+          <span class="hero-quote-source" data-i18n="hero.quoteSource">Zhang Lab · SIFBI, A*STAR</span>
         </div>
       </div>
     </div>
@@ -1186,49 +1211,49 @@
   <!-- Recent news strip (newest first) -->
   <div class="hero-news">
     <div class="hero-news-inner">
-      <p class="hero-news-label">Recent updates</p>
+      <p class="hero-news-label" data-i18n="news.label">Recent updates</p>
       <div class="hero-news-grid">
         <div class="news-card news-card--highlight">
-          <span class="news-type">📣 Recruitment · Open</span>
-          <div class="news-date">Ongoing · Apply now</div>
-          <h3>We are hiring PhD students</h3>
-          <p>Interested in synthetic biology and metabolic engineering of microbial cell factories? Read about backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), and how to apply.</p>
-          <a href="join.html" class="news-cta">Join the Lab →</a>
+          <span class="news-type" data-i18n="news.recruit.type">📣 Recruitment · Open</span>
+          <div class="news-date" data-i18n="news.recruit.date">Ongoing · Apply now</div>
+          <h3 data-i18n="news.recruit.title">We are hiring PhD students</h3>
+          <p data-i18n="news.recruit.body">Interested in synthetic biology and metabolic engineering of microbial cell factories? Read about backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), and how to apply.</p>
+          <a href="join.html" class="news-cta" data-i18n="news.recruit.cta">Join the Lab →</a>
         </div>
         <div class="news-card">
-          <span class="news-type">In the News</span>
-          <div class="news-date">6 May 2026 · Nature Spotlight</div>
-          <h3><a href="https://www.nature.com/articles/d41586-026-01250-z" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">📰 Featured in Nature: Engineering resilient food systems in a warming world ↗</a></h3>
-          <p>Simon is featured in a <em>Nature</em> Spotlight on synthetic biology and food security, discussing the lab's work engineering microorganisms to produce flavours, fragrances, and antioxidants — and to reduce dependence on petroleum-derived chemicals.</p>
+          <span class="news-type" data-i18n="news.nature.type">In the News</span>
+          <div class="news-date" data-i18n="news.nature.date">6 May 2026 · Nature Spotlight</div>
+          <h3><a href="https://www.nature.com/articles/d41586-026-01250-z" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" data-i18n="news.nature.title">📰 Featured in Nature: Engineering resilient food systems in a warming world ↗</a></h3>
+          <p data-i18n="news.nature.body">Simon is featured in a <em>Nature</em> Spotlight on synthetic biology and food security, discussing the lab's work engineering microorganisms to produce flavours, fragrances, and antioxidants — and to reduce dependence on petroleum-derived chemicals.</p>
         </div>
         <div class="news-card">
-          <span class="news-type">Editorial Role</span>
-          <div class="news-date">May 2026 · Submissions open</div>
-          <h3><a href="https://www.nature.com/collections/gaihbdbedb/guest-editors" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">🧪 Guest Editor — <em>Scientific Reports</em> Collection on Next‑Generation Biomanufacturing ↗</a></h3>
-          <p>Simon joins Dr. Hyun Gi Koh and Dr. Takuya Matsumoto as Guest Editor for a <em>Scientific Reports</em> (Nature Portfolio) Collection on Next‑Generation Biomanufacturing. Submissions open until 12 January 2027.</p>
+          <span class="news-type" data-i18n="news.sciRep.type">Editorial Role</span>
+          <div class="news-date" data-i18n="news.sciRep.date">May 2026 · Submissions open</div>
+          <h3><a href="https://www.nature.com/collections/gaihbdbedb/guest-editors" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" data-i18n="news.sciRep.title">🧪 Guest Editor — <em>Scientific Reports</em> Collection on Next‑Generation Biomanufacturing ↗</a></h3>
+          <p data-i18n="news.sciRep.body">Simon joins Dr. Hyun Gi Koh and Dr. Takuya Matsumoto as Guest Editor for a <em>Scientific Reports</em> (Nature Portfolio) Collection on Next‑Generation Biomanufacturing. Submissions open until 12 January 2027.</p>
         </div>
         <div class="news-card">
-          <span class="news-type">Editorial Role</span>
-          <div class="news-date">2026 · Elsevier Special Issue</div>
-          <h3><a href="https://www.sciencedirect.com/special-issue/331907/bio-based-production-of-functional-food-ingredients-bpffi" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">🥗 Guest Editor — Special Issue on Bio-based Production of Functional Food Ingredients (BPFFI) ↗</a></h3>
-          <p>Simon is serving as Guest Editor for an Elsevier special issue on microbial and enzymatic synthesis of functional food ingredients — nutraceuticals, flavours, sweeteners, and bioactives produced via fermentation and biocatalysis.</p>
+          <span class="news-type" data-i18n="news.bpffi.type">Editorial Role</span>
+          <div class="news-date" data-i18n="news.bpffi.date">2026 · Elsevier Special Issue</div>
+          <h3><a href="https://www.sciencedirect.com/special-issue/331907/bio-based-production-of-functional-food-ingredients-bpffi" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;" data-i18n="news.bpffi.title">🥗 Guest Editor — Special Issue on Bio-based Production of Functional Food Ingredients (BPFFI) ↗</a></h3>
+          <p data-i18n="news.bpffi.body">Simon is serving as Guest Editor for an Elsevier special issue on microbial and enzymatic synthesis of functional food ingredients — nutraceuticals, flavours, sweeteners, and bioactives produced via fermentation and biocatalysis.</p>
         </div>
         <div class="news-card">
-          <span class="news-type">Milestone</span>
-          <div class="news-date">14 Apr 2026</div>
-          <h3>🎓 Xiao Hui defends her PhD thesis</h3>
-          <p>Many congratulations to <strong>Dr. LIM Xiao Hui</strong> on successfully defending her PhD — a hard-earned milestone, and a proud moment for the lab.</p>
+          <span class="news-type" data-i18n="news.phd.type">Milestone</span>
+          <div class="news-date" data-i18n="news.phd.date">14 Apr 2026</div>
+          <h3 data-i18n="news.phd.title">🎓 Xiao Hui defends her PhD thesis</h3>
+          <p data-i18n="news.phd.body">Many congratulations to <strong>Dr. LIM Xiao Hui</strong> on successfully defending her PhD — a hard-earned milestone, and a proud moment for the lab.</p>
         </div>
         <div class="news-card">
-          <span class="news-type">Publication</span>
+          <span class="news-type" data-i18n="news.aucs.type">Publication</span>
           <div class="news-date">2026</div>
-          <h3><a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">New paper in ACS Synthetic Biology: AUCS control system ↗</a></h3>
-          <p>We report a new arabinose-inducible univariant control system (AUCS) that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
+          <h3><a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;" data-i18n="news.aucs.title">New paper in ACS Synthetic Biology: AUCS control system ↗</a></h3>
+          <p data-i18n="news.aucs.body">We report a new arabinose-inducible univariant control system (AUCS) that enables precise, tunable expression for microbial production of proteins, enzymes, and metabolites.</p>
         </div>
       </div>
       <div class="hero-news-links">
-        <a href="#publications" class="hero-news-more">See all publications &amp; patents →</a>
-        <a href="news.html" class="hero-news-more hero-news-more--accent">More news →</a>
+        <a href="#publications" class="hero-news-more" data-i18n="news.morePubs">See all publications &amp; patents →</a>
+        <a href="news.html" class="hero-news-more hero-news-more--accent" data-i18n="news.moreNews">More news →</a>
       </div>
     </div>
   </div>
@@ -1237,9 +1262,9 @@
 <!-- RESEARCH -->
 <section id="research">
   <div class="section-inner">
-    <p class="section-label">Research</p>
-    <h2 class="section-title">Engineering Biology for Sustainable Production</h2>
-    <p class="section-lead">Our lab focuses on designing and optimizing microbial cell factories through metabolic engineering, synthetic biology, and systems biology approaches.</p>
+    <p class="section-label" data-i18n="research.label">Research</p>
+    <h2 class="section-title" data-i18n="research.title">Engineering Biology for Sustainable Production</h2>
+    <p class="section-lead" data-i18n="research.lead">Our lab focuses on designing and optimizing microbial cell factories through metabolic engineering, synthetic biology, and systems biology approaches.</p>
 
     <div class="research-grid">
       <!-- Card 1: Microbial Cell Factory -->
@@ -1251,14 +1276,14 @@
             <path d="M7.76 7.76l2.83 2.83M21.41 21.41l2.83 2.83M7.76 24.24l2.83-2.83M21.41 10.59l2.83-2.83" stroke="#1D9E75" stroke-width="1" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3>Microbial Cell Factory</h3>
-        <p>Engineering <em>E. coli</em>, yeast, and non-model microorganisms as efficient platforms for biosynthesis of target molecules through rational and evolutionary strategies.</p>
+        <h3 data-i18n="research.card1.title">Microbial Cell Factory</h3>
+        <p data-i18n="research.card1.body">Engineering <em>E. coli</em>, yeast, and non-model microorganisms as efficient platforms for biosynthesis of target molecules through rational and evolutionary strategies.</p>
         <div class="research-tags">
           <span class="tag">E. coli</span>
-          <span class="tag">Yeast</span>
-          <span class="tag">Fungi</span>
+          <span class="tag" data-i18n="research.tag.yeast">Yeast</span>
+          <span class="tag" data-i18n="research.tag.fungi">Fungi</span>
         </div>
-        <span class="research-card-cta">Read more <span class="research-card-cta-arrow">→</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.readMore">Read more <span class="research-card-cta-arrow">→</span></span>
       </a>
       <!-- Card 2: Biocatalysis and Biosynthesis -->
       <a class="research-card" href="research-biocatalysis.html">
@@ -1270,14 +1295,14 @@
             <circle cx="22" cy="10" r="2" fill="#0F6E56"/>
           </svg>
         </div>
-        <h3>Biocatalysis and Biosynthesis</h3>
-        <p>Engineering microbes to produce isoprenoids, food ingredients, flavours and fragrances, specialty chemicals from renewable carbon sources.</p>
+        <h3 data-i18n="research.card2.title">Biocatalysis and Biosynthesis</h3>
+        <p data-i18n="research.card2.body">Engineering microbes to produce isoprenoids, food ingredients, flavours and fragrances, specialty chemicals from renewable carbon sources.</p>
         <div class="research-tags">
-          <span class="tag">Terpenoids</span>
-          <span class="tag">Specialty chemicals</span>
-          <span class="tag">Biofuels</span>
+          <span class="tag" data-i18n="research.tag.terpenoids">Terpenoids</span>
+          <span class="tag" data-i18n="research.tag.specChem">Specialty chemicals</span>
+          <span class="tag" data-i18n="research.tag.biofuels">Biofuels</span>
         </div>
-        <span class="research-card-cta">Read more <span class="research-card-cta-arrow">→</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.readMore2">Read more <span class="research-card-cta-arrow">→</span></span>
       </a>
       <!-- Card 3: Synthetic Pathway Design -->
       <a class="research-card" href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" rel="noopener">
@@ -1290,14 +1315,14 @@
             <path d="M14 10h4M22 14v4M14 22h-4M10 14v-4" stroke="#0F6E56" stroke-width="1" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3>Synthetic Pathway Design</h3>
-        <p>Designing, constructing, and optimizing novel biosynthetic pathways using DNA assembly tools, protein engineering, and computational pathway design frameworks.</p>
+        <h3 data-i18n="research.card3.title">Synthetic Pathway Design</h3>
+        <p data-i18n="research.card3.body">Designing, constructing, and optimizing novel biosynthetic pathways using DNA assembly tools, protein engineering, and computational pathway design frameworks.</p>
         <div class="research-tags">
-          <span class="tag">Pathway design</span>
-          <span class="tag">Protein engineering</span>
-          <span class="tag">Computation</span>
+          <span class="tag" data-i18n="research.tag.pathway">Pathway design</span>
+          <span class="tag" data-i18n="research.tag.protein">Protein engineering</span>
+          <span class="tag" data-i18n="research.tag.compute">Computation</span>
         </div>
-        <span class="research-card-cta">Flagship paper <span class="research-card-cta-arrow">↗</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.flagship">Flagship paper <span class="research-card-cta-arrow">↗</span></span>
       </a>
       <!-- Card 4: Genomic Editing & Omics -->
       <a class="research-card" href="https://www.sciencedirect.com/science/article/abs/pii/S1096717626000479" target="_blank" rel="noopener">
@@ -1309,14 +1334,14 @@
             <circle cx="22" cy="11" r="2" fill="#0F6E56"/>
           </svg>
         </div>
-        <h3>Genomic Editing &amp; Omics</h3>
-        <p>Applying CRISPR-based genome editing, omics technologies, and AI-guided modeling to understand and rewire cellular metabolism for precision strain engineering.</p>
+        <h3 data-i18n="research.card4.title">Genomic Editing &amp; Omics</h3>
+        <p data-i18n="research.card4.body">Applying CRISPR-based genome editing, omics technologies, and AI-guided modeling to understand and rewire cellular metabolism for precision strain engineering.</p>
         <div class="research-tags">
           <span class="tag">CRISPR</span>
-          <span class="tag">Flux analysis</span>
-          <span class="tag">AI-guided design</span>
+          <span class="tag" data-i18n="research.tag.flux">Flux analysis</span>
+          <span class="tag" data-i18n="research.tag.ai">AI-guided design</span>
         </div>
-        <span class="research-card-cta">Latest paper (2026) <span class="research-card-cta-arrow">↗</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.latest">Latest paper (2026) <span class="research-card-cta-arrow">↗</span></span>
       </a>
       <!-- Card 5: Waste Valorisation -->
       <a class="research-card" href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" rel="noopener">
@@ -1331,14 +1356,14 @@
             <circle cx="22" cy="24" r="1.5" fill="#1D9E75"/>
           </svg>
         </div>
-        <h3>Waste Valorisation</h3>
-        <p>Developing microbial and enzymatic platforms to upcycle C1 &amp; C2 feedstocks (methanol, CO<sub>2</sub>, ethylene glycol) and plastic waste (PET) into value-added chemicals and food ingredients.</p>
+        <h3 data-i18n="research.card5.title">Waste Valorisation</h3>
+        <p data-i18n="research.card5.body">Developing microbial and enzymatic platforms to upcycle C1 &amp; C2 feedstocks (methanol, CO<sub>2</sub>, ethylene glycol) and plastic waste (PET) into value-added chemicals and food ingredients.</p>
         <div class="research-tags">
-          <span class="tag">C1/C2 feedstocks</span>
-          <span class="tag">PET upcycling</span>
-          <span class="tag">Circular economy</span>
+          <span class="tag" data-i18n="research.tag.c1c2">C1/C2 feedstocks</span>
+          <span class="tag" data-i18n="research.tag.pet">PET upcycling</span>
+          <span class="tag" data-i18n="research.tag.circular">Circular economy</span>
         </div>
-        <span class="research-card-cta">Review paper <span class="research-card-cta-arrow">↗</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.review">Review paper <span class="research-card-cta-arrow">↗</span></span>
       </a>
       <!-- Card 6: Bioprocess Scale-up -->
       <a class="research-card" href="https://doi.org/10.1021/acssuschemeng.3c06030" target="_blank" rel="noopener">
@@ -1349,20 +1374,20 @@
             <path d="M8 20h4v6H8zM20 16h4v10h-4z" stroke="#0F6E56" stroke-width="1.5"/>
           </svg>
         </div>
-        <h3>Novel Bioprocess &amp; Scale-up</h3>
-        <p>Translating laboratory-scale microbial production to pilot and industrial bioreactor conditions through fermentation process optimization and techno-economic analysis.</p>
+        <h3 data-i18n="research.card6.title">Novel Bioprocess &amp; Scale-up</h3>
+        <p data-i18n="research.card6.body">Translating laboratory-scale microbial production to pilot and industrial bioreactor conditions through fermentation process optimization and techno-economic analysis.</p>
         <div class="research-tags">
-          <span class="tag">Fermentation</span>
-          <span class="tag">Bioprocess</span>
-          <span class="tag">Scale-up</span>
+          <span class="tag" data-i18n="research.tag.ferm">Fermentation</span>
+          <span class="tag" data-i18n="research.tag.bioproc">Bioprocess</span>
+          <span class="tag" data-i18n="research.tag.scaleup">Scale-up</span>
         </div>
-        <span class="research-card-cta">Bioprocess paper <span class="research-card-cta-arrow">↗</span></span>
+        <span class="research-card-cta" data-i18n="research.cta.bioprocPaper">Bioprocess paper <span class="research-card-cta-arrow">↗</span></span>
       </a>
     </div><!-- end research-grid -->
 
     <!-- Research figures carousel -->
     <div style="margin-top:3.5rem;">
-      <p class="members-section-title" style="margin-bottom:1.25rem;">Selected Research Figures</p>
+      <p class="members-section-title" style="margin-bottom:1.25rem;" data-i18n="research.figs.title">Selected Research Figures</p>
 
       <div class="fig-carousel" id="figCarousel">
         <!-- Slides -->
@@ -1371,7 +1396,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-c1c2-embedded.svg" alt="C1 and C2 feedstocks network and thermodynamics" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.1">
                 <strong style="color:var(--gray-700);">Figure 1.</strong>
                 Overview of C1 &amp; C2 feedstock generation routes and thermodynamic landscape of key carbon substrates for microbial waste valorisation. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
               </p>
@@ -1381,7 +1406,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-bioeconomy.svg" alt="Bioeconomy overview using C1 and C2 feedstocks" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.2">
                 <strong style="color:var(--gray-700);">Figure 2.</strong>
                 Overview of the bioeconomy using C1 and C2 feedstocks — connecting renewable carbon sources to high-value bioproducts through microbial biotransformation. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
               </p>
@@ -1391,7 +1416,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-autotrophy.svg" alt="Autotrophic microbial production pathways" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.3">
                 <strong style="color:var(--gray-700);">Figure 3.</strong>
                 Autotrophic biosynthesis pathways — engineering microbes to fix CO<sub>2</sub> and other one-carbon feedstocks into value-added chemicals. <a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>
               </p>
@@ -1401,7 +1426,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-mhp.svg" alt="MHP multidimensional heuristic process products" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.4">
                 <strong style="color:var(--gray-700);">Figure 4.</strong>
                 Multidimensional heuristic process (MHP) — a systematic strategy for high-yield co-production of astaxanthin and fragrance molecules in <em>E. coli</em>. <a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1038/s41467-018-04211-x</a>
               </p>
@@ -1411,7 +1436,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-carotenoids.svg" alt="Carotenoids and apocarotenoids biosynthesis" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.5">
                 <strong style="color:var(--gray-700);">Figure 5.</strong>
                 Biosynthetic landscape of carotenoids and apocarotenoids — from lycopene to astaxanthin, zeaxanthin, and fragrance ionones via engineered microbial pathways. <a href="https://doi.org/10.5772/intechopen.79061" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.5772/intechopen.79061</a>
               </p>
@@ -1421,7 +1446,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-ionone-embedded.svg" alt="Apocarotenoid biosynthesis — α-ionone, β-ionone and retinol" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.6">
                 <strong style="color:var(--gray-700);">Figure 6.</strong>
                 Modular biosynthetic pathway for producing apocarotenoid flavour &amp; fragrance molecules (α-ionone, β-ionone) and nutraceutical retinol from glucose via lycopene. <a href="https://doi.org/10.1002/bit.26462" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1002/bit.26462</a>
               </p>
@@ -1431,7 +1456,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-nerolidol-embedded.svg" alt="trans-Nerolidol biosynthetic pathway" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.7">
                 <strong style="color:var(--gray-700);">Figure 7.</strong>
                 Biosynthetic pathway for high-yield production of <em>trans</em>-nerolidol, a woody/floral fragrance compound, from sugar and glycerol feedstocks in engineered <em>E. coli</em>. <a href="https://doi.org/10.1021/acs.jafc.3c01161" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acs.jafc.3c01161</a>
               </p>
@@ -1441,7 +1466,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-diterpenes.svg" alt="Diterpene biosynthesis pathways" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.8">
                 <strong style="color:var(--gray-700);">Figure 8.</strong>
                 Diterpene biosynthetic pathways — engineering microbial hosts to produce high-value diterpenoid natural products from renewable carbon sources. <a href="https://doi.org/10.1016/j.engmic.2022.100058" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1016/j.engmic.2022.100058</a>
               </p>
@@ -1451,7 +1476,7 @@
           <div class="fig-slide">
             <div style="border:1px solid var(--gray-100);padding:1.5rem 1.5rem 1rem;background:var(--white);">
               <img src="figure-aucs.svg" alt="Arabinose-Inducible Univariant Control System (AUCS)" loading="lazy" decoding="async">
-              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;">
+              <p style="font-size:0.78rem;color:var(--gray-500);margin-top:0.75rem;line-height:1.6;" data-i18n="fig.9">
                 <strong style="color:var(--gray-700);">Figure 9.</strong>
                 Arabinose-Inducible Univariant Control System (AUCS) — a precision gene expression tool for tunable microbial production of proteins, enzymes, and metabolites. <a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acssynbio.5c00602</a>
               </p>
@@ -1478,7 +1503,7 @@
           </button>
         </div>
       </div><!-- end carousel -->
-      <p class="fig-zoom-hint">Tap a figure to enlarge · swipe to flip</p>
+      <p class="fig-zoom-hint" data-i18n="fig.zoomHint">Tap a figure to enlarge · swipe to flip</p>
     </div><!-- end research figures -->
   </div>
 </section>
@@ -1486,15 +1511,15 @@
 <!-- PUBLICATIONS -->
 <section id="publications">
   <div class="section-inner">
-    <p class="section-label">Publications &amp; Patents</p>
-    <h2 class="section-title">Publications &amp; Patents</h2>
-    <p class="section-lead">A selection of recent peer-reviewed papers and granted/pending patents. For the complete record, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a> or the <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" style="color:var(--teal);">A*STAR researcher page</a>.</p>
+    <p class="section-label" data-i18n="pubs.label">Publications &amp; Patents</p>
+    <h2 class="section-title" data-i18n="pubs.title">Publications &amp; Patents</h2>
+    <p class="section-lead" data-i18n="pubs.lead">A selection of recent peer-reviewed papers and granted/pending patents. For the complete record, visit the <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar profile</a> or the <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" style="color:var(--teal);">A*STAR researcher page</a>.</p>
 
     <div class="pub-tabs" role="tablist" aria-label="Filter publications and patents">
-      <button class="pub-tab active" data-filter="all" role="tab" aria-selected="true" type="button">Selected <span class="pub-tab-count">10</span></button>
-      <button class="pub-tab" data-filter="original" role="tab" aria-selected="false" type="button">Original Research <span class="pub-tab-count">5</span></button>
-      <button class="pub-tab" data-filter="review" role="tab" aria-selected="false" type="button">Reviews <span class="pub-tab-count">2</span></button>
-      <button class="pub-tab" data-filter="patent" role="tab" aria-selected="false" type="button">Patents <span class="pub-tab-count">3</span></button>
+      <button class="pub-tab active" data-filter="all" role="tab" aria-selected="true" type="button" data-i18n="pubs.tab.all">Selected <span class="pub-tab-count">10</span></button>
+      <button class="pub-tab" data-filter="original" role="tab" aria-selected="false" type="button" data-i18n="pubs.tab.original">Original Research <span class="pub-tab-count">5</span></button>
+      <button class="pub-tab" data-filter="review" role="tab" aria-selected="false" type="button" data-i18n="pubs.tab.review">Reviews <span class="pub-tab-count">2</span></button>
+      <button class="pub-tab" data-filter="patent" role="tab" aria-selected="false" type="button" data-i18n="pubs.tab.patent">Patents <span class="pub-tab-count">3</span></button>
     </div>
 
     <div class="pub-list">
@@ -1505,7 +1530,7 @@
         <div>
           <div class="pub-title">
             <a href="https://www.sciencedirect.com/science/article/abs/pii/S1096717626000479" target="_blank" style="color:inherit;text-decoration:none;">Systematic study of genomic loci in Escherichia coli B and K12 for genomic integration: application in plasmid-free astaxanthin production</a>
-            <span class="pub-badge">New</span>
+            <span class="pub-badge" data-i18n="pubs.badge.new">New</span>
           </div>
           <div class="pub-authors"> Nguyen N., Ong L., <strong>Zhang C</strong>.</div>
           <div class="pub-journal">Metabolic Engineering</div>
@@ -1517,7 +1542,7 @@
         <div>
           <div class="pub-title">
             <a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:inherit;text-decoration:none;">Arabinose-inducible univariant control system (AUCS) for microbial production of proteins, enzymes, and metabolites</a>
-            <span class="pub-badge">New</span>
+            <span class="pub-badge" data-i18n="pubs.badge.new">New</span>
           </div>
           <div class="pub-authors"><strong>Zhang C</strong>, Shukal S.</div>
           <div class="pub-journal">ACS Synthetic Biology</div>
@@ -1551,7 +1576,7 @@
         <div>
           <div class="pub-title">
             <a href="https://patents.google.com/patent/US12378561B2/en" target="_blank" style="color:inherit;text-decoration:none;">Production of carotenoids and apocarotenoids</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
+            <span class="pub-badge pub-badge--patent" data-i18n="pubs.badge.patent">Patent</span>
           </div>
           <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Heng-Phon Too</div>
           <div class="pub-journal">US-12378561-B2 · Granted Aug 2025 · A*STAR, Singapore</div>
@@ -1563,7 +1588,7 @@
         <div>
           <div class="pub-title">
             <a href="https://patents.google.com/patent/US20250188479A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis Of Rose Aromas</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
+            <span class="pub-badge pub-badge--patent" data-i18n="pubs.badge.patent">Patent</span>
           </div>
           <div class="pub-authors">Jian Ting Leonard Ong, Chin Chin Lim, <strong>Congqiang Simon Zhang</strong>, Sudha Devi D/O Manbahal Shukal, Xixian Chen, Rehka T</div>
           <div class="pub-journal">US-2025188479-A1 · Pending · published Jun 2025 · A*STAR, Singapore</div>
@@ -1575,7 +1600,7 @@
         <div>
           <div class="pub-title">
             <a href="https://patents.google.com/patent/US20250154451A1/en" target="_blank" style="color:inherit;text-decoration:none;">Biosynthesis Of Linalool</a>
-            <span class="pub-badge pub-badge--patent">Patent</span>
+            <span class="pub-badge pub-badge--patent" data-i18n="pubs.badge.patent">Patent</span>
           </div>
           <div class="pub-authors"><strong>Congqiang Zhang</strong>, Xixian Chen, Sudha Devi D/O Manbahal Shukal, Nicola Yen Min (Chen Yuanming) Tan, Jian Ting Leonard Ong, Chin Chin Lim</div>
           <div class="pub-journal">US-2025154451-A1 · Pending · published May 2025 · A*STAR, Singapore</div>
@@ -1617,24 +1642,24 @@
 </div>
 
     <div class="pub-more btn-group" style="margin-top:1.5rem;">
-      <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-primary">Full list on Google Scholar ↗</a>
-      <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" class="btn btn-outline">A*STAR Profile ↗</a>
+      <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" class="btn btn-primary" data-i18n="pubs.btn.scholar">Full list on Google Scholar ↗</a>
+      <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" class="btn btn-outline" data-i18n="pubs.btn.astar">A*STAR Profile ↗</a>
     </div>
-    <p style="margin-top:0.85rem;font-size:0.82rem;color:var(--gray-500);">Showing the 10 most recent items here. The full publication list and earlier work are on Google Scholar.</p>
+    <p style="margin-top:0.85rem;font-size:0.82rem;color:var(--gray-500);" data-i18n="pubs.footnote">Showing the 10 most recent items here. The full publication list and earlier work are on Google Scholar.</p>
   </div>
 </section>
 
 <!-- TEAM -->
 <section id="team">
   <div class="section-inner">
-    <p class="section-label">Team</p>
-    <h2 class="section-title">People</h2>
-    <p class="section-lead">A multidisciplinary team of biologists, chemists, and engineers united by the goal of sustainable biomanufacturing.</p>
+    <p class="section-label" data-i18n="team.label">Team</p>
+    <h2 class="section-title" data-i18n="team.title">People</h2>
+    <p class="section-lead" data-i18n="team.lead">A multidisciplinary team of biologists, chemists, and engineers united by the goal of sustainable biomanufacturing.</p>
 
     <!-- Team / Gallery tabs -->
     <div class="team-tabs" role="tablist" aria-label="Team or Gallery view">
-      <button class="team-tab active" data-tab="team" role="tab" aria-selected="true" type="button">Team</button>
-      <button class="team-tab" data-tab="gallery" role="tab" aria-selected="false" type="button">📷 Gallery</button>
+      <button class="team-tab active" data-tab="team" role="tab" aria-selected="true" type="button" data-i18n="team.tab.team">Team</button>
+      <button class="team-tab" data-tab="gallery" role="tab" aria-selected="false" type="button" data-i18n="team.tab.gallery">📷 Gallery</button>
     </div>
 
     <!-- Team panel -->
@@ -1647,9 +1672,9 @@
       </div>
       <div>
         <p class="team-pi-name">ZHANG Congqiang (Simon) <span style="font-weight:300;color:var(--gray-500);font-family:var(--sans);font-size:1.1rem;">张聪强</span></p>
-        <p class="team-pi-title">Principal Investigator</p>
-        <p class="team-pi-affil">Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR</p>
-        <p class="team-pi-bio">
+        <p class="team-pi-title" data-i18n="team.pi.title">Principal Investigator</p>
+        <p class="team-pi-affil" data-i18n="team.pi.affil">Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR</p>
+        <p class="team-pi-bio" data-i18n="team.pi.bio">
           Dr. Zhang Congqiang (Simon) leads synthetic biology research at A*STAR's SIFBI, where he engineers microbes into "cell factories" for sustainable chemicals, food and energy. An NUS-MIT PhD graduate with extensive publications and patents, Simon actively influences the biotech landscape through his leadership in the BioEnergy Society of Singapore and as an editor for prestigious journals including Nature Portfolio, Elsevier, and Wiley-VCH.
         </p>
         <div class="team-pi-links">
@@ -1663,73 +1688,73 @@
     </div>
 
     <!-- Senior Scientists -->
-    <p class="members-section-title">Senior Scientists</p>
+    <p class="members-section-title" data-i18n="team.head.senior">Senior Scientists</p>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-card-photo" style="background:#0F6E56;">KS</div>
         <div class="team-card-name"><a href="mailto:Kim_Seohyoung@a-star.edu.sg">Dr. KIM Seohyoung</a></div>
-        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-role" data-i18n="team.role.senior">Senior Scientist</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#34736C;">LY</div>
         <div class="team-card-name"><a href="mailto:Liu_Yanbin@a-star.edu.sg">Dr. LIU Yanbin</a></div>
-        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-role" data-i18n="team.role.senior">Senior Scientist</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#4F7C5A;">TN</div>
         <div class="team-card-name"><a href="mailto:Thao_Nguyen@a-star.edu.sg">Dr. NGUYEN Thao</a></div>
-        <div class="team-card-role">Senior Scientist</div>
+        <div class="team-card-role" data-i18n="team.role.senior">Senior Scientist</div>
       </div>
     </div>
 
     <!-- Scientist -->
-    <p class="members-section-title" style="margin-top:2.5rem;">Scientist</p>
+    <p class="members-section-title" style="margin-top:2.5rem;" data-i18n="team.head.sci">Scientist</p>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-card-photo" style="background:#1D9E75;">LX</div>
         <div class="team-card-name"><a href="mailto:Lim_Xiao_Hui@a-star.edu.sg">Dr. LIM Xiao Hui</a></div>
-        <div class="team-card-role">Scientist</div>
+        <div class="team-card-role" data-i18n="team.role.sci">Scientist</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#085041;">SS</div>
         <div class="team-card-name"><a href="mailto:sudha_devi@a-star.edu.sg">SHUKAL Sudha</a></div>
-        <div class="team-card-role">Lead Research Officer</div>
+        <div class="team-card-role" data-i18n="team.role.lro">Lead Research Officer</div>
       </div>
     </div>
 
     <!-- Current Students -->
-    <p class="members-section-title" style="margin-top:2.5rem;">Current Students</p>
+    <p class="members-section-title" style="margin-top:2.5rem;" data-i18n="team.head.students">Current Students</p>
     <div class="team-grid">
       <div class="team-card">
         <div class="team-card-photo" style="background:#2F6F87;">OL</div>
         <div class="team-card-name">ONG Jian Ting (Leonard)</div>
-        <div class="team-card-role">PhD Student</div>
+        <div class="team-card-role" data-i18n="team.role.phd">PhD Student</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#0F6E56;">WSH</div>
         <div class="team-card-name">WANG Sihang 王思航</div>
-        <div class="team-card-role">Master's Student</div>
+        <div class="team-card-role" data-i18n="team.role.master">Master's Student</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#34736C;">QJH</div>
         <div class="team-card-name">QIU Jiahao 邱嘉豪</div>
-        <div class="team-card-role">Master's Student</div>
+        <div class="team-card-role" data-i18n="team.role.master">Master's Student</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#4F7C5A;">LA</div>
         <div class="team-card-name">LEE Alvin</div>
-        <div class="team-card-role">Student</div>
+        <div class="team-card-role" data-i18n="team.role.student">Student</div>
       </div>
       <div class="team-card">
         <div class="team-card-photo" style="background:#1D9E75;">SH</div>
         <div class="team-card-name">SIAH Hayden</div>
-        <div class="team-card-role">Student</div>
+        <div class="team-card-role" data-i18n="team.role.student">Student</div>
       </div>
     </div>
 
     <!-- Alumni — Former Staff -->
     <div class="alumni-block" style="margin-top:3rem;">
-      <p class="members-section-title">Former Staff</p>
+      <p class="members-section-title" data-i18n="team.head.formerStaff">Former Staff</p>
       <div class="alumni-list">
         <span class="alumni-name">Dr. HUANG Ching-Ning</span>
         <span class="alumni-name">Dr. DWIJAYANTI Ari</span>
@@ -1743,7 +1768,7 @@
 
     <!-- Alumni — Former Students -->
     <div class="alumni-block" style="margin-top:2rem;">
-      <p class="members-section-title">Former Students</p>
+      <p class="members-section-title" data-i18n="team.head.formerStudents">Former Students</p>
       <div class="alumni-list">
         <span class="alumni-name">Dr. ZHANG Xinyi 张昕怡</span>
         <span class="alumni-name">WAN Qing 万青</span>
@@ -1800,10 +1825,10 @@
 
     <div class="open-positions">
       <div class="open-positions-text">
-        <h3>🚀 Join us — we are recruiting</h3>
-        <p>We welcome motivated PhD students and visiting researchers. Backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), example projects, and how to apply — all on one page.</p>
+        <h3 data-i18n="team.join.title">🚀 Join us — we are recruiting</h3>
+        <p data-i18n="team.join.body">We welcome motivated PhD students and visiting researchers. Backgrounds we look for, scholarship pathways (AGS, ARAP, SRAP), example projects, and how to apply — all on one page.</p>
       </div>
-      <a href="join.html" class="open-positions-cta">Joining the Lab →</a>
+      <a href="join.html" class="open-positions-cta" data-i18n="team.join.cta">Joining the Lab →</a>
     </div>
   </div>
 </section>
@@ -1811,13 +1836,13 @@
 <!-- COLLABORATORS -->
 <section id="collaborators" style="background:var(--gray-50);">
   <div class="section-inner">
-    <p class="section-label">Collaborators</p>
-    <h2 class="section-title">Research Collaborators</h2>
-    <p class="section-lead">We are fortunate to work with outstanding scientists and groups across Singapore and around the world. Our collaborations span synthetic biology, metabolic engineering, enzymology, and bioprocess engineering.</p>
+    <p class="section-label" data-i18n="collab.label">Collaborators</p>
+    <h2 class="section-title" data-i18n="collab.title">Research Collaborators</h2>
+    <p class="section-lead" data-i18n="collab.lead">We are fortunate to work with outstanding scientists and groups across Singapore and around the world. Our collaborations span synthetic biology, metabolic engineering, enzymology, and bioprocess engineering.</p>
 
     <!-- Featured collaborator: Dr. Chen Xixian -->
     <div style="margin-bottom:3rem;">
-      <p class="members-section-title" style="margin-bottom:1.25rem;">Primary Collaborator</p>
+      <p class="members-section-title" style="margin-bottom:1.25rem;" data-i18n="collab.head.primary">Primary Collaborator</p>
       <div style="display:grid;grid-template-columns:80px 1fr;gap:2rem;align-items:start;
                   padding:2rem 2.5rem;background:var(--white);
                   border-left:3px solid var(--teal);position:relative;overflow:hidden;">
@@ -1833,17 +1858,17 @@
           <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.2rem;">
             <span style="font-family:var(--serif);font-size:1.35rem;color:var(--gray-900);">Dr. CHEN Xixian</span>
             <span style="font-size:0.65rem;padding:0.2rem 0.6rem;background:var(--teal);color:white;
-                         text-transform:uppercase;letter-spacing:0.07em;font-weight:500;border-radius:1px;">Key Collaborator</span>
+                         text-transform:uppercase;letter-spacing:0.07em;font-weight:500;border-radius:1px;" data-i18n="collab.keyBadge">Key Collaborator</span>
             <span style="font-size:1rem;">🇸🇬</span>
           </div>
-          <p style="font-size:0.85rem;color:var(--teal);font-weight:500;margin-bottom:0.5rem;">Principal Investigator &amp; Long-term Research Partner</p>
+          <p style="font-size:0.85rem;color:var(--teal);font-weight:500;margin-bottom:0.5rem;" data-i18n="collab.chen.role">Principal Investigator &amp; Long-term Research Partner</p>
           <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:1rem;">
             <a href="https://www.a-star.edu.sg/sifbi" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.2s;"
                onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='transparent'">
               Singapore Institute of Food and Biotechnology Innovation (SIFBI), A*STAR
             </a>
           </p>
-          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;max-width:65ch;">
+          <p style="font-size:0.9rem;color:var(--gray-700);line-height:1.75;max-width:65ch;" data-i18n="collab.chen.bio">
             Dr. Chen Xixian is a close and longstanding collaborator whose work on terpenoid and carotenoid biosynthesis has been central to many of our joint publications. Together, our groups have co-authored more than 15 papers spanning microbial cell factory design, synthetic pathway engineering, CRISPR-based genome editing, and bioprocess optimization.
           </p>
         </div>
@@ -1854,14 +1879,14 @@
     <div class="collab-region">
       <div class="collab-region-title">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
-        Singapore
+        <span data-i18n="collab.region.sg">Singapore</span>
       </div>
       <div class="collab-grid">
 
         <div class="collab-card">
           <span class="collab-flag">🇸🇬</span>
           <div class="collab-name">Dr. JI Lianghui</div>
-          <div class="collab-role">Senior Scientist</div>
+          <div class="collab-role" data-i18n="collab.role.senior">Senior Scientist</div>
           <div class="collab-inst">
             <a href="https://www.a-star.edu.sg/tll" target="_blank">Temasek Life Sciences Laboratory (TLL), A*STAR</a>
           </div>
@@ -1870,7 +1895,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇸🇬</span>
           <div class="collab-name">Prof. ZHOU Kang</div>
-          <div class="collab-role">Associate Professor</div>
+          <div class="collab-role" data-i18n="collab.role.assocProf">Associate Professor</div>
           <div class="collab-inst">
             <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
           </div>
@@ -1879,7 +1904,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇸🇬</span>
           <div class="collab-name">Prof. LEONG Susanna</div>
-          <div class="collab-role">Professor</div>
+          <div class="collab-role" data-i18n="collab.role.prof">Professor</div>
           <div class="collab-inst">
             <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
           </div>
@@ -1888,7 +1913,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇸🇬</span>
           <div class="collab-name">Prof. WONG Adison</div>
-          <div class="collab-role">Associate Professor</div>
+          <div class="collab-role" data-i18n="collab.role.assocProf">Associate Professor</div>
           <div class="collab-inst">
             <a href="https://www.singaporetech.edu.sg" target="_blank">Singapore Institute of Technology (SIT)</a>
           </div>
@@ -1897,7 +1922,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇸🇬</span>
           <div class="collab-name">Prof. POH Chueh Loo</div>
-          <div class="collab-role">Associate Professor</div>
+          <div class="collab-role" data-i18n="collab.role.assocProf">Associate Professor</div>
           <div class="collab-inst">
             <a href="https://www.nus.edu.sg" target="_blank">National University of Singapore (NUS)</a>
           </div>
@@ -1910,14 +1935,14 @@
     <div class="collab-region">
       <div class="collab-region-title">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
-        France
+        <span data-i18n="collab.region.fr">France</span>
       </div>
       <div class="collab-grid">
 
         <div class="collab-card">
           <span class="collab-flag">🇫🇷</span>
           <div class="collab-name">Dr. LAUTIER Thomas</div>
-          <div class="collab-role">Researcher</div>
+          <div class="collab-role" data-i18n="collab.role.researcher">Researcher</div>
           <div class="collab-inst">
             <a href="https://www.toulouse-biotechnology-institute.fr" target="_blank">Toulouse Biotechnology Institute (TBI), INSA Toulouse</a>
           </div>
@@ -1926,7 +1951,7 @@
        <div class="collab-card">
           <span class="collab-flag">🇫🇷</span>
           <div class="collab-name">Dr. ANDRÉ Isabelle</div>
-          <div class="collab-role">Research Director</div>
+          <div class="collab-role" data-i18n="collab.role.director">Research Director</div>
           <div class="collab-inst">
             <a href="https://www.toulouse-biotechnology-institute.fr" target="_blank">Toulouse Biotechnology Institute (TBI), INSA Toulouse</a>
           </div>
@@ -1935,7 +1960,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇫🇷</span>
           <div class="collab-name">Prof. SOUCAILLE Philippe</div>
-          <div class="collab-role">Professor</div>
+          <div class="collab-role" data-i18n="collab.role.prof">Professor</div>
           <div class="collab-inst">
             <a href="https://www.toulouse-biotechnology-institute.fr" target="_blank">Toulouse Biotechnology Institute (TBI), INSA Toulouse</a>
           </div>
@@ -1948,14 +1973,14 @@
     <div class="collab-region">
       <div class="collab-region-title">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
-        Germany
+        <span data-i18n="collab.region.de">Germany</span>
       </div>
       <div class="collab-grid">
 
         <div class="collab-card">
           <span class="collab-flag">🇩🇪</span>
           <div class="collab-name">Prof. RÜHL Martin</div>
-          <div class="collab-role">Professor of Fungal Biotechnology</div>
+          <div class="collab-role" data-i18n="collab.role.fungalProf">Professor of Fungal Biotechnology</div>
           <div class="collab-inst">
             <a href="https://scholar.google.com/citations?view_op=view_org&hl=en&org=5433096937151665997" target="_blank">Justus Liebig University Giessen</a>
           </div>
@@ -1968,14 +1993,14 @@
     <div class="collab-region">
       <div class="collab-region-title">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="var(--gray-300)" stroke-width="1.2"/><path d="M7 1v12M1 7h12" stroke="var(--gray-300)" stroke-width="1.2"/></svg>
-        China
+        <span data-i18n="collab.region.cn">China</span>
       </div>
       <div class="collab-grid">
 
         <div class="collab-card">
           <span class="collab-flag">🇨🇳</span>
           <div class="collab-name">Prof. LI Xun 李迅</div>
-          <div class="collab-role">Professor</div>
+          <div class="collab-role" data-i18n="collab.role.prof">Professor</div>
           <div class="collab-inst">
             <a href="https://www.njfu.edu.cn/english/" target="_blank">Nanjing Forestry University</a>
           </div>
@@ -1984,7 +2009,7 @@
         <div class="collab-card">
           <span class="collab-flag">🇨🇳</span>
           <div class="collab-name">Prof. QI Wei 齐崴</div>
-          <div class="collab-role">Professor</div>
+          <div class="collab-role" data-i18n="collab.role.prof">Professor</div>
           <div class="collab-inst">
             <a href="https://www.tju.edu.cn/english/" target="_blank">Tianjin University</a>
           </div>
@@ -1993,7 +2018,7 @@
        <div class="collab-card">
           <span class="collab-flag">🇨🇳</span>
           <div class="collab-name">A/P YOU Shengping 尤生萍</div>
-          <div class="collab-role">Associate Professor</div>
+          <div class="collab-role" data-i18n="collab.role.assocProf">Associate Professor</div>
           <div class="collab-inst">
             <a href="https://www.tju.edu.cn/english/" target="_blank">Tianjin University</a>
           </div>
@@ -2008,20 +2033,20 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-    <p class="section-label">Contact</p>
-    <h2 class="section-title">Get in Touch</h2>
-    <p class="section-lead">We welcome inquiries from prospective collaborators, students, and the media.</p>
+    <p class="section-label" data-i18n="contact.label">Contact</p>
+    <h2 class="section-title" data-i18n="contact.title">Get in Touch</h2>
+    <p class="section-lead" data-i18n="contact.lead">We welcome inquiries from prospective collaborators, students, and the media.</p>
 
     <div class="contact-grid">
       <div class="contact-info">
-        <h3>Lab Information</h3>
+        <h3 data-i18n="contact.labInfo">Lab Information</h3>
 
         <div class="contact-detail">
           <svg class="contact-icon" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 1.5C6.51 1.5 4.5 3.51 4.5 6c0 3.375 4.5 10.5 4.5 10.5S13.5 9.375 13.5 6c0-2.49-2.01-4.5-4.5-4.5z" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
             <circle cx="9" cy="6" r="1.5" stroke="#0F6E56" stroke-width="1.2"/>
           </svg>
-          <div class="contact-text">
+          <div class="contact-text" data-i18n="contact.address">
             <strong>Address</strong>
             Singapore Institute of Food and Biotechnology Innovation (SIFBI)<br>
             31 Biopolis Way, Nanos, Singapore 138669
@@ -2033,7 +2058,7 @@
             <path d="M3 3h12a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="#0F6E56" stroke-width="1.2"/>
             <path d="M2 4l7 6 7-6" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
-          <div class="contact-text">
+          <div class="contact-text" data-i18n="contact.email">
             <strong>Email</strong>
             <a href="mailto:congqiang_zhang@a-star.edu.sg" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);transition:border-color 0.2s;">congqiang_zhang@a-star.edu.sg</a>
           </div>
@@ -2044,7 +2069,7 @@
             <rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.2"/>
             <path d="M6 6h6M6 9h6M6 12h3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
           </svg>
-          <div class="contact-text">
+          <div class="contact-text" data-i18n="contact.prospective">
             <strong>📣 Prospective Students</strong>
             We are actively recruiting PhD students and visiting researchers. <a href="join.html" style="text-decoration:none;border-bottom:1px solid var(--teal);transition:border-color 0.2s;">See the Joining the Lab page →</a> for backgrounds, scholarship pathways (AGS, ARAP, SRAP), and how to apply.
           </div>
@@ -2055,7 +2080,7 @@
             <circle cx="9" cy="9" r="7" stroke="#0F6E56" stroke-width="1.2"/>
             <path d="M9 5v4l3 2" stroke="#0F6E56" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          <div class="contact-text">
+          <div class="contact-text" data-i18n="contact.hours">
             <strong>Office Hours</strong>
             By appointment. Response within 5 business days.
           </div>
@@ -2071,14 +2096,14 @@
   <div class="footer-inner">
     <div>
       <a href="#home" class="footer-logo">Zhang<span>'s Lab</span></a>
-      <div class="footer-copy" style="margin-top:0.5rem;">© <span id="footerYear">2026</span> Zhang Lab · Singapore Institute of Food and Biotechnology Innovation</div>
+      <div class="footer-copy" style="margin-top:0.5rem;" data-i18n="footer.copy">© <span id="footerYear">2026</span> Zhang Lab · Singapore Institute of Food and Biotechnology Innovation</div>
     </div>
     <div class="footer-links">
-      <a href="#research">Research</a>
-      <a href="#publications">Publications</a>
-      <a href="#team">Team</a>
-      <a href="#collaborators">Collaborators</a>
-      <a href="#contact">Contact</a>
+      <a href="#research" data-i18n="nav.research">Research</a>
+      <a href="#publications" data-i18n="nav.publications">Publications</a>
+      <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#collaborators" data-i18n="nav.collaborators">Collaborators</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
       <a href="https://www.a-star.edu.sg/sifbi" target="_blank">SIFBI ↗</a>
     </div>
   </div>
@@ -2690,6 +2715,221 @@
       }
     }, { passive: true });
   })();
+</script>
+
+<!-- ── i18n: EN ↔ 中文 toggle (homepage only) ── -->
+<script>
+(function() {
+  const ZH = {
+    // Nav
+    'nav.research':       '研究',
+    'nav.publications':   '论文与专利',
+    'nav.team':           '团队',
+    'nav.collaborators':  '合作者',
+    'nav.contact':        '联系',
+
+    // Hero
+    'hero.galleryCta':    '相册',
+    'hero.quote':         '"我们设计微生物细胞工厂,将可再生原料转化为化学品、燃料和食品配料 — 通过精准代谢设计与合成生物学,把低值碳源变为高附加值产品。"',
+    'hero.quoteSource':   '张聪强课题组 · 新加坡科技研究局(A*STAR)食品与生物技术创新研究所(SIFBI)',
+
+    // News strip (homepage)
+    'news.label':         '近期动态',
+    'news.recruit.type':  '📣 招聘中',
+    'news.recruit.date':  '长期招收 · 欢迎申请',
+    'news.recruit.title': '招收博士生',
+    'news.recruit.body':  '对合成生物学和微生物细胞工厂代谢工程感兴趣?查看我们欢迎的背景、奖学金途径(AGS、ARAP、SRAP)以及申请方式。',
+    'news.recruit.cta':   '加入课题组 →',
+
+    'news.nature.type':   '媒体报道',
+    'news.nature.date':   '2026 年 5 月 6 日 · Nature 聚焦',
+    'news.nature.title':  '📰 《Nature》专题:在气候变暖中构建韧性食品系统 ↗',
+    'news.nature.body':   '张聪强(Simon)受邀参与《Nature》合成生物学与粮食安全专题,分享课题组在工程化微生物生产香精、香料与抗氧化剂方面的工作,以及如何减少对石化原料的依赖。',
+
+    'news.sciRep.type':   '编辑工作',
+    'news.sciRep.date':   '2026 年 5 月 · 投稿开放',
+    'news.sciRep.title':  '🧪 客座编辑 — <em>Scientific Reports</em> 下一代生物制造专辑 ↗',
+    'news.sciRep.body':   'Simon 与 Hyun Gi Koh 博士和 Takuya Matsumoto 博士共同担任 <em>Scientific Reports</em>(Nature Portfolio)下一代生物制造专辑客座编辑。专辑欢迎先进生物生产与生物工艺方向的原创研究,投稿截止 2027 年 1 月 12 日。',
+
+    'news.bpffi.type':    '编辑工作',
+    'news.bpffi.date':    '2026 · Elsevier 专刊',
+    'news.bpffi.title':   '🥗 客座编辑 — 功能性食品配料生物合成专刊(BPFFI)↗',
+    'news.bpffi.body':    'Simon 担任 Elsevier 专刊客座编辑,聚焦功能性食品配料的微生物与酶法合成 — 涵盖通过发酵和生物催化生产的营养品、香精、甜味剂与生物活性物质。',
+
+    'news.phd.type':      '里程碑',
+    'news.phd.date':      '2026 年 4 月 14 日',
+    'news.phd.title':     '🎓 LIM Xiao Hui 顺利通过博士论文答辩',
+    'news.phd.body':      '热烈祝贺 <strong>LIM Xiao Hui 博士</strong>顺利完成博士论文答辩 — 这是她个人的重要里程碑,也是整个课题组的骄傲时刻。',
+
+    'news.aucs.type':     '论文发表',
+    'news.aucs.title':    'ACS Synthetic Biology 新论文:AUCS 调控系统 ↗',
+    'news.aucs.body':     '我们报道了一种新型阿拉伯糖诱导单变量调控系统(AUCS),可对微生物生产蛋白、酶和代谢产物实现精确、可调控的表达。',
+
+    'news.morePubs':      '查看所有论文与专利 →',
+    'news.moreNews':      '更多动态 →',
+
+    // Research section
+    'research.label':     '研究方向',
+    'research.title':     '面向可持续生产的工程生物学',
+    'research.lead':      '课题组通过代谢工程、合成生物学与系统生物学方法,设计与优化微生物细胞工厂。',
+    'research.card1.title': '微生物细胞工厂',
+    'research.card1.body':  '通过理性设计与进化策略,将 <em>大肠杆菌</em>、酵母及非模式微生物改造为高效的目标分子生物合成平台。',
+    'research.card2.title': '生物催化与生物合成',
+    'research.card2.body':  '改造微生物,从可再生碳源生产类异戊二烯、食品配料、香精香料及精细化学品。',
+    'research.card3.title': '合成途径设计',
+    'research.card3.body':  '运用 DNA 组装工具、蛋白质工程与计算途径设计框架,设计、构建并优化全新的生物合成途径。',
+    'research.card4.title': '基因组编辑与组学',
+    'research.card4.body':  '运用 CRISPR 基因组编辑、组学技术与 AI 引导建模,理解并重塑细胞代谢,实现精准菌株工程。',
+    'research.card5.title': '废弃物资源化',
+    'research.card5.body':  '开发微生物与酶法平台,将 C1 与 C2 原料(甲醇、CO<sub>2</sub>、乙二醇)以及塑料废弃物(PET)升级转化为高附加值化学品与食品配料。',
+    'research.card6.title': '新型生物工艺与放大',
+    'research.card6.body':  '通过发酵工艺优化与技术经济分析,将实验室规模的微生物生产工艺放大至中试与工业级生物反应器。',
+    'research.tag.yeast':     '酵母',
+    'research.tag.fungi':     '真菌',
+    'research.tag.terpenoids': '萜类化合物',
+    'research.tag.specChem':  '精细化学品',
+    'research.tag.biofuels':  '生物燃料',
+    'research.tag.pathway':   '途径设计',
+    'research.tag.protein':   '蛋白质工程',
+    'research.tag.compute':   '计算',
+    'research.tag.flux':      '通量分析',
+    'research.tag.ai':        'AI 引导设计',
+    'research.tag.c1c2':      'C1/C2 原料',
+    'research.tag.pet':       'PET 升级',
+    'research.tag.circular':  '循环经济',
+    'research.tag.ferm':      '发酵',
+    'research.tag.bioproc':   '生物工艺',
+    'research.tag.scaleup':   '放大',
+    'research.cta.readMore':  '阅读更多 <span class="research-card-cta-arrow">→</span>',
+    'research.cta.readMore2': '阅读更多 <span class="research-card-cta-arrow">→</span>',
+    'research.cta.flagship':  '代表性论文 <span class="research-card-cta-arrow">↗</span>',
+    'research.cta.latest':    '最新论文(2026) <span class="research-card-cta-arrow">↗</span>',
+    'research.cta.review':    '综述论文 <span class="research-card-cta-arrow">↗</span>',
+    'research.cta.bioprocPaper': '生物工艺论文 <span class="research-card-cta-arrow">↗</span>',
+    'research.figs.title':    '代表性研究图示',
+    'fig.1': '<strong style="color:var(--gray-700);">图 1.</strong> C1 与 C2 原料的生成路线总览,以及微生物废弃物资源化中关键碳底物的热力学全景。<a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>',
+    'fig.2': '<strong style="color:var(--gray-700);">图 2.</strong> 基于 C1 与 C2 原料的生物经济总览 — 通过微生物生物转化,将可再生碳源与高附加值生物制品连接起来。<a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>',
+    'fig.3': '<strong style="color:var(--gray-700);">图 3.</strong> 自养型生物合成途径 — 改造微生物固定 CO<sub>2</sub> 与其他一碳原料,生产高附加值化学品。<a href="https://doi.org/10.3389/fbioe.2022.874612" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.3389/fbioe.2022.874612</a>',
+    'fig.4': '<strong style="color:var(--gray-700);">图 4.</strong> 多维启发式工艺(MHP)— 在 <em>大肠杆菌</em> 中高效联产虾青素与香精分子的系统化策略。<a href="https://doi.org/10.1038/s41467-018-04211-x" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1038/s41467-018-04211-x</a>',
+    'fig.5': '<strong style="color:var(--gray-700);">图 5.</strong> 类胡萝卜素与降异戊二烯类化合物的生物合成全景 — 通过工程微生物途径,从番茄红素到虾青素、玉米黄质及香精紫罗酮。<a href="https://doi.org/10.5772/intechopen.79061" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.5772/intechopen.79061</a>',
+    'fig.6': '<strong style="color:var(--gray-700);">图 6.</strong> 模块化生物合成途径:从葡萄糖经番茄红素生产降异戊二烯香精香料分子(α-紫罗酮、β-紫罗酮)与营养品视黄醇。<a href="https://doi.org/10.1002/bit.26462" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1002/bit.26462</a>',
+    'fig.7': '<strong style="color:var(--gray-700);">图 7.</strong> 在工程化 <em>大肠杆菌</em> 中,以糖和甘油为原料高效合成木质/花香香精化合物 <em>反式</em>-橙花叔醇的生物合成途径。<a href="https://doi.org/10.1021/acs.jafc.3c01161" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acs.jafc.3c01161</a>',
+    'fig.8': '<strong style="color:var(--gray-700);">图 8.</strong> 二萜生物合成途径 — 改造微生物宿主,从可再生碳源生产高附加值二萜类天然产物。<a href="https://doi.org/10.1016/j.engmic.2022.100058" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1016/j.engmic.2022.100058</a>',
+    'fig.9': '<strong style="color:var(--gray-700);">图 9.</strong> 阿拉伯糖诱导单变量调控系统(AUCS)— 用于微生物精准生产蛋白、酶与代谢产物的可调基因表达工具。<a href="https://doi.org/10.1021/acssynbio.5c00602" target="_blank" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);">10.1021/acssynbio.5c00602</a>',
+    'fig.zoomHint': '点击图片可放大 · 左右滑动切换',
+
+    // Publications
+    'pubs.label':         '论文与专利',
+    'pubs.title':         '论文与专利',
+    'pubs.lead':          '近期同行评审论文与已授权/待审专利精选。完整记录请见 <a href="https://scholar.google.com/citations?user=SDgjKwIAAAAJ&hl=en" target="_blank" style="color:var(--teal);">Google Scholar 主页</a>或 <a href="https://research.a-star.edu.sg/researcher/congqiang-zhang/" target="_blank" style="color:var(--teal);">A*STAR 研究员页面</a>。',
+    'pubs.tab.all':       '精选 <span class="pub-tab-count">10</span>',
+    'pubs.tab.original':  '原创研究 <span class="pub-tab-count">5</span>',
+    'pubs.tab.review':    '综述 <span class="pub-tab-count">2</span>',
+    'pubs.tab.patent':    '专利 <span class="pub-tab-count">3</span>',
+    'pubs.badge.new':     '新',
+    'pubs.badge.patent':  '专利',
+    'pubs.btn.scholar':   'Google Scholar 完整列表 ↗',
+    'pubs.btn.astar':     'A*STAR 主页 ↗',
+    'pubs.footnote':      '此处显示最近 10 项。完整论文列表与早期工作请见 Google Scholar。',
+
+    // Team
+    'team.label':         '团队',
+    'team.title':         '成员',
+    'team.lead':          '一支由生物学家、化学家与工程师组成的多学科团队,共同致力于可持续生物制造。',
+    'team.tab.team':      '团队',
+    'team.tab.gallery':   '📷 相册',
+    'team.pi.title':      '课题组长(PI)',
+    'team.pi.affil':      '新加坡科技研究局(A*STAR)食品与生物技术创新研究所(SIFBI)',
+    'team.pi.bio':        '张聪强博士(Simon)在 A*STAR SIFBI 领导合成生物学研究,将微生物改造为可持续生产化学品、食品与能源的"细胞工厂"。他是新加坡国立大学—麻省理工学院联合培养博士,拥有丰富的论文与专利成果。Simon 担任新加坡生物能源协会的领导职务,并担任 Nature Portfolio、Elsevier、Wiley-VCH 等知名期刊的编辑,积极推动生物技术领域的发展。',
+    'team.head.senior':   '高级研究员',
+    'team.head.sci':      '研究员',
+    'team.head.students': '在读学生',
+    'team.head.formerStaff': '前成员',
+    'team.head.formerStudents': '毕业学生',
+    'team.role.senior':   '高级研究员',
+    'team.role.sci':      '研究员',
+    'team.role.lro':      '首席研究助理',
+    'team.role.phd':      '博士生',
+    'team.role.master':   '硕士生',
+    'team.role.student':  '学生',
+    'team.join.title':    '🚀 加入我们 — 课题组正在招人',
+    'team.join.body':     '欢迎有志的博士生与访问学者。我们欢迎的背景、奖学金途径(AGS、ARAP、SRAP)、研究方向示例与申请方式 — 全部在同一页面。',
+    'team.join.cta':      '加入课题组 →',
+
+    // Collaborators
+    'collab.label':       '合作者',
+    'collab.title':       '科研合作伙伴',
+    'collab.lead':        '我们有幸与新加坡及世界各地的杰出科学家与团队合作,合作领域涵盖合成生物学、代谢工程、酶学与生物工艺工程。',
+    'collab.head.primary': '主要合作者',
+    'collab.keyBadge':    '核心合作伙伴',
+    'collab.chen.role':   '课题组长 · 长期科研合作伙伴',
+    'collab.chen.bio':    '陈茜娴博士是我们长期密切的合作伙伴,她在萜类与类胡萝卜素生物合成方向的工作贯穿我们多项联合研究。我们的团队共同发表了 15 篇以上论文,涵盖微生物细胞工厂设计、合成途径工程、CRISPR 基因组编辑与生物工艺优化。',
+    'collab.region.sg':   '新加坡',
+    'collab.region.fr':   '法国',
+    'collab.region.de':   '德国',
+    'collab.region.cn':   '中国',
+    'collab.role.senior':    '高级研究员',
+    'collab.role.assocProf': '副教授',
+    'collab.role.prof':      '教授',
+    'collab.role.researcher': '研究员',
+    'collab.role.director':  '研究主任',
+    'collab.role.fungalProf': '真菌生物技术教授',
+
+    // Contact
+    'contact.label':      '联系方式',
+    'contact.title':      '联系我们',
+    'contact.lead':       '欢迎潜在合作者、学生与媒体咨询。',
+    'contact.labInfo':    '课题组信息',
+    'contact.address':    '<strong>地址</strong>新加坡科技研究局(A*STAR)食品与生物技术创新研究所(SIFBI)<br>31 Biopolis Way, Nanos, Singapore 138669',
+    'contact.email':      '<strong>电子邮件</strong><a href="mailto:congqiang_zhang@a-star.edu.sg" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal-light);transition:border-color 0.2s;">congqiang_zhang@a-star.edu.sg</a>',
+    'contact.prospective': '<strong>📣 准学生</strong>我们正在积极招收博士生与访问学者。<a href="join.html" style="text-decoration:none;border-bottom:1px solid var(--teal);transition:border-color 0.2s;">请见加入课题组页面 →</a>,了解欢迎的背景、奖学金途径(AGS、ARAP、SRAP)与申请方式。',
+    'contact.hours':      '<strong>办公时间</strong>预约制。一般在 5 个工作日内回复。',
+
+    // Footer
+    'footer.copy':        '© <span id="footerYear">2026</span> 张聪强课题组 · 新加坡科技研究局食品与生物技术创新研究所(SIFBI)'
+  };
+
+  const STORAGE_KEY = 'zhanglab.lang';
+  const toggle = document.getElementById('langToggle');
+  if (!toggle) return;
+
+  // Cache original English HTML on first run so we can restore
+  const targets = document.querySelectorAll('[data-i18n]');
+  targets.forEach(el => { el.dataset.original = el.innerHTML; });
+
+  function applyLang(lang) {
+    targets.forEach(el => {
+      const key = el.dataset.i18n;
+      if (lang === 'zh' && ZH[key]) {
+        el.innerHTML = ZH[key];
+      } else {
+        el.innerHTML = el.dataset.original;
+      }
+    });
+    // Keep footer year fresh after restoring HTML
+    const y = document.getElementById('footerYear');
+    if (y) y.textContent = new Date().getFullYear();
+    // Update html lang attribute (helps search engines + a11y)
+    document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-Hans' : 'en');
+    // Update toggle visual state
+    toggle.querySelectorAll('.lang-opt').forEach(s => {
+      s.classList.toggle('is-active', s.dataset.langOpt === lang);
+    });
+  }
+
+  // Initial language: stored preference, otherwise English
+  const saved = (function() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  })();
+  if (saved === 'zh') applyLang('zh');
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('lang');
+    const next = (current && current.startsWith('zh')) ? 'en' : 'zh';
+    applyLang(next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { /* ignore */ }
+  });
+})();
 </script>
 
 </body>
