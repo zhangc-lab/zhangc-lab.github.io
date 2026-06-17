@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Japan — 8 Days in the Land of the Rising Sun</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0D0B09;
+    --bg-card: #161210;
+    --bg-surface: #1E1A16;
+    --text: #F0EBE1;
+    --text-muted: #9B9189;
+    --accent: #C94B3A;
+    --gold: #D4A853;
+    --border: #2A2420;
+    --tokyo: #3A6B8A;
+    --nara: #4A7C59;
+    --kyoto: #7B5EA7;
+    --osaka: #C94B3A;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://lh3.googleusercontent.com/place-photos/AJRVUZPLoJibc2nZU6rSSoI8mOTIvFyA3lvtAHBa0ctwbZECE-REK3FbSSc-RQAHtqcS0Z2EWy9mGK3ZrErWB-yiz2oHmlkjn6J5uqGZCDhUGqE--O3lS4uauob4bvJu1e0A0EBd57Eu8UuLot5RtQ=s4800-w800-h600') center/cover no-repeat;
+    filter: brightness(0.35);
+    transform: scale(1.05);
+    animation: heroZoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.12); } }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(13,11,9,0.2) 0%, rgba(13,11,9,0.6) 70%, var(--bg) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 1.5rem; }
+  .hero-eyebrow {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--accent); }
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: rgba(240,235,225,0.7);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+  }
+  .hero-badges {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+  .badge {
+    padding: 0.4rem 1.1rem;
+    border: 1px solid rgba(212,168,83,0.4);
+    border-radius: 100px;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+  }
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    color: rgba(240,235,225,0.4); font-size: 0.7rem; letter-spacing: 0.15em;
+    text-transform: uppercase; z-index: 2;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-hint span { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(240,235,225,0.4), transparent); }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* NAVIGATION */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,11,9,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo em { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 0.25rem; }
+  .nav-links a {
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--bg-surface); }
+
+  /* SECTIONS */
+  section { padding: 5rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .section-label {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 300; line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc { color: var(--text-muted); max-width: 600px; margin-bottom: 3rem; }
+
+  /* FADE IN */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+  /* OVERVIEW CITIES */
+  .cities-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--border); border-radius: 16px; overflow: hidden;
+    margin-bottom: 4rem;
+  }
+  .city-card {
+    background: var(--bg-card);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: background 0.3s;
+  }
+  .city-card:hover { background: var(--bg-surface); }
+  .city-dot { width: 10px; height: 10px; border-radius: 50%; margin: 0 auto 1rem; }
+  .city-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 0.25rem; }
+  .city-days { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.1em; }
+
+  /* ITINERARY TABS */
+  .day-tabs {
+    display: flex; gap: 0.4rem; margin-bottom: 2rem; flex-wrap: wrap;
+  }
+  .day-tab {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--bg-card);
+    color: var(--text-muted);
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .day-tab:hover { color: var(--text); border-color: #3a3430; }
+  .day-tab.active { color: var(--text); border-color: transparent; }
+  .day-tab[data-city="tokyo"].active { background: rgba(58,107,138,0.3); border-color: #3A6B8A; color: #7bbde3; }
+  .day-tab[data-city="nara"].active { background: rgba(74,124,89,0.3); border-color: #4A7C59; color: #7ec99b; }
+  .day-tab[data-city="kyoto"].active { background: rgba(123,94,167,0.3); border-color: #7B5EA7; color: #c4a8f0; }
+  .day-tab[data-city="osaka"].active { background: rgba(201,75,58,0.3); border-color: #C94B3A; color: #f09080; }
+
+  .day-panel { display: none; }
+  .day-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; animation: fadeIn 0.4s; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .day-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem; font-weight: 300;
+    margin-bottom: 0.5rem;
+  }
+  .day-city-tag {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .tag-tokyo { background: rgba(58,107,138,0.25); color: #7bbde3; }
+  .tag-nara { background: rgba(74,124,89,0.25); color: #7ec99b; }
+  .tag-kyoto { background: rgba(123,94,167,0.25); color: #c4a8f0; }
+  .tag-osaka { background: rgba(201,75,58,0.25); color: #f09080; }
+
+  .day-info p { color: rgba(240,235,225,0.75); margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+  .stops { display: flex; flex-direction: column; gap: 0.75rem; }
+  .stop {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    padding: 0.8rem 1rem;
+    background: var(--bg-surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .stop:hover { border-color: #3a3430; }
+  .stop-time { font-size: 0.7rem; color: var(--gold); font-weight: 500; white-space: nowrap; margin-top: 0.15rem; }
+  .stop-details { flex: 1; }
+  .stop-name { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.15rem; }
+  .stop-tip { font-size: 0.78rem; color: var(--text-muted); }
+  .map-link {
+    font-size: 0.7rem; color: var(--accent); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    margin-top: 0.3rem;
+    transition: color 0.2s;
+  }
+  .map-link:hover { color: #e06050; }
+
+  .day-image {
+    border-radius: 14px; overflow: hidden;
+    height: 100%; min-height: 420px;
+    position: relative;
+  }
+  .day-image img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .day-image:hover img { transform: scale(1.04); }
+  .day-image-caption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.5rem 1.2rem 1rem;
+    background: linear-gradient(to top, rgba(13,11,9,0.85), transparent);
+    font-size: 0.78rem; color: rgba(240,235,225,0.6);
+    font-style: italic;
+  }
+
+  /* PLACES GRID */
+  .places-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .place-card {
+    background: var(--bg-card);
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+  }
+  .place-card:hover { transform: translateY(-4px); border-color: #3a3430; }
+  .place-img { height: 200px; overflow: hidden; position: relative; }
+  .place-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .place-card:hover .place-img img { transform: scale(1.08); }
+  .place-city-badge {
+    position: absolute; top: 0.75rem; left: 0.75rem;
+    padding: 0.2rem 0.6rem; border-radius: 4px;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .place-body { padding: 1.2rem; }
+  .place-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.3rem; }
+  .place-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; line-height: 1.5; }
+  .place-rating { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: var(--gold); }
+  .stars { letter-spacing: 0.05em; }
+  .place-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+  .place-link {
+    font-size: 0.72rem; color: var(--accent); text-decoration: none;
+    font-weight: 500; letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: color 0.2s;
+  }
+  .place-link:hover { color: #e06050; }
+
+  /* FOOD */
+  .food-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  .food-city-section { margin-bottom: 3rem; }
+  .food-city-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .food-city-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .food-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .food-item:hover { border-color: #3a3430; }
+  .food-emoji { font-size: 2rem; line-height: 1; flex-shrink: 0; }
+  .food-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.2rem; }
+  .food-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  .food-must { font-size: 0.65rem; font-weight: 600; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+
+  /* TRANSPORT */
+  .transport-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+  .transport-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.8rem;
+    transition: border-color 0.2s;
+  }
+  .transport-card:hover { border-color: #3a3430; }
+  .transport-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .transport-name { font-weight: 500; font-size: 1rem; margin-bottom: 0.5rem; }
+  .transport-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.6; }
+
+  .route-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .route-header {
+    padding: 1.25rem 1.5rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500; font-size: 0.9rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .route-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.82rem;
+    align-items: center;
+  }
+  .route-row:last-child { border-bottom: none; }
+  .route-row:nth-child(even) { background: rgba(255,255,255,0.015); }
+  .from-to { font-weight: 500; }
+  .duration { color: var(--gold); font-weight: 500; }
+  .pass { font-size: 0.7rem; color: #7ec99b; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .tip-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.3rem;
+    display: flex; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .tip-card:hover { border-color: #3a3430; }
+  .tip-icon {
+    width: 38px; height: 38px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+    background: var(--bg-surface);
+  }
+  .tip-title { font-weight: 500; font-size: 0.9rem; margin-bottom: 0.25rem; }
+  .tip-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* FOOTER */
+  footer {
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 0.5rem; }
+  .footer-logo em { font-style: italic; color: var(--accent); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); margin: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .day-panel.active { grid-template-columns: 1fr; }
+    .day-image { min-height: 260px; }
+    .places-grid { grid-template-columns: repeat(2, 1fr); }
+    .transport-grid { grid-template-columns: 1fr; }
+    .cities-grid { grid-template-columns: repeat(2, 1fr); }
+    .route-row { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .route-row .pass { display: none; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .places-grid { grid-template-columns: 1fr; }
+    .food-grid { grid-template-columns: 1fr; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .cities-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Complete Travel Guide · 8 Days</p>
+    <h1 class="hero-title">Japan —<br>Land of the <em>Rising Sun</em></h1>
+    <p class="hero-subtitle">Tokyo · Nara · Kyoto · Osaka — temples, deer, torii gates, and the world's greatest street food.</p>
+    <div class="hero-badges">
+      <span class="badge">🗼 3 Days Tokyo</span>
+      <span class="badge">🦌 1 Day Nara</span>
+      <span class="badge">⛩️ 2 Days Kyoto</span>
+      <span class="badge">🍜 2 Days Osaka</span>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll <span></span></div>
+</section>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="nav-logo">日本 <em>Japan</em></a>
+  <div class="nav-links">
+    <a href="#overview">Overview</a>
+    <a href="#itinerary">Itinerary</a>
+    <a href="#places">Places</a>
+    <a href="#food">Food</a>
+    <a href="#transport">Transport</a>
+    <a href="#tips">Tips</a>
+  </div>
+</nav>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">The Journey</p>
+      <h2 class="section-title">Four Cities, <em>Eight Days</em></h2>
+      <p class="section-desc">A perfectly paced itinerary covering the best of Japan — from Tokyo's neon-lit chaos to Osaka's legendary street food scene.</p>
+    </div>
+    <div class="cities-grid reveal">
+      <div class="city-card">
+        <div class="city-dot" style="background: #3A6B8A;"></div>
+        <div class="city-name">Tokyo</div>
+        <div class="city-days">Days 1–3 · 3 nights</div>
+      </div>
+      <div class="city-card">
+        <div class="city-dot" style="background: #4A7C59;"></div>
+        <div class="city-name">Nara</div>
+        <div class="city-days">Day 4 · Day trip</div>
+      </div>
+      <div class="city-card">
+        <div class="city-dot" style="background: #7B5EA7;"></div>
+        <div class="city-name">Kyoto</div>
+        <div class="city-days">Days 5–6 · 2 nights</div>
+      </div>
+      <div class="city-card">
+        <div class="city-dot" style="background: #C94B3A;"></div>
+        <div class="city-name">Osaka</div>
+        <div class="city-days">Days 7–8 · 2 nights</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Day by Day</p>
+      <h2 class="section-title">Your <em>Itinerary</em></h2>
+      <p class="section-desc">Click each day to explore what to do, where to go, and insider tips for every stop.</p>
+    </div>
+
+    <div class="day-tabs reveal">
+      <button class="day-tab active" data-day="1" data-city="tokyo">Day 1 · Tokyo</button>
+      <button class="day-tab" data-day="2" data-city="tokyo">Day 2 · Tokyo</button>
+      <button class="day-tab" data-day="3" data-city="tokyo">Day 3 · Tokyo</button>
+      <button class="day-tab" data-day="4" data-city="nara">Day 4 · Nara</button>
+      <button class="day-tab" data-day="5" data-city="kyoto">Day 5 · Kyoto</button>
+      <button class="day-tab" data-day="6" data-city="kyoto">Day 6 · Kyoto</button>
+      <button class="day-tab" data-day="7" data-city="osaka">Day 7 · Osaka</button>
+      <button class="day-tab" data-day="8" data-city="osaka">Day 8 · Osaka</button>
+    </div>
+
+    <!-- Day 1 -->
+    <div class="day-panel active" data-day="1">
+      <div class="day-info">
+        <h3>Asakusa &amp; Akihabara</h3>
+        <span class="day-city-tag tag-tokyo">🗼 Tokyo</span>
+        <p>Begin your Japan adventure in Asakusa — Tokyo's most atmospheric old district. Visit Sensō-ji at dawn before the crowds arrive, then explore the streets of Akihabara.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">6:30 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Sensō-ji Temple</div>
+              <div class="stop-tip">Arrive before 7am — the lantern-lit Kaminarimon Gate is magical at dawn. Walk Nakamise-dori for souvenirs &amp; tamagoyaki skewers.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=7785923974874169613" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">10:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kanda Myōjin Shrine</div>
+              <div class="stop-tip">Historic shrine near Akihabara with a lively pop-culture edge. Buy the IT Omamori charm for good luck with technology!</div>
+              <a class="map-link" href="https://maps.google.com/?cid=17552749546243718283" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">2:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Akihabara Electric Town</div>
+              <div class="stop-tip">Browse multi-story electronics stores, retro games, and anime shops. Great spot to pick up unique Japan-only gadgets.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">7:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Dinner in Asakusa</div>
+              <div class="stop-tip">Try tonkotsu ramen at a standing ramen shop — order from the vending machine, grab a stool, and slurp away.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOkfluKcrlxf_uFjR9HLizvpHf06XoAv55r60eOXEyaOti_sHMTKMpmjc-72Ims2_g-tcRm_HYTIfMyWj9Vvs_baJImvFPYnOU8C5t9x0apO61SpKs67KzNvKOYvt7ZfIWSHDk944cYCAfW-Ee2bAHZxg=s4800-w800-h600" alt="Sensō-ji Temple"/>
+        <div class="day-image-caption">Sensō-ji Temple, Asakusa · Tokyo's oldest and most iconic temple</div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="day-panel" data-day="2">
+      <div class="day-info">
+        <h3>Harajuku, Shibuya &amp; Shinjuku</h3>
+        <span class="day-city-tag tag-tokyo">🗼 Tokyo</span>
+        <p>Today covers Tokyo's most iconic neighbourhoods — a peaceful forest shrine, the world's most famous crossing, and the dazzling neon of Shinjuku at night.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">8:30 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Meiji Jingu Shrine</div>
+              <div class="stop-tip">Walk through 70 hectares of forested grounds. A perfect counterpoint to Tokyo's chaos — serene, lush, and deeply spiritual.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=10361244767556222835" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">11:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Takeshita Street, Harajuku</div>
+              <div class="stop-tip">The heartbeat of Japanese youth culture — wild fashion, crepe shops, and endless characters. Unlike anywhere else on Earth.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">2:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Tsukiji Outer Market</div>
+              <div class="stop-tip">Fresh sushi, tamagoyaki on a stick, and the world's best tuna. Go hungry — this is one of the great food experiences of your life.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">7:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Shibuya Crossing at Night</div>
+              <div class="stop-tip">Watch from above at Mag's Park or Starbucks overlooking the crossing. Up to 3,000 people cross at once — it's breathtaking.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNKHa6tYM27wb-puCwSEcCOmyN8DdQOTboduBJ1C7Ps05zl5W-fRAsTyeWAxk2Ufa5bATcrE78D1so24OklOeMOPJ5u2hXGr-D9Cf48Uzzf296z2w1JJ1Ize10vyKaPWPOz7iGn6QsVp3rmbc=s4800-w800-h600" alt="Meiji Jingu"/>
+        <div class="day-image-caption">Meiji Jingu Shrine · A forest sanctuary in the heart of Tokyo</div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="day-panel" data-day="3">
+      <div class="day-info">
+        <h3>teamLab &amp; Odaiba</h3>
+        <span class="day-city-tag tag-tokyo">🗼 Tokyo</span>
+        <p>Day 3 is for Tokyo's more unconventional side — a world-class digital art museum and a futuristic waterfront island with panoramic views of the bay.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">10:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">teamLab Borderless (Azabudai)</div>
+              <div class="stop-tip">⚠️ Book tickets weeks in advance — they sell out. This is one of the most extraordinary art experiences in the world. Give it 3+ hours.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">3:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Odaiba Waterfront</div>
+              <div class="stop-tip">Take the Yurikamome monorail for stunning views. See the life-size Gundam statue, shop at DiverCity, and catch sunset over Rainbow Bridge.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">7:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Shinjuku at Night</div>
+              <div class="stop-tip">End in the neon labyrinth of Shinjuku — the Golden Gai alleyways have tiny bars seating just 6 people. An unforgettable night out.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPgxg9qvXO17QaomL2P_qh2d954XFt-RYAeOx7GdBfFoH9jdopZF4G4Zj0rh41CmSFUiCrWlHHDY_5tZtU-03g-Fm_Kcf64riP2gCBjqfZylkzId5-5dVkQaJ-iag65ruZKanR2EkRlqQXJ8aPw4rIY=s4800-w800-h600" alt="Kanda Myoujin"/>
+        <div class="day-image-caption">Kanda Myōjin · One of Tokyo's most culturally layered shrines</div>
+      </div>
+    </div>
+
+    <!-- Day 4 -->
+    <div class="day-panel" data-day="4">
+      <div class="day-info">
+        <h3>Ancient Nara — Deer &amp; Temples</h3>
+        <span class="day-city-tag tag-nara">🦌 Nara</span>
+        <p>Take the Shinkansen to Nara for a day trip you'll never forget. Over 1,000 wild deer roam freely through a UNESCO World Heritage site. They actually bow back at you.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">9:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Nara Park</div>
+              <div class="stop-tip">Buy shika senbei (deer crackers, ¥200) and hold ONE at a time or you'll be mobbed. Bow first — many will bow back. Magical.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=17972930374069941334" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">11:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Tōdai-ji Temple</div>
+              <div class="stop-tip">The world's largest wooden building. The Great Buddha inside is 15 metres tall and genuinely awe-inspiring. Try crawling through the pillar hole for good luck!</div>
+              <a class="map-link" href="https://maps.google.com/?cid=17911005107283377295" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">1:30 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kasugataisha Shrine</div>
+              <div class="stop-tip">Deep in ancient forest, lined with thousands of moss-covered stone lanterns. One of Japan's most sacred Shinto shrines. Utterly serene.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=5519134420388517270" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">3:30 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Naramachi District</div>
+              <div class="stop-tip">Try kakinoha-zushi (sushi in persimmon leaves) and shika manju (deer-shaped buns) before taking the Shinkansen to Kyoto.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPaPpP8ufsn4wmHa0Gk8MT2fhEwpYVqFoobmHqdDZGDOz2hDQTGFUgrbHqiw8_otN5HED92bCwHzxQlafZfHHTO1_eLliykkzgRHMYcekG2deoIrs-5ao_EBQUwpiws6p2Fyj0-ukIsWUjMng=s4800-w800-h600" alt="Nara Park Deer"/>
+        <div class="day-image-caption">Nara Park · Where 1,000+ wild deer roam free among ancient temples</div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <div class="day-panel" data-day="5">
+      <div class="day-info">
+        <h3>Fushimi Inari &amp; Gion</h3>
+        <span class="day-city-tag tag-kyoto">⛩️ Kyoto</span>
+        <p>Kyoto's spiritual heart — rise before the sun for one of Japan's most iconic hikes, then spend the evening in the historic geisha district as lanterns flicker to life.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">5:30 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Fushimi Inari Taisha</div>
+              <div class="stop-tip">⚠️ Go at sunrise — by 9am it's packed. Thousands of vermilion torii gates wind up the mountain. The full hike takes 2–3 hours. Open 24h.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=8870624639634301673" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">10:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Nishiki Market</div>
+              <div class="stop-tip">"Kyoto's Kitchen" — a 400-year-old covered market with pickled vegetables, matcha soft serve, grilled skewers, and every Kyoto specialty.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">2:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kiyomizudera Temple</div>
+              <div class="stop-tip">Perched on a hillside with dramatic views of Kyoto. The wooden stage extends out over the cliff without a single nail — incredible engineering.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">6:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Gion District — Hanamikoji Street</div>
+              <div class="stop-tip">Walk at dusk for the best chance to spot geiko and maiko in kimono. Respect the strict no-photography rules — just absorb the atmosphere.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPLoJibc2nZU6rSSoI8mOTIvFyA3lvtAHBa0ctwbZECE-REK3FbSSc-RQAHtqcS0Z2EWy9mGK3ZrErWB-yiz2oHmlkjn6J5uqGZCDhUGqE--O3lS4uauob4bvJu1e0A0EBd57Eu8UuLot5RtQ=s4800-w800-h600" alt="Fushimi Inari"/>
+        <div class="day-image-caption">Fushimi Inari Taisha · 10,000 torii gates climbing Mount Inari</div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <div class="day-panel" data-day="6">
+      <div class="day-info">
+        <h3>Arashiyama &amp; Kinkaku-ji</h3>
+        <span class="day-city-tag tag-kyoto">⛩️ Kyoto</span>
+        <p>Two of Kyoto's most breathtaking sights — a bamboo grove at dawn so quiet you can hear the stalks creak, and a gold-plated pavilion shimmering on a mirror-still pond.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">6:30 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Arashiyama Bamboo Grove</div>
+              <div class="stop-tip">Go before 8am for a surreal, near-empty experience. The bamboo reaches 30m — light filters through in an otherworldly way. Walk to Tenryu-ji garden after.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">9:30 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kinkaku-ji (Golden Pavilion)</div>
+              <div class="stop-tip">Japan's most photographed sight. The gold reflection on Kyoko-chi pond is best in morning light. Budget 1 hour — the grounds are beautiful.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">1:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kaiseki Lunch</div>
+              <div class="stop-tip">Splurge on a kaiseki multi-course lunch — even a mid-range one (¥3,000–5,000) in Kyoto is life-changing. Book ahead.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">4:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Philosopher's Path</div>
+              <div class="stop-tip">A canal-side stone path connecting Ginkaku-ji to Nanzen-ji. Lined with cherry trees, boutique cafes, and small pottery studios. Perfect late-afternoon walk.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZMS_AqnxfScO9C0EqkPMP5CULCWowb-3akFHr5EBdd7-0TGTkFSR7Ww_B2XCOdhl5KUAQGTE_sO3wuqKwmeEUH-lNjOPlGEfseT1A7bwA5d9eOtBArnAb3Qgmz8dqwqOu9B2ZZkiZVXD38jeeeDe-NHvg=s4800-w800-h600" alt="Kasugataisha Shrine"/>
+        <div class="day-image-caption">Kasugataisha · Lantern-lined paths through ancient sacred forest</div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <div class="day-panel" data-day="7">
+      <div class="day-info">
+        <h3>Osaka Castle &amp; Dotonbori</h3>
+        <span class="day-city-tag tag-osaka">🍜 Osaka</span>
+        <p>Osaka is Japan's food capital — "kuidaore" means "eat until you drop" and it's the city motto. History in the morning, legendary street food all night.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">9:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Osaka Castle</div>
+              <div class="stop-tip">The grounds are free to explore and stunning. The museum inside tells the story of Toyotomi Hideyoshi's unification of Japan. Views from the top are superb.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=1081374622389182017" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">12:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Kuromon Ichiba Market</div>
+              <div class="stop-tip">Osaka's "Kitchen" — walk and eat through this 600-stall covered market. Fresh crab, oysters, wagyu on a stick, and mochi. Pure joy.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">6:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Dotonbori at Night</div>
+              <div class="stop-tip">The Glico Running Man sign, giant mechanical crab, neon chaos. Eat takoyaki, okonomiyaki, and kushikatsu along the canal. Never double-dip the sauce!</div>
+              <a class="map-link" href="https://maps.google.com/?cid=13311254180582368656" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNBgToaloXHcJoAhsOiY6arX3-3lOrIfTZ4W4taqAqFRp3ukutM4M4HMczGmb2fG5QnzpYfwD93rng4TzK9HB-du1_Or8h5_ancRpJ1Hope988SL2VQ1HZIeK2wM62J5glSwJOyUUAOUS392g=s4800-w800-h600" alt="Dotonbori"/>
+        <div class="day-image-caption">Dotonbori · Osaka's legendary neon-lit food and entertainment canal</div>
+      </div>
+    </div>
+
+    <!-- Day 8 -->
+    <div class="day-panel" data-day="8">
+      <div class="day-info">
+        <h3>Umeda &amp; Farewell Osaka</h3>
+        <span class="day-city-tag tag-osaka">🍜 Osaka</span>
+        <p>A final morning high above the city, then time to shop, eat one last bowl of ramen, and collect your memories before heading to the airport.</p>
+        <div class="stops">
+          <div class="stop">
+            <div class="stop-time">8:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Umeda Sky Building — Floating Garden</div>
+              <div class="stop-tip">360° open-air rooftop with views all the way to Kobe. Stunning at sunrise. Go early to avoid queues — bring a light jacket, it's windy.</div>
+              <a class="map-link" href="https://maps.google.com/?cid=6323866581023509245" target="_blank">📍 View on Google Maps →</a>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">11:00 AM</div>
+            <div class="stop-details">
+              <div class="stop-name">Shinsaibashi Shopping</div>
+              <div class="stop-tip">Osaka's best shopping arcade. Pick up last-minute gifts: Kit Kats in unique flavours, matcha sweets, face masks, and Japanese stationery.</div>
+            </div>
+          </div>
+          <div class="stop">
+            <div class="stop-time">2:00 PM</div>
+            <div class="stop-details">
+              <div class="stop-name">Farewell Ramen</div>
+              <div class="stop-tip">End the trip the right way — one last bowl of ramen. Try a Kyushu-style tonkotsu or a classic shoyu in a tiny counter-seat shop. Sayonara, Japan!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="day-image">
+        <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOktJB4O5yE5wu-UKGgZYhdnoAMbD7n5AsObtKtPMH-dSKenhlhBsDnsoh4hSZiLiiw4sFDTZwGyPlT55MIB6uVA_TuDt0N1S4hbgIevw8QUxwzqAEvBkykWhw9ikN5qUDKQNi-42aWmh6ATA=s4800-w800-h600" alt="Umeda Sky Building"/>
+        <div class="day-image-caption">Umeda Sky Building · 360° panoramic views over Osaka from the Floating Garden</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLACES -->
+<section id="places">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Must Visit</p>
+      <h2 class="section-title">The Best <em>Places</em></h2>
+      <p class="section-desc">The highlights that define each city — with real photos, ratings, and direct links to Google Maps.</p>
+    </div>
+    <div class="places-grid reveal">
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZOkfluKcrlxf_uFjR9HLizvpHf06XoAv55r60eOXEyaOti_sHMTKMpmjc-72Ims2_g-tcRm_HYTIfMyWj9Vvs_baJImvFPYnOU8C5t9x0apO61SpKs67KzNvKOYvt7ZfIWSHDk944cYCAfW-Ee2bAHZxg=s4800-w800-h600" alt="Sensō-ji"/>
+          <span class="place-city-badge tag-tokyo">Tokyo</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Sensō-ji Temple</div>
+          <div class="place-desc">Tokyo's oldest temple, dating to 628 AD. The Kaminarimon Gate and Nakamise-dori shopping street are unmissable.</div>
+          <div class="place-rating"><span class="stars">★★★★★</span> 4.6 · 94,951 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Asakusa, Tokyo</span>
+          <a class="place-link" href="https://maps.google.com/?cid=7785923974874169613" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZNKHa6tYM27wb-puCwSEcCOmyN8DdQOTboduBJ1C7Ps05zl5W-fRAsTyeWAxk2Ufa5bATcrE78D1so24OklOeMOPJ5u2hXGr-D9Cf48Uzzf296z2w1JJ1Ize10vyKaPWPOz7iGn6QsVp3rmbc=s4800-w800-h600" alt="Meiji Jingu"/>
+          <span class="place-city-badge tag-tokyo">Tokyo</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Meiji Jingu Shrine</div>
+          <div class="place-desc">A tranquil forest sanctuary in the heart of Shibuya. The forested path leading to the shrine feels like another world.</div>
+          <div class="place-rating"><span class="stars">★★★★★</span> 4.6 · 50,268 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Harajuku, Tokyo</span>
+          <a class="place-link" href="https://maps.google.com/?cid=10361244767556222835" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPkQUpXbGqkm-jqny-vwxPlGbz1nTj4I3belDcbpkOpwyuuyV9-wniSMk95brqlxRlyPq6_87pKKcMjKjyLTkRqnMO2nKsBibmhx7ZSD-SHv21y1VYEYmUJQ2g-XvpH7Ikn8-Bgl7lHiIyU3VI=s4800-w800-h600" alt="Tōdai-ji"/>
+          <span class="place-city-badge tag-nara">Nara</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Tōdai-ji Temple</div>
+          <div class="place-desc">The world's largest wooden building, housing a 15-metre bronze Great Buddha. Absolutely awe-inspiring at any scale.</div>
+          <div class="place-rating"><span class="stars">★★★★★</span> 4.7 · 30,786 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Nara City, Nara</span>
+          <a class="place-link" href="https://maps.google.com/?cid=17911005107283377295" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZP1LCSwNPUs4D10h_zVrMPRejTH9a2WDB0dkwWb83CRleI65IqL-EdmAyLsecco-LMlqot3hk38tzhN3yzrjUd2EnRy0xIeqjjO2Q8zmGE2IjGXR5qAytirnccffLh-upkF9x2MfMJvPBCYpc0K_hd_IQ=s4800-w800-h600" alt="Nara Park"/>
+          <span class="place-city-badge tag-nara">Nara</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Nara Park</div>
+          <div class="place-desc">Over 1,000 wild sika deer roam free. Buy deer crackers, bow to them — they bow back. One of Japan's most unique experiences.</div>
+          <div class="place-rating"><span class="stars">★★★★★</span> 4.6 · 73,316 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Nara, Japan</span>
+          <a class="place-link" href="https://maps.google.com/?cid=17972930374069941334" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPLoJibc2nZU6rSSoI8mOTIvFyA3lvtAHBa0ctwbZECE-REK3FbSSc-RQAHtqcS0Z2EWy9mGK3ZrErWB-yiz2oHmlkjn6J5uqGZCDhUGqE--O3lS4uauob4bvJu1e0A0EBd57Eu8UuLot5RtQ=s4800-w800-h600" alt="Fushimi Inari"/>
+          <span class="place-city-badge tag-kyoto">Kyoto</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Fushimi Inari Taisha</div>
+          <div class="place-desc">10,000 vermilion torii gates winding up a sacred mountain. The world's most photographed shrine path. Open 24 hours.</div>
+          <div class="place-rating"><span class="stars">★★★★★</span> 4.6 · 87,829 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Fushimi, Kyoto</span>
+          <a class="place-link" href="https://maps.google.com/?cid=8870624639634301673" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="place-card">
+        <div class="place-img">
+          <img src="https://lh3.googleusercontent.com/place-photos/AJRVUZPbsxkouYN1VcrQ_ABCHD2XsfWwwNubG1r-DHIbEDLnmK7j-MDW6-uWL9MA0COA32RLqFia442AkUATwAFYVJ5J94QN4_DWWR40CAiCeuG-u5hyFEx1TVyqeLEgRTm5vmSl64oPtVNi_rZ-Gf3Jse1BIA=s4800-w800-h600" alt="Osaka Castle"/>
+          <span class="place-city-badge tag-osaka">Osaka</span>
+        </div>
+        <div class="place-body">
+          <div class="place-name">Osaka Castle</div>
+          <div class="place-desc">A 16th-century symbol of Japan's unification, surrounded by a vast moat and park. Stunning in any season — spectacular during cherry blossom.</div>
+          <div class="place-rating"><span class="stars">★★★★☆</span> 4.4 · 95,593 reviews</div>
+        </div>
+        <div class="place-footer">
+          <span style="font-size:0.72rem;color:var(--text-muted);">Chuo, Osaka</span>
+          <a class="place-link" href="https://maps.google.com/?cid=1081374622389182017" target="_blank">Open in Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOD -->
+<section id="food">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">What to Eat</p>
+      <h2 class="section-title">Food You <em>Must Try</em></h2>
+      <p class="section-desc">Japan has the most Michelin stars in the world — but its greatest food is often found at street stalls and tiny counter seats.</p>
+    </div>
+
+    <div class="food-city-section reveal">
+      <h3 class="food-city-title" style="color:#7bbde3;">🗼 Tokyo</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <div class="food-emoji">🍜</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Ramen</div>
+            <div class="food-desc">Order from the ticket machine, grab a counter seat, and slurp loudly — it's polite. Try tonkotsu (rich pork broth) or Tokyo-style shoyu.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🐟</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Tsukiji Sushi</div>
+            <div class="food-desc">The freshest tuna in the world, served at the outer market stalls. A medium toro hand roll at 8am is one of life's great pleasures.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🥚</div>
+          <div>
+            <div class="food-name">Tamagoyaki Skewer</div>
+            <div class="food-desc">Sweet, soft rolled egg on a stick from Nakamise-dori stalls in Asakusa. Simple, fresh, and utterly Japanese.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🍣</div>
+          <div>
+            <div class="food-name">Omakase Sushi</div>
+            <div class="food-desc">A chef's-choice tasting menu at a counter-seat sushi bar. Even a mid-range omakase (¥5,000–10,000) will rearrange your concept of sushi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-city-section reveal">
+      <h3 class="food-city-title" style="color:#7ec99b;">🦌 Nara</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <div class="food-emoji">🍱</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Kakinoha-zushi</div>
+            <div class="food-desc">Nara's signature dish — pressed sushi wrapped in preserved persimmon leaves. The tannins in the leaf perfume the fish subtly. Available at Hiraso.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🦌</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Shika Manju</div>
+            <div class="food-desc">Deer-shaped steamed buns sold at stalls near the park entrance. Light, fluffy, and filled with sweet bean paste. Perfect travel snack.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-city-section reveal">
+      <h3 class="food-city-title" style="color:#c4a8f0;">⛩️ Kyoto</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <div class="food-emoji">🍵</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Matcha Everything</div>
+            <div class="food-desc">Kyoto is the home of ceremonial matcha. Try soft serve, wagashi sweets, latte, and a proper whisked bowl at Ippodo or Nakamura Tokichi.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🍽️</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Kaiseki Dinner</div>
+            <div class="food-desc">Japan's haute cuisine — a seasonal multi-course meal where every dish is a small work of art. Book ahead; even a mid-range kaiseki is life-changing.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🥢</div>
+          <div>
+            <div class="food-name">Yudofu</div>
+            <div class="food-desc">Silken tofu simmered in kombu broth — a Kyoto classic that proves simplicity is its own form of perfection. Best at Tousuiro near Kiyomizudera.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🥬</div>
+          <div>
+            <div class="food-name">Kyoto Tsukemono</div>
+            <div class="food-desc">Pickled vegetables unique to Kyoto — shibazuke, suguki, and senmaizuke. Pick up a tasting pack at Nishiki Market to bring home.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="food-city-section reveal">
+      <h3 class="food-city-title" style="color:#f09080;">🍜 Osaka</h3>
+      <div class="food-grid">
+        <div class="food-item">
+          <div class="food-emoji">🐙</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Takoyaki</div>
+            <div class="food-desc">Osaka invented these octopus balls. Watch them cook on the iron mold, then drown them in bonito, mayo, and okonomi sauce. Eat immediately — scalding hot!</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🥞</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Okonomiyaki</div>
+            <div class="food-desc">A savory pancake packed with cabbage, pork, and topped with a glossy sweet sauce. Osaka-style (mixed together) is different from Hiroshima-style (layered).</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🍢</div>
+          <div>
+            <div class="food-must">Must Try</div>
+            <div class="food-name">Kushikatsu</div>
+            <div class="food-desc">Deep-fried skewers of meat, seafood, and vegetables. Sacred rule: NEVER double-dip in the communal sauce. Never. Eat at Daruma near Dotonbori.</div>
+          </div>
+        </div>
+        <div class="food-item">
+          <div class="food-emoji">🥩</div>
+          <div>
+            <div class="food-name">Yakiniku BBQ</div>
+            <div class="food-desc">Korean-style BBQ at your own grill — huge in Osaka's Tsuruhashi district, Japan's largest Korean town. Order wagyu A5 at least once.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRANSPORT -->
+<section id="transport">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Getting Around</p>
+      <h2 class="section-title">How to <em>Travel</em></h2>
+      <p class="section-desc">Japan's transport is world-class — punctual to the minute, comfortable, and surprisingly easy to navigate with the right prep.</p>
+    </div>
+
+    <div class="transport-grid reveal">
+      <div class="transport-card">
+        <div class="transport-icon">🚅</div>
+        <div class="transport-name">JR Pass — Buy Before You Leave</div>
+        <div class="transport-desc">The Japan Rail Pass covers all Shinkansen (bullet trains) between cities and most JR local trains. A 14-day pass costs ~¥50,000 (~$330). Buy it in your home country before departure — it cannot be purchased inside Japan at the same price. Activate it at any major JR station upon arrival.</div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">💳</div>
+        <div class="transport-name">IC Card — Suica or Pasmo</div>
+        <div class="transport-desc">A rechargeable card for all metro, bus, and local trains within cities. Also accepted at convenience stores, vending machines, and many restaurants. Add it to your iPhone Wallet for tap-and-go. Top up at any station machine. Works in Tokyo, Kyoto, Osaka, and Nara.</div>
+      </div>
+      <div class="transport-card">
+        <div class="transport-icon">🚇</div>
+        <div class="transport-name">City Metro</div>
+        <div class="transport-desc">Every city has an excellent metro system. Tokyo alone has 13 lines. Google Maps works perfectly — just enter your destination and it tells you exactly which train, which platform, and where to stand on the platform to be closest to the exit.</div>
+      </div>
+    </div>
+
+    <div class="route-card reveal">
+      <div class="route-header">🚅 Shinkansen Routes Between Cities</div>
+      <div class="route-row" style="font-size:0.7rem;color:var(--text-muted);font-weight:500;">
+        <span>ROUTE</span><span>TRAIN</span><span>DURATION</span><span>JR PASS</span>
+      </div>
+      <div class="route-row">
+        <span class="from-to">Tokyo → Kyoto</span>
+        <span>Hikari / Nozomi</span>
+        <span class="duration">~2h 15min</span>
+        <span class="pass">✅ Covered (Hikari only)</span>
+      </div>
+      <div class="route-row">
+        <span class="from-to">Kyoto → Nara</span>
+        <span>JR Nara Line</span>
+        <span class="duration">~45 min</span>
+        <span class="pass">✅ Covered</span>
+      </div>
+      <div class="route-row">
+        <span class="from-to">Kyoto → Osaka</span>
+        <span>JR Special Rapid</span>
+        <span class="duration">~15 min</span>
+        <span class="pass">✅ Covered</span>
+      </div>
+      <div class="route-row">
+        <span class="from-to">Tokyo → Nara</span>
+        <span>Shinkansen + JR</span>
+        <span class="duration">~2h 45min</span>
+        <span class="pass">✅ Covered</span>
+      </div>
+      <div class="route-row">
+        <span class="from-to">Osaka → Airport</span>
+        <span>Haruka Express (KIX) or Narita Express (NRT)</span>
+        <span class="duration">~75 min</span>
+        <span class="pass">✅ Covered</span>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;" class="reveal">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:1.5rem 2rem;">
+        <h4 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1rem;">✈️ Getting from Tokyo Airport</h4>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;font-size:0.82rem;">
+          <div>
+            <div style="font-weight:500;color:var(--gold);margin-bottom:0.3rem;">Narita Airport (NRT)</div>
+            <div style="color:var(--text-muted);">Narita Express (N'EX) → Tokyo Station: ~55 min. Covered by JR Pass. Runs every 30 min.</div>
+          </div>
+          <div>
+            <div style="font-weight:500;color:var(--gold);margin-bottom:0.3rem;">Haneda Airport (HND)</div>
+            <div style="color:var(--text-muted);">Tokyo Monorail or Keikyu Line → central Tokyo: ~30 min. Cheaper and faster than NRT.</div>
+          </div>
+          <div>
+            <div style="font-weight:500;color:var(--gold);margin-bottom:0.3rem;">Osaka KIX Airport</div>
+            <div style="color:var(--text-muted);">Haruka Express → Shin-Osaka: ~75 min. Namba by Nankai Rapid: ~40 min (not JR Pass).</div>
+          </div>
+          <div>
+            <div style="font-weight:500;color:var(--gold);margin-bottom:0.3rem;">Pocket WiFi Tip</div>
+            <div style="color:var(--text-muted);">Pre-order a pocket WiFi device or SIM card to the airport counter before leaving home. Pick up on arrival — essential for navigation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Before You Go</p>
+      <h2 class="section-title">Essential <em>Tips</em></h2>
+      <p class="section-desc">Small things that make a huge difference — save these before you leave.</p>
+    </div>
+    <div class="tips-grid reveal">
+      <div class="tip-card">
+        <div class="tip-icon">💴</div>
+        <div>
+          <div class="tip-title">Carry Cash — Always</div>
+          <div class="tip-text">Japan is still very cash-heavy. Many restaurants, shrines, and small shops are cash-only. 7-Eleven ATMs accept foreign cards reliably. Withdraw ¥30,000–50,000 at the airport on arrival.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🦌</div>
+        <div>
+          <div class="tip-title">Bow to the Nara Deer First</div>
+          <div class="tip-text">Hold out one cracker, bow slowly — many deer will bow back before taking it. Never hold the whole stack visible or you'll be swarmed. Show both empty palms when done.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⛩️</div>
+        <div>
+          <div class="tip-title">Visit Shrines at Dawn</div>
+          <div class="tip-text">Fushimi Inari, Sensō-ji, and Meiji Jingu are overwhelmingly crowded by 10am. Going at 5–7am gives you an almost private experience that's completely transformative.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">👟</div>
+        <div>
+          <div class="tip-title">Wear Slip-On Shoes</div>
+          <div class="tip-text">You'll remove your shoes at temples, traditional restaurants, and ryokan inns — sometimes dozens of times a day. Wear comfortable, easy-to-remove shoes. Your feet will also walk 20,000+ steps daily.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎟️</div>
+        <div>
+          <div class="tip-title">Pre-Book Key Attractions</div>
+          <div class="tip-text">teamLab Borderless sells out weeks ahead. Certain ramen restaurants and sushi counters require reservations months in advance. Book before you leave home — don't assume walk-ins work.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗑️</div>
+        <div>
+          <div class="tip-title">Pack Your Trash</div>
+          <div class="tip-text">There are almost no public bins in Japan. Streets are spotless because everyone carries their rubbish to a convenience store bin or back to the hotel. Bring a small bag for waste — it's the respectful thing to do.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🍢</div>
+        <div>
+          <div class="tip-title">The Kushikatsu Rule</div>
+          <div class="tip-text">At kushikatsu restaurants in Osaka, the communal dipping sauce is shared. The sacred, inviolable rule: NEVER double-dip a skewer you've already bitten. Use the provided cabbage to add more sauce if needed.</div>
+        </div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📱</div>
+        <div>
+          <div class="tip-title">Google Translate Camera</div>
+          <div class="tip-text">Point your phone camera at any Japanese text and it translates in real-time. Indispensable for menus, signs, and train displays. Works offline if you download the Japanese pack in advance.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">日本 <em>Japan</em></div>
+  <p>8 Days · Tokyo · Nara · Kyoto · Osaka</p>
+  <p style="margin-top:0.5rem;">Maps powered by <a href="https://maps.google.com" target="_blank">Google Maps</a> · Ratings from verified visitor reviews</p>
+</footer>
+
+<script>
+  // Tab switching
+  const tabs = document.querySelectorAll('.day-tab');
+  const panels = document.querySelectorAll('.day-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const day = tab.dataset.day;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const target = document.querySelector(`.day-panel[data-day="${day}"]`);
+      if (target) target.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Stagger children
+        const kids = e.target.querySelectorAll('.place-card, .food-item, .tip-card, .transport-card');
+        kids.forEach((k, i) => {
+          k.style.transitionDelay = `${i * 60}ms`;
+          k.classList.add('reveal', 'visible');
+        });
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+      a.style.background = a.getAttribute('href') === '#' + current ? 'var(--bg-surface)' : '';
+    });
+  });
+</script>
+</body>
+</html>
