@@ -48,19 +48,19 @@
 
   /* SIDEBAR */
   .sidebar {
-    width: 220px; min-width: 220px; background: white; height: calc(100vh - 160px);
+    width: 140px; min-width: 140px; background: white; height: calc(100vh - 160px);
     position: sticky; top: 0; overflow-y: auto; border-right: 1px solid #eee;
-    padding: 16px 0;
+    padding: 10px 0;
   }
-  .sidebar-section { margin-bottom: 8px; }
+  .sidebar-section { margin-bottom: 4px; }
   .sidebar-city {
-    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-    padding: 8px 16px 4px; color: var(--muted);
+    font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+    padding: 6px 10px 2px; color: var(--muted); display: flex; align-items: center; gap: 4px;
   }
   .day-link {
-    display: flex; align-items: center; padding: 8px 16px; cursor: pointer;
-    border-left: 3px solid transparent; transition: all 0.15s; gap: 10px;
-    font-size: 0.88rem;
+    display: flex; align-items: center; padding: 6px 10px; cursor: pointer;
+    border-left: 3px solid transparent; transition: all 0.15s; gap: 7px;
+    font-size: 0.82rem;
   }
   .day-link:hover { background: var(--bg); }
   .day-link.active { background: #f0f0f0; font-weight: 600; }
@@ -69,8 +69,8 @@
   .day-link.osaka { border-left-color: var(--osaka); }
   .day-link.kobe { border-left-color: var(--kobe); }
   .day-link.flight { border-left-color: var(--flight); }
-  .day-num { font-size: 0.75rem; color: var(--muted); min-width: 20px; }
-  .day-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .day-num { font-size: 0.7rem; color: var(--muted); }
+  .day-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
   /* MAIN */
   .main { flex: 1; padding: 24px; overflow-y: auto; }
@@ -190,6 +190,37 @@
   .booking-key { color: var(--muted); }
   .booking-val { font-weight: 600; color: var(--text); }
 
+  /* TRIP LOG */
+  .trip-log {
+    margin-top: 20px; border-top: 2px dashed #f0f0f0; padding-top: 20px;
+  }
+  .trip-log-title {
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+    color: #e74c3c; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .trip-log-title::after {
+    content: ''; flex: 1; height: 1px; background: #fde;
+  }
+  .log-entry {
+    display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start;
+  }
+  .log-icon {
+    font-size: 1.5rem; min-width: 36px; height: 36px; display: flex; align-items: center;
+    justify-content: center; background: #fff5f5; border-radius: 50%;
+  }
+  .log-content { flex: 1; }
+  .log-name {
+    font-weight: 700; font-size: 0.95rem; color: var(--text);
+  }
+  .log-name a { color: #e74c3c; text-decoration: none; }
+  .log-name a:hover { text-decoration: underline; }
+  .log-addr { font-size: 0.78rem; color: var(--muted); margin: 2px 0 4px; }
+  .log-note {
+    font-size: 0.85rem; background: #fff9f0; border-left: 3px solid #f39c12;
+    padding: 6px 10px; border-radius: 0 6px 6px 0; color: var(--text);
+    font-style: italic;
+  }
+
   /* SCROLL NAV */
   .top-nav { position: sticky; top: 0; z-index: 10; background: white; border-bottom: 1px solid #eee; padding: 0; }
   .nav-tabs { display: flex; overflow-x: auto; gap: 0; }
@@ -242,83 +273,83 @@
     <div class="sidebar-city">✈️ Departure</div>
     <div class="day-link flight" onclick="scrollTo('day-jun18')">
       <div class="day-dot" style="background:var(--flight)"></div>
-      <div><div>Jun 18</div><div class="day-num">Thu · Depart SG</div></div>
+      <div><div>Jun 18</div><div class="day-num">Depart SG</div></div>
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--tokyo)">🗼 Tokyo</div>
     <div class="day-link tokyo" onclick="scrollTo('day-jun19')">
       <div class="day-dot" style="background:var(--tokyo)"></div>
-      <div><div>Jun 19</div><div class="day-num">Fri · Arrive</div></div>
+      <div><div>Jun 19</div><div class="day-num">Arrive</div></div>
     </div>
     <div class="day-link tokyo" onclick="scrollTo('day-jun20')">
       <div class="day-dot" style="background:var(--tokyo)"></div>
-      <div><div>Jun 20</div><div class="day-num">Sat · Tokyo</div></div>
+      <div><div>Jun 20</div><div class="day-num">Tokyo</div></div>
     </div>
     <div class="day-link tokyo" onclick="scrollTo('day-jun21')">
       <div class="day-dot" style="background:var(--tokyo)"></div>
-      <div><div>Jun 21</div><div class="day-num">Sun · Tokyo</div></div>
+      <div><div>Jun 21</div><div class="day-num">Tokyo</div></div>
     </div>
     <div class="day-link tokyo" onclick="scrollTo('day-jun22')">
       <div class="day-dot" style="background:var(--tokyo)"></div>
-      <div><div>Jun 22</div><div class="day-num">Mon · Disneyland</div></div>
+      <div><div>Jun 22</div><div class="day-num">Disneyland</div></div>
     </div>
     <div class="day-link transit" onclick="scrollTo('day-jun23')">
       <div class="day-dot" style="background:#546e7a"></div>
-      <div><div>Jun 23</div><div class="day-num">Tue · → Kyoto</div></div>
+      <div><div>Jun 23</div><div class="day-num">→ Kyoto</div></div>
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--kyoto)">⛩️ Kyoto</div>
     <div class="day-link kyoto" onclick="scrollTo('day-jun24')">
       <div class="day-dot" style="background:var(--kyoto)"></div>
-      <div><div>Jun 24</div><div class="day-num">Wed · Kyoto</div></div>
+      <div><div>Jun 24</div><div class="day-num">Kyoto</div></div>
     </div>
     <div class="day-link kyoto" onclick="scrollTo('day-jun25')">
       <div class="day-dot" style="background:var(--kyoto)"></div>
-      <div><div>Jun 25</div><div class="day-num">Thu · Kyoto</div></div>
+      <div><div>Jun 25</div><div class="day-num">Kyoto</div></div>
     </div>
     <div class="day-link transit" onclick="scrollTo('day-jun26')">
       <div class="day-dot" style="background:#546e7a"></div>
-      <div><div>Jun 26</div><div class="day-num">Fri · → Osaka</div></div>
+      <div><div>Jun 26</div><div class="day-num">→ Osaka</div></div>
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--osaka)">🏯 Osaka</div>
     <div class="day-link osaka" onclick="scrollTo('day-jun27')">
       <div class="day-dot" style="background:var(--osaka)"></div>
-      <div><div>Jun 27</div><div class="day-num">Sat · Osaka</div></div>
+      <div><div>Jun 27</div><div class="day-num">Osaka</div></div>
     </div>
     <div class="day-link transit" onclick="scrollTo('day-jun28')">
       <div class="day-dot" style="background:#546e7a"></div>
-      <div><div>Jun 28</div><div class="day-num">Sun · → Kobe</div></div>
+      <div><div>Jun 28</div><div class="day-num">→ Kobe</div></div>
     </div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--kobe)">⚓ Kobe</div>
     <div class="day-link kobe" onclick="scrollTo('day-jun29')">
       <div class="day-dot" style="background:var(--kobe)"></div>
-      <div><div>Jun 29</div><div class="day-num">Mon · Kobe</div></div>
+      <div><div>Jun 29</div><div class="day-num">Kobe</div></div>
     </div>
     <div class="day-link kobe" onclick="scrollTo('day-jun30')">
       <div class="day-dot" style="background:var(--kobe)"></div>
-      <div><div>Jun 30</div><div class="day-num">Tue · Kobe</div></div>
+      <div><div>Jun 30</div><div class="day-num">Kobe</div></div>
     </div>
     <div class="day-link kobe" onclick="scrollTo('day-jul01')">
       <div class="day-dot" style="background:var(--kobe)"></div>
-      <div><div>Jul 1</div><div class="day-num">Wed · Kobe</div></div>
+      <div><div>Jul 1</div><div class="day-num">Kobe</div></div>
     </div>
     <div class="day-link kobe" onclick="scrollTo('day-jul02')">
       <div class="day-dot" style="background:var(--kobe)"></div>
-      <div><div>Jul 2</div><div class="day-num">Thu · Kobe</div></div>
+      <div><div>Jul 2</div><div class="day-num">Kobe</div></div>
     </div>
     <div class="day-link kobe" onclick="scrollTo('day-jul03')">
       <div class="day-dot" style="background:var(--kobe)"></div>
-      <div><div>Jul 3</div><div class="day-num">Fri · Kobe</div></div>
+      <div><div>Jul 3</div><div class="day-num">Kobe</div></div>
     </div>
     <div class="day-link flight" onclick="scrollTo('day-jul04')">
       <div class="day-dot" style="background:var(--flight)"></div>
-      <div><div>Jul 4</div><div class="day-num">Sat · Fly Home</div></div>
+      <div><div>Jul 4</div><div class="day-num">Fly Home</div></div>
     </div>
   </div>
 </div>
@@ -447,6 +478,46 @@
           <div class="activity-item"><div class="activity-icon">🏯</div><div class="activity-text"><div class="activity-name">Nihombashi area (evening) <span class="suggest-badge">Suggested</span></div><div class="activity-desc">Historic bridge near hotel, lovely at dusk after a full day</div></div></div>
         </div>
       </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🥩</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://gyu-star.owst.jp/" target="_blank">牛スター (Gyu Star) 上野</a></div>
+            <div class="log-addr">〒110-0015 Tokyo, Taito City, Higashiueno, 2-15-6 アユタヤビル · Lunch</div>
+            <div class="log-note">🌟 Wagyu beef BBQ all-you-can-eat (食べ放題) — beef BBQ was very nice!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌳</div>
+          <div class="log-content">
+            <div class="log-name">上野恩賜公園 (Ueno Park)</div>
+            <div class="log-addr">Ueno, Taito City, Tokyo · Afternoon stroll</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌤</div>
+          <div class="log-content">
+            <div class="log-name">SHIBUYA SKY Observatory</div>
+            <div class="log-addr">Shibuya Scramble Square, 2-24-12 Shibuya · 2:20 PM</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍜</div>
+          <div class="log-content">
+            <div class="log-name">TsuruTonTan Udon 鶴亀つるとんたん</div>
+            <div class="log-addr">Tokyo · Dinner</div>
+            <div class="log-note">乌冬面 (Udon noodles) dinner to end the first day!</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
