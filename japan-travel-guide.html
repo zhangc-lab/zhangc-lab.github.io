@@ -216,6 +216,8 @@
   }
   .log-name a { color: #e74c3c; text-decoration: none; }
   .log-name a:hover { text-decoration: underline; }
+  .map-link { font-size: 0.75rem; color: #3498db; text-decoration: none; margin-left: 6px; white-space: nowrap; }
+  .map-link:hover { text-decoration: underline; }
   .log-addr { font-size: 0.78rem; color: var(--muted); margin: 2px 0 4px; }
   .log-note {
     font-size: 0.85rem; background: #fff9f0; border-left: 3px solid #f39c12;
@@ -297,9 +299,53 @@
     display: inline-flex; align-items: center; gap: 6px; background: #f0f4ff;
     border: 1px solid #c5cae9; padding: 6px 14px; border-radius: 20px; font-size: 0.83rem;
   }
+  /* PASSWORD GATE */
+  .gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: linear-gradient(135deg, #c0392b 0%, #8e44ad 50%, #2980b9 100%);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .gate-box {
+    background: white; border-radius: 20px; padding: 40px 36px; text-align: center;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25); width: 320px; max-width: 90vw;
+  }
+  .gate-box h2 { font-size: 1.6rem; margin-bottom: 4px; }
+  .gate-box p { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
+  .gate-input {
+    width: 100%; padding: 12px 16px; border: 2px solid #eee; border-radius: 10px;
+    font-size: 1rem; outline: none; text-align: center; letter-spacing: 2px;
+    transition: border-color 0.2s;
+  }
+  .gate-input:focus { border-color: #8e44ad; }
+  .gate-input.error { border-color: #e74c3c; animation: shake 0.3s; }
+  .gate-btn {
+    width: 100%; margin-top: 14px; padding: 13px; background: #2c3e50; color: white;
+    border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .gate-btn:hover { background: #1a252f; }
+  .gate-error { color: #e74c3c; font-size: 0.82rem; margin-top: 10px; min-height: 18px; }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+  }
 </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div style="font-size:2.4rem;margin-bottom:10px">🗾</div>
+    <h2>Japan Trip 2026</h2>
+    <p>Enter password to view the travel guide</p>
+    <input class="gate-input" id="gate-input" type="password" placeholder="Password"
+      onkeydown="if(event.key==='Enter')checkPassword()">
+    <button class="gate-btn" onclick="checkPassword()">Enter →</button>
+    <div class="gate-error" id="gate-error"></div>
+  </div>
+</div>
 
 <div class="header">
   <h1>🗾 Japan Trip 2026</h1>
@@ -551,7 +597,7 @@
         <div class="log-entry">
           <div class="log-icon">🥩</div>
           <div class="log-content">
-            <div class="log-name"><a href="https://gyu-star.owst.jp/" target="_blank">牛スター (Gyu Star) 上野</a></div>
+            <div class="log-name"><a href="https://gyu-star.owst.jp/" target="_blank">牛スター (Gyu Star) 上野</a><a class="map-link" href="https://maps.google.com/?q=2-15-6+Higashiueno+Taito+Tokyo+牛スター" target="_blank">📍 Maps</a></div>
             <div class="log-addr">〒110-0015 Tokyo, Taito City, Higashiueno, 2-15-6 アユタヤビル · Lunch</div>
             <div class="log-note">🌟 Wagyu beef BBQ all-you-can-eat (食べ放題) — beef BBQ was very nice!</div>
           </div>
@@ -560,7 +606,7 @@
         <div class="log-entry">
           <div class="log-icon">🌳</div>
           <div class="log-content">
-            <div class="log-name">上野恩賜公園 (Ueno Park)</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=上野恩賜公園+Ueno+Park+Taito+Tokyo" target="_blank">上野恩賜公園 (Ueno Park)</a></div>
             <div class="log-addr">Ueno, Taito City, Tokyo · Afternoon stroll</div>
           </div>
         </div>
@@ -568,7 +614,7 @@
         <div class="log-entry">
           <div class="log-icon">🌤</div>
           <div class="log-content">
-            <div class="log-name">SHIBUYA SKY Observatory</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=SHIBUYA+SKY+Shibuya+Scramble+Square+2-24-12+Shibuya+Tokyo" target="_blank">SHIBUYA SKY Observatory</a></div>
             <div class="log-addr">Shibuya Scramble Square, 2-24-12 Shibuya · 2:20 PM</div>
           </div>
         </div>
@@ -576,7 +622,7 @@
         <div class="log-entry">
           <div class="log-icon">🍜</div>
           <div class="log-content">
-            <div class="log-name">TsuruTonTan Udon 鶴亀つるとんたん</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=TsuruTonTan+Udon+つるとんたん+Tokyo" target="_blank">TsuruTonTan Udon つるとんたん</a></div>
             <div class="log-addr">Tokyo · Dinner</div>
             <div class="log-note">乌冬面 (Udon noodles) dinner to end the first day!</div>
           </div>
@@ -629,10 +675,13 @@
         <div class="log-entry">
           <div class="log-icon">🏮</div>
           <div class="log-content">
-            <div class="log-name">Asakusa Temple District</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=Senso-ji+Temple+Asakusa+Taito+Tokyo" target="_blank">Asakusa Temple District</a></div>
             <div class="log-addr">Asakusa, Taito City, Tokyo · Morning</div>
             <div class="log-note">
-              Kaminarimon Gate 雷門 → Nakamise Shopping Street 仲見世商店街 → Hozomon Gate 宝蔵門 → Sensō-ji 浅草寺
+              <a href="https://maps.google.com/?q=Kaminarimon+Gate+雷門+Asakusa+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Kaminarimon Gate 雷門</a> →
+              <a href="https://maps.google.com/?q=Nakamise+Shopping+Street+仲見世商店街+Asakusa+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Nakamise 仲見世商店街</a> →
+              <a href="https://maps.google.com/?q=Hozomon+Gate+宝蔵門+Senso-ji+Asakusa+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Hozomon Gate 宝蔵門</a> →
+              <a href="https://maps.google.com/?q=Senso-ji+浅草寺+Asakusa+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Sensō-ji 浅草寺</a>
             </div>
           </div>
         </div>
@@ -640,7 +689,7 @@
         <div class="log-entry">
           <div class="log-icon">🥩</div>
           <div class="log-content">
-            <div class="log-name">Washoku Gyuuna やどき (GYUUNA yadoki Asakusa)</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=GYUUNA+yadoki+やどき+Asakusa+Taito+Tokyo" target="_blank">Washoku Gyuuna やどき (GYUUNA yadoki Asakusa)</a></div>
             <div class="log-addr">浅草, Taito City, Tokyo · Lunch</div>
             <div class="log-note">🐄 Wagyu Beef Sukiyaki + 🐟 Kabayaki Eel (Unagi) — washoku set lunch in Asakusa!</div>
           </div>
@@ -649,7 +698,7 @@
         <div class="log-entry">
           <div class="log-icon">🦕</div>
           <div class="log-content">
-            <div class="log-name">国立科学博物館 (National Museum of Nature and Science)</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=国立科学博物館+National+Museum+of+Nature+and+Science+Ueno+Tokyo" target="_blank">国立科学博物館 (National Museum of Nature and Science)</a></div>
             <div class="log-addr">Ueno Park, Taito City, Tokyo · Afternoon · Closed 5:00 PM</div>
             <div class="log-note">Really big museum! Visited 地球館 (Earth Hall) only — no time left for 日本館 (Japan Hall). Need another visit someday!</div>
           </div>
@@ -658,7 +707,7 @@
         <div class="log-entry">
           <div class="log-icon">🍜</div>
           <div class="log-content">
-            <div class="log-name">山笠ノ龍 (Yamagasa no Ryū)</div>
+            <div class="log-name"><a href="https://maps.google.com/?q=山笠ノ龍+Yamagasa+no+Ryu+ramen+Tokyo" target="_blank">山笠ノ龍 (Yamagasa no Ryū)</a></div>
             <div class="log-addr">Tokyo · Dinner</div>
             <div class="log-note">🌟 Yummy ramen to end a rainy day perfectly!</div>
           </div>
@@ -1142,6 +1191,27 @@
 </div><!-- /container flex -->
 
 <script>
+// PASSWORD GATE
+const PASS = 'QSJapan@2026';
+function checkPassword() {
+  const val = document.getElementById('gate-input').value;
+  if (val === PASS) {
+    sessionStorage.setItem('jp26_auth', '1');
+    document.getElementById('gate').style.display = 'none';
+  } else {
+    const inp = document.getElementById('gate-input');
+    const err = document.getElementById('gate-error');
+    err.textContent = 'Incorrect password. Please try again.';
+    inp.classList.add('error');
+    inp.value = '';
+    setTimeout(() => inp.classList.remove('error'), 400);
+  }
+}
+// Auto-unlock if already authenticated this session
+if (sessionStorage.getItem('jp26_auth') === '1') {
+  document.getElementById('gate').style.display = 'none';
+}
+
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
