@@ -19,7 +19,9 @@
     --shadow: 0 2px 16px rgba(0,0,0,0.10);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); }
+  a.day-link { text-decoration: none; color: inherit; display: flex; }
 
   /* HEADER */
   .header {
@@ -236,6 +238,59 @@
   .nav-tab.kobe.active { color: var(--kobe); border-bottom-color: var(--kobe); }
   .nav-tab.flight.active { color: var(--flight); border-bottom-color: var(--flight); }
 
+  /* MOBILE DRAWER */
+  .hamburger {
+    display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    z-index: 200; background: #2c3e50; color: white; border: none;
+    border-radius: 30px; padding: 12px 22px; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.3); gap: 8px;
+    align-items: center; letter-spacing: 0.5px;
+  }
+  .hamburger:active { transform: translateX(-50%) scale(0.96); }
+
+  .drawer-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+    z-index: 300; backdrop-filter: blur(2px);
+  }
+  .drawer-overlay.open { display: block; }
+
+  .sidebar.drawer-open {
+    transform: translateX(0) !important;
+  }
+
+  @media (max-width: 640px) {
+    .sidebar {
+      position: fixed; top: 0; left: 0; height: 100vh; z-index: 400;
+      transform: translateX(-100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+      width: 200px !important; min-width: 200px !important;
+      box-shadow: 4px 0 24px rgba(0,0,0,0.18);
+    }
+    .hamburger { display: flex; }
+    .main { padding: 14px; }
+    .hotel-section { grid-template-columns: 1fr !important; }
+    .activities-grid { grid-template-columns: 1fr !important; }
+    .day-header { padding: 14px 16px; }
+    .day-date { font-size: 1.1rem; }
+    .day-body { padding: 14px; }
+    .header h1 { font-size: 1.5rem; }
+    .trip-summary { gap: 18px; }
+    .trip-stat .num { font-size: 1.4rem; }
+    .legend { gap: 10px; font-size: 0.8rem; padding: 10px; }
+    .day-tag { font-size: 0.7rem; padding: 3px 8px; }
+    .drawer-close {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 12px 8px; border-bottom: 1px solid #eee; font-weight: 700;
+      font-size: 0.85rem; color: var(--text);
+    }
+    .drawer-close button {
+      background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--muted);
+      line-height: 1;
+    }
+  }
+  @media (min-width: 641px) {
+    .drawer-close { display: none; }
+  }
+
   /* PASSENGER CHIP */
   .passenger-section { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
   .passenger-chip {
@@ -265,92 +320,102 @@
   <div class="legend-item" onclick="filterCity('kobe')"><div class="legend-dot" style="background:var(--kobe)"></div> Kobe</div>
 </div>
 
+<!-- Overlay backdrop -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+
+<!-- Floating hamburger button (mobile only) -->
+<button class="hamburger" onclick="openDrawer()">🗓 Days</button>
+
 <div style="display:flex; max-width:1400px; margin:0 auto;">
 
 <!-- SIDEBAR -->
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
+  <div class="drawer-close">
+    <span>🗾 Navigation</span>
+    <button onclick="closeDrawer()">✕</button>
+  </div>
   <div class="sidebar-section">
     <div class="sidebar-city">✈️ Departure</div>
-    <div class="day-link flight" onclick="scrollTo('day-jun18')">
+    <a class="day-link flight" href="#day-jun18" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--flight)"></div>
       <div><div>Jun 18</div><div class="day-num">Depart SG</div></div>
-    </div>
+    </a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--tokyo)">🗼 Tokyo</div>
-    <div class="day-link tokyo" onclick="scrollTo('day-jun19')">
+    <a class="day-link tokyo" href="#day-jun19" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--tokyo)"></div>
       <div><div>Jun 19</div><div class="day-num">Arrive</div></div>
-    </div>
-    <div class="day-link tokyo" onclick="scrollTo('day-jun20')">
+    </a>
+    <a class="day-link tokyo" href="#day-jun20" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--tokyo)"></div>
       <div><div>Jun 20</div><div class="day-num">Tokyo</div></div>
-    </div>
-    <div class="day-link tokyo" onclick="scrollTo('day-jun21')">
+    </a>
+    <a class="day-link tokyo" href="#day-jun21" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--tokyo)"></div>
       <div><div>Jun 21</div><div class="day-num">Tokyo</div></div>
-    </div>
-    <div class="day-link tokyo" onclick="scrollTo('day-jun22')">
+    </a>
+    <a class="day-link tokyo" href="#day-jun22" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--tokyo)"></div>
       <div><div>Jun 22</div><div class="day-num">Disneyland</div></div>
-    </div>
-    <div class="day-link transit" onclick="scrollTo('day-jun23')">
+    </a>
+    <a class="day-link transit" href="#day-jun23" onclick="closeDrawer()">
       <div class="day-dot" style="background:#546e7a"></div>
       <div><div>Jun 23</div><div class="day-num">→ Kyoto</div></div>
-    </div>
+    </a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--kyoto)">⛩️ Kyoto</div>
-    <div class="day-link kyoto" onclick="scrollTo('day-jun24')">
+    <a class="day-link kyoto" href="#day-jun24" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kyoto)"></div>
       <div><div>Jun 24</div><div class="day-num">Kyoto</div></div>
-    </div>
-    <div class="day-link kyoto" onclick="scrollTo('day-jun25')">
+    </a>
+    <a class="day-link kyoto" href="#day-jun25" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kyoto)"></div>
       <div><div>Jun 25</div><div class="day-num">Kyoto</div></div>
-    </div>
-    <div class="day-link transit" onclick="scrollTo('day-jun26')">
+    </a>
+    <a class="day-link transit" href="#day-jun26" onclick="closeDrawer()">
       <div class="day-dot" style="background:#546e7a"></div>
       <div><div>Jun 26</div><div class="day-num">→ Osaka</div></div>
-    </div>
+    </a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--osaka)">🏯 Osaka</div>
-    <div class="day-link osaka" onclick="scrollTo('day-jun27')">
+    <a class="day-link osaka" href="#day-jun27" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--osaka)"></div>
       <div><div>Jun 27</div><div class="day-num">Osaka</div></div>
-    </div>
-    <div class="day-link transit" onclick="scrollTo('day-jun28')">
+    </a>
+    <a class="day-link transit" href="#day-jun28" onclick="closeDrawer()">
       <div class="day-dot" style="background:#546e7a"></div>
       <div><div>Jun 28</div><div class="day-num">→ Kobe</div></div>
-    </div>
+    </a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-city" style="color:var(--kobe)">⚓ Kobe</div>
-    <div class="day-link kobe" onclick="scrollTo('day-jun29')">
+    <a class="day-link kobe" href="#day-jun29" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kobe)"></div>
       <div><div>Jun 29</div><div class="day-num">Kobe</div></div>
-    </div>
-    <div class="day-link kobe" onclick="scrollTo('day-jun30')">
+    </a>
+    <a class="day-link kobe" href="#day-jun30" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kobe)"></div>
       <div><div>Jun 30</div><div class="day-num">Kobe</div></div>
-    </div>
-    <div class="day-link kobe" onclick="scrollTo('day-jul01')">
+    </a>
+    <a class="day-link kobe" href="#day-jul01" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kobe)"></div>
       <div><div>Jul 1</div><div class="day-num">Kobe</div></div>
-    </div>
-    <div class="day-link kobe" onclick="scrollTo('day-jul02')">
+    </a>
+    <a class="day-link kobe" href="#day-jul02" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kobe)"></div>
       <div><div>Jul 2</div><div class="day-num">Kobe</div></div>
-    </div>
-    <div class="day-link kobe" onclick="scrollTo('day-jul03')">
+    </a>
+    <a class="day-link kobe" href="#day-jul03" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--kobe)"></div>
       <div><div>Jul 3</div><div class="day-num">Kobe</div></div>
-    </div>
-    <div class="day-link flight" onclick="scrollTo('day-jul04')">
+    </a>
+    <a class="day-link flight" href="#day-jul04" onclick="closeDrawer()">
       <div class="day-dot" style="background:var(--flight)"></div>
       <div><div>Jul 4</div><div class="day-num">Fly Home</div></div>
-    </div>
+    </a>
   </div>
 </div>
 
@@ -547,6 +612,59 @@
           <div class="activity-item"><div class="activity-icon">🎮</div><div class="activity-text"><div class="activity-name">Shinjuku Kabukicho (late) <span class="suggest-badge">Suggested</span></div><div class="activity-desc">Golden Gai tiny bars, night food stalls, vibrant nightlife</div></div></div>
         </div>
       </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌧</div>
+          <div class="log-content">
+            <div class="log-name">Weather: Rain all day ☔</div>
+            <div class="log-addr">Morning through night</div>
+            <div class="log-note">Good news: cooler and not too hot outdoors. Bad news: wet roads made walking around the park less enjoyable.</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏮</div>
+          <div class="log-content">
+            <div class="log-name">Asakusa Temple District</div>
+            <div class="log-addr">Asakusa, Taito City, Tokyo · Morning</div>
+            <div class="log-note">
+              Kaminarimon Gate 雷門 → Nakamise Shopping Street 仲見世商店街 → Hozomon Gate 宝蔵門 → Sensō-ji 浅草寺
+            </div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🥩</div>
+          <div class="log-content">
+            <div class="log-name">Washoku Gyuuna やどき (GYUUNA yadoki Asakusa)</div>
+            <div class="log-addr">浅草, Taito City, Tokyo · Lunch</div>
+            <div class="log-note">🐄 Wagyu Beef Sukiyaki + 🐟 Kabayaki Eel (Unagi) — washoku set lunch in Asakusa!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🦕</div>
+          <div class="log-content">
+            <div class="log-name">国立科学博物館 (National Museum of Nature and Science)</div>
+            <div class="log-addr">Ueno Park, Taito City, Tokyo · Afternoon · Closed 5:00 PM</div>
+            <div class="log-note">Really big museum! Visited 地球館 (Earth Hall) only — no time left for 日本館 (Japan Hall). Need another visit someday!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍜</div>
+          <div class="log-content">
+            <div class="log-name">山笠ノ龍 (Yamagasa no Ryū)</div>
+            <div class="log-addr">Tokyo · Dinner</div>
+            <div class="log-note">🌟 Yummy ramen to end a rainy day perfectly!</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1027,6 +1145,19 @@
 function scrollTo(id) {
   const el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  closeDrawer();
+}
+
+function openDrawer() {
+  document.getElementById('sidebar').classList.add('drawer-open');
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+  document.getElementById('sidebar').classList.remove('drawer-open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 function toggleAccordion(toggle) {
