@@ -299,53 +299,10 @@
     display: inline-flex; align-items: center; gap: 6px; background: #f0f4ff;
     border: 1px solid #c5cae9; padding: 6px 14px; border-radius: 20px; font-size: 0.83rem;
   }
-  /* PASSWORD GATE */
-  .gate {
-    position: fixed; inset: 0; z-index: 9999;
-    background: linear-gradient(135deg, #c0392b 0%, #8e44ad 50%, #2980b9 100%);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .gate-box {
-    background: white; border-radius: 20px; padding: 40px 36px; text-align: center;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.25); width: 320px; max-width: 90vw;
-  }
-  .gate-box h2 { font-size: 1.6rem; margin-bottom: 4px; }
-  .gate-box p { color: var(--muted); font-size: 0.88rem; margin-bottom: 24px; }
-  .gate-input {
-    width: 100%; padding: 12px 16px; border: 2px solid #eee; border-radius: 10px;
-    font-size: 1rem; outline: none; text-align: center; letter-spacing: 2px;
-    transition: border-color 0.2s;
-  }
-  .gate-input:focus { border-color: #8e44ad; }
-  .gate-input.error { border-color: #e74c3c; animation: shake 0.3s; }
-  .gate-btn {
-    width: 100%; margin-top: 14px; padding: 13px; background: #2c3e50; color: white;
-    border: none; border-radius: 10px; font-size: 1rem; font-weight: 700;
-    cursor: pointer; transition: background 0.2s;
-  }
-  .gate-btn:hover { background: #1a252f; }
-  .gate-error { color: #e74c3c; font-size: 0.82rem; margin-top: 10px; min-height: 18px; }
-  @keyframes shake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    75% { transform: translateX(8px); }
-  }
 </style>
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <div style="font-size:2.4rem;margin-bottom:10px">🗾</div>
-    <h2>Japan Trip 2026</h2>
-    <p>Enter password to view the travel guide</p>
-    <input class="gate-input" id="gate-input" type="password" placeholder="Password"
-      onkeydown="if(event.key==='Enter')checkPassword()">
-    <button class="gate-btn" onclick="checkPassword()">Enter →</button>
-    <div class="gate-error" id="gate-error"></div>
-  </div>
-</div>
 
 <div class="header">
   <h1>🗾 Japan Trip 2026</h1>
@@ -743,6 +700,68 @@
           <div class="activity-item"><div class="activity-icon">🥪</div><div class="activity-text"><div class="activity-name">Pack snacks & water</div><div class="activity-desc">In-park food is pricey — bring light snacks in a bag</div></div></div>
         </div>
       </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌳</div>
+          <div class="log-content">
+            <div class="log-name">
+              <a href="https://maps.google.com/?q=代々木公園+Yoyogi+Park+Shibuya+Tokyo" target="_blank">代々木公園 (Yoyogi Park)</a>
+              &nbsp;&amp;&nbsp;
+              <a href="https://maps.google.com/?q=明治神宮+Meiji+Jingu+Shibuya+Tokyo" target="_blank">明治神宮 (Meiji Jingu)</a>
+            </div>
+            <div class="log-addr">Yoyogi, Shibuya, Tokyo · Morning</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🎌</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=竹下通り+Takeshita+Street+Harajuku+Tokyo" target="_blank">竹下通り (Takeshita Street)</a> — Harajuku</div>
+            <div class="log-addr">Jingumae, Shibuya, Tokyo · Lunch & shopping</div>
+            <div class="log-note">
+              🍜 Ramen lunch &nbsp;·&nbsp;
+              🍓🍌 Strawberry &amp; banana ice cream at <a href="https://maps.google.com/?q=Giolitti+Harajuku+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Giolitti</a> &nbsp;·&nbsp;
+              ⚡ <a href="https://maps.google.com/?q=Harry+Potter+Shop+Harajuku+Tokyo" target="_blank" style="color:#e74c3c;text-decoration:none;">Harry Potter Shop Harajuku</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏛</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=根津美術館+Nezu+Museum+Minami-Aoyama+Tokyo" target="_blank">根津美術館 (Nezu Museum)</a></div>
+            <div class="log-addr">Minami-Aoyama, Minato, Tokyo · Afternoon</div>
+            <div class="log-note">🏗 Stunning building designed by <strong>隈研吾 (Kengo Kuma)</strong> + beautiful traditional 日式庭院 (Japanese garden)</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">💎</div>
+          <div class="log-content">
+            <div class="log-name">
+              <a href="https://maps.google.com/?q=Prada+Aoyama+Tokyo+Herzog+de+Meuron" target="_blank">Prada Aoyama</a>
+              &nbsp;&amp;&nbsp;
+              <a href="https://maps.google.com/?q=Gentle+Monster+Aoyama+Flagship+Tokyo" target="_blank">Gentle Monster Aoyama</a>
+            </div>
+            <div class="log-addr">Minami-Aoyama, Minato, Tokyo</div>
+            <div class="log-note">🏢 Prada tower — iconic crystal glass façade by <strong>Herzog &amp; de Meuron</strong> · 🕶 Gentle Monster Aoyama Flagship Store</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌿</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=明治神宮外苑+Meiji+Jingu+Gaien+Ginkgo+Avenue+Tokyo" target="_blank">明治神宮外苑 (Meiji Jingu Gaien) — 銀杏並木</a></div>
+            <div class="log-addr">Kasumigaokamachi, Shinjuku, Tokyo · Evening</div>
+            <div class="log-note">🍂 The famous 146-tree ginkgo avenue — a living golden corridor</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -772,6 +791,86 @@
           <div class="activity-item"><div class="activity-icon">🎠</div><div class="activity-text"><div class="activity-name">Big Thunder Mountain</div><div class="activity-desc">Wild mine train ride — great for all ages</div></div></div>
           <div class="activity-item"><div class="activity-icon">🎭</div><div class="activity-text"><div class="activity-name">Electrical Parade (evening)</div><div class="activity-desc">Dreaming Up! parade — grab a spot 30 min early</div></div></div>
         </div>
+      </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍯</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Pooh's+Hunny+Hunt+Tokyo+Disneyland" target="_blank">Pooh's Hunny Hunt</a></div>
+            <div class="log-addr">Fantasyland, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌹</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Beauty+and+the+Beast+Castle+Tokyo+Disneyland" target="_blank">Beauty and the Beast</a></div>
+            <div class="log-addr">New Fantasyland, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍱</div>
+          <div class="log-content">
+            <div class="log-name">Lunch Break</div>
+            <div class="log-addr">Tokyo Disneyland · Midday</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">😱</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Monsters+Inc+Ride+and+Go+Seek+Tokyo+Disneyland" target="_blank">Monsters, Inc. Ride &amp; Go Seek!</a></div>
+            <div class="log-addr">Tomorrowland, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">👻</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Haunted+Mansion+Tokyo+Disneyland" target="_blank">Haunted Mansion</a></div>
+            <div class="log-addr">Liberty Square, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">⛏</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Big+Thunder+Mountain+Tokyo+Disneyland" target="_blank">Big Thunder Mountain</a></div>
+            <div class="log-addr">Westernland, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍿</div>
+          <div class="log-content">
+            <div class="log-name">Tokyo Disneyland Popcorn Break</div>
+            <div class="log-addr">Tokyo Disneyland · Snack time</div>
+            <div class="log-note">🧡 Caramel &amp; 🧀 Cheese flavours — the famous TDL popcorn!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌺</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Walt+Disney's+Enchanted+Tiki+Room+Tokyo+Disneyland" target="_blank">Walt Disney's Enchanted Tiki Room</a></div>
+            <div class="log-addr">Adventureland, Tokyo Disneyland</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🎆</div>
+          <div class="log-content">
+            <div class="log-name">Disney Enchantment — Nighttime Spectacular</div>
+            <div class="log-addr">Main Street U.S.A., Tokyo Disneyland · Evening finale</div>
+            <div class="log-note">✨ Fireworks, projections &amp; castle lights — the perfect end to a magical day!</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -823,6 +922,100 @@
         </div>
         <a href="https://maps.google.com/?q=Miyako+Hotel+Kyoto+Hachijo+17+Nishikujo+Inmachi+Minami+Kyoto" target="_blank" style="font-size:0.8rem; color:#3498db;">📍 Open in Google Maps →</a>
       </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌿</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=上野恩賜公園+Ueno+Park+Taito+Tokyo" target="_blank">上野恩賜公園 (Ueno Park)</a> — In-depth revisit</div>
+            <div class="log-addr">Ueno, Taito City, Tokyo · Morning (before checkout &amp; Shinkansen)</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏯</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Kiyomizu+Kannon-do+Ueno+Park+Tokyo" target="_blank">清水観音堂 (Kiyomizu Kannon-do)</a></div>
+            <div class="log-addr">Ueno Park, Taito, Tokyo</div>
+            <div class="log-note">1631年建造的江户时代佛堂，仿照京都清水寺而建</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🗼</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Kaneiji+Temple+Five+Story+Pagoda+Ueno+Tokyo" target="_blank">寛永寺 五重塔 (Kaneiji Temple 5-Story Pagoda)</a></div>
+            <div class="log-addr">Ueno Park, Taito, Tokyo</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🦢</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Shinobazu+Pond+不忍池+Ueno+Park+Tokyo" target="_blank">不忍池 (Shinobazu Pond)</a></div>
+            <div class="log-addr">Ueno Park, Taito, Tokyo</div>
+            <div class="log-note">Beautiful lotus pond with pedal boats — serene morning views</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">⛩️</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=Bentendo+Temple+弁天堂+Shinobazu+Pond+Ueno+Tokyo" target="_blank">弁天堂 (Bentendo Temple)</a></div>
+            <div class="log-addr">Shinobazu Pond island, Ueno Park, Tokyo</div>
+            <div class="log-note">Island shrine dedicated to Benzaiten, goddess of music &amp; knowledge</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🥩</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=本格焼肉処+たかとら+上野店+Ueno+Tokyo" target="_blank">本格焼肉処 たかとら 上野店</a></div>
+            <div class="log-addr">上野, Taito City, Tokyo · Lunch</div>
+            <div class="log-note">🔥 Authentic Japanese yakiniku (焼肉) — last meal in Tokyo!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🚄</div>
+          <div class="log-content">
+            <div class="log-name">Shinkansen — Tokyo → Kyoto</div>
+            <div class="log-addr">Tokyo Station → Kyoto Station · ~2h 15min</div>
+            <div class="log-note">Nozomi/Hikari bullet train — sayonara Tokyo! 👋</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🛕</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=東寺+To-ji+Temple+Kyoto" target="_blank">東寺 (To-ji Temple)</a></div>
+            <div class="log-addr">Kujo-cho, Minami Ward, Kyoto · Afternoon</div>
+            <div class="log-note">UNESCO World Heritage site — home to Japan's tallest pagoda (五重塔, 54.8m) · Founded 796 AD</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌳</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=梅小路公園+Umekoji+Park+Kyoto" target="_blank">梅小路公園 (Umekōji Park)</a></div>
+            <div class="log-addr">Kankiji-cho, Shimogyo Ward, Kyoto</div>
+            <div class="log-note">Large riverside park near Kyoto Station — great for an evening stroll</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍳</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=鉄板魂+さとし+Teppan-damashii+Satoshinchi+Kyoto" target="_blank">鉄板魂 3104 (さとし) ん家 (Teppan-damashii Satoshinchi)</a></div>
+            <div class="log-addr">Kyoto · Dinner</div>
+            <div class="log-note">🥢 First dinner in Kyoto — teppanyaki iron plate cooking!</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -852,6 +1045,71 @@
           <div class="activity-item"><div class="activity-icon">🍣</div><div class="activity-text"><div class="activity-name">Nishiki Market (evening) <span class="suggest-badge">Suggested</span></div><div class="activity-desc">"Kyoto's Kitchen" — 400-year-old covered market, closes ~6pm</div></div></div>
         </div>
       </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did</div>
+
+        <div class="log-entry">
+          <div class="log-icon">✨</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=金閣寺+Kinkaku-ji+Kita+Kyoto" target="_blank">金閣寺 (Kinkaku-ji · Golden Pavilion)</a></div>
+            <div class="log-addr">Kinkakuji-cho, Kita Ward, Kyoto · Morning</div>
+            <div class="log-note">🏅 Iconic gold-leaf temple shimmering over the mirror pond — a Kyoto must-see</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏯</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=元離宮二条城+Nijo+Castle+Kyoto" target="_blank">元離宮二条城 (Nijō Castle)</a></div>
+            <div class="log-addr">Nijojo-cho, Nakagyo Ward, Kyoto</div>
+            <div class="log-note">UNESCO World Heritage · Famous "nightingale floors" that chirp underfoot to alert of intruders</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍜</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=家系ラーメン+山下醤造+YAMASHO+RAMEN+Kyoto" target="_blank">家系ラーメン 山下醤造 -YAMASHO RAMEN-</a></div>
+            <div class="log-addr">Kyoto · Lunch</div>
+            <div class="log-note">🍥 Rich Yokohama-style ie-kei ramen — hearty fuel for an afternoon in Arashiyama!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🎋</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=嵐山竹林の小径+Arashiyama+Bamboo+Forest+Kyoto" target="_blank">嵐山竹林の小径 (Arashiyama Bamboo Forest)</a></div>
+            <div class="log-addr">Sagaogurayama, Ukyo Ward, Kyoto · Afternoon</div>
+            <div class="log-note">🌿 The iconic towering bamboo corridor — magical light filtering through the canopy</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏞</div>
+          <div class="log-content">
+            <div class="log-name">
+              <a href="https://maps.google.com/?q=嵐山公園+亀山地区+Arashiyama+Park+Kameyama+Kyoto" target="_blank">嵐山公園 亀山地区 (Arashiyama Park · Kameyama Area)</a>
+            </div>
+            <div class="log-addr">Sagakamenoo-cho, Ukyo Ward, Kyoto</div>
+            <div class="log-note">
+              🌊 Walked along <a href="https://maps.google.com/?q=嵐峡+Rankyo+Gorge+Arashiyama+Kyoto" target="_blank" style="color:#e74c3c;text-decoration:none;">嵐峡 (Rankyo Gorge)</a> &nbsp;·&nbsp;
+              🕊 <a href="https://maps.google.com/?q=周恩来総理+記念詩碑+雨中嵐山+Arashiyama+Kyoto" target="_blank" style="color:#e74c3c;text-decoration:none;">周恩来総理 記念詩碑 雨中嵐山 (Zhou Enlai Poetry Monument)</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌉</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=渡月橋+Togetsukyō+Bridge+Arashiyama+Kyoto" target="_blank">渡月橋 (Togetsukyō Bridge)</a></div>
+            <div class="log-addr">Arashiyama, Ukyo Ward, Kyoto</div>
+            <div class="log-note">🌅 "Moon-crossing bridge" — beautiful views over the Oi River with forested mountains behind</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -879,6 +1137,101 @@
           <div class="activity-item"><div class="activity-icon">🏮</div><div class="activity-text"><div class="activity-name">Gion District (evening) <span class="suggest-badge">Suggested</span></div><div class="activity-desc">Preserved geisha district · Hanamikoji Street is stunning at dusk</div></div></div>
           <div class="activity-item"><div class="activity-icon">👘</div><div class="activity-text"><div class="activity-name">Kimono rental <span class="suggest-badge">Suggested</span></div><div class="activity-desc">Rent kimono near Gion for ~¥3,000 — great photos in historic streets</div></div></div>
         </div>
+      </div>
+
+      <!-- TRIP LOG -->
+      <div class="trip-log">
+        <div class="trip-log-title">📖 Trip Record — What We Did · Day Trip to Nara 奈良</div>
+
+        <div class="log-entry">
+          <div class="log-icon">🛕</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=興福寺+Kohfuku-ji+Nara" target="_blank">興福寺 (Kōfuku-ji)</a></div>
+            <div class="log-addr">Noborioji-cho, Nara City · Morning</div>
+            <div class="log-note">UNESCO World Heritage · Famous five-story pagoda — one of Japan's oldest temples, founded 669 AD</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🦌</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=奈良公園+Nara+Park+Nara" target="_blank">奈良公園 (Nara Park)</a></div>
+            <div class="log-addr">Kasugano-cho, Nara City</div>
+            <div class="log-note">🦌🦌🦌 Over 1,000 free-roaming sacred deer — tame, curious, and will bow for shika-senbei crackers!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">⛩️</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=春日大社+Kasuga+Taisha+Shrine+Nara" target="_blank">春日大社 (Kasuga Taisha Shrine)</a></div>
+            <div class="log-addr">Kasugano-cho, Nara City</div>
+            <div class="log-note">UNESCO World Heritage · Thousands of stone and bronze lanterns lining the path through the forest</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏛</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=新薬師寺+Shin+Yakushi-ji+Nara" target="_blank">新薬師寺 (Shin Yakushi-ji)</a></div>
+            <div class="log-addr">Takabatake-cho, Nara City</div>
+            <div class="log-note">Quiet 8th-century temple with original clay guardian statues (十二神将) — less crowded, very atmospheric</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍱</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=吟松+高畑店+Ginsho+Takahata+Nara" target="_blank">吟松 高畑店 (Ginsho Takahata)</a></div>
+            <div class="log-addr">Takabatake-cho, Nara City · Lunch</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌿</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=依水園+寧楽美術館+Isuien+Garden+Nara" target="_blank">依水園・寧楽美術館 (Isuien Garden &amp; Neiraku Museum)</a></div>
+            <div class="log-addr">Suimoncho, Nara City · Afternoon</div>
+            <div class="log-note">🍃 Stunning two-part traditional Japanese garden with borrowed scenery of Tōdai-ji and Mt. Wakakusa</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🏯</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=東大寺+Todai-ji+Nara" target="_blank">東大寺 (Tōdai-ji)</a></div>
+            <div class="log-addr">Zoshi-cho, Nara City</div>
+            <div class="log-note">UNESCO World Heritage · World's largest wooden building — home to the 15m Great Buddha (奈良大仏) cast in 752 AD</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🌙</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=東大寺+二月堂+Nigatsu-do+Nara" target="_blank">東大寺 二月堂 (Nigatsu-do Hall)</a></div>
+            <div class="log-addr">Zoshi-cho, Nara City · Late afternoon</div>
+            <div class="log-note">Hilltop hall with sweeping views over Nara — one of the most serene spots in the city</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🦌</div>
+          <div class="log-content">
+            <div class="log-name">Playing with the Nara Deer 🦌</div>
+            <div class="log-addr">Nara Park · All day!</div>
+            <div class="log-note">😄 The deer were everywhere — cheeky, pushy, and absolutely adorable. A trip highlight!</div>
+          </div>
+        </div>
+
+        <div class="log-entry">
+          <div class="log-icon">🍝</div>
+          <div class="log-content">
+            <div class="log-name"><a href="https://maps.google.com/?q=サイゼリヤ+近鉄奈良駅ビル店+Saizeriya+Nara" target="_blank">サイゼリヤ 近鉄奈良駅ビル店 (Saizeriya)</a></div>
+            <div class="log-addr">Kintetsu Nara Station Building, Nara · Dinner</div>
+            <div class="log-note">🇮🇹 Italian family restaurant — great value after a full day of sightseeing!</div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1191,26 +1544,6 @@
 </div><!-- /container flex -->
 
 <script>
-// PASSWORD GATE
-const PASS = 'QSJapan@2026';
-function checkPassword() {
-  const val = document.getElementById('gate-input').value;
-  if (val === PASS) {
-    sessionStorage.setItem('jp26_auth', '1');
-    document.getElementById('gate').style.display = 'none';
-  } else {
-    const inp = document.getElementById('gate-input');
-    const err = document.getElementById('gate-error');
-    err.textContent = 'Incorrect password. Please try again.';
-    inp.classList.add('error');
-    inp.value = '';
-    setTimeout(() => inp.classList.remove('error'), 400);
-  }
-}
-// Auto-unlock if already authenticated this session
-if (sessionStorage.getItem('jp26_auth') === '1') {
-  document.getElementById('gate').style.display = 'none';
-}
 
 function scrollTo(id) {
   const el = document.getElementById(id);
