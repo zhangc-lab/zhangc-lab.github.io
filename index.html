@@ -64,6 +64,56 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* ── TOOLS ── */
+  .tool-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem; margin-top: 2.5rem;
+  }
+  .tool-card {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--gray-300); border-radius: 14px;
+    padding: 1.75rem; background: var(--white);
+    transition: border-color .25s, box-shadow .25s, transform .25s;
+  }
+  .tool-card:hover {
+    border-color: var(--teal); transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(8,80,65,.10);
+  }
+  .tool-tag {
+    display: inline-block; align-self: flex-start;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--teal-dark); background: var(--teal-light);
+    padding: .3rem .7rem; border-radius: 999px; margin-bottom: 1rem;
+  }
+  .tool-card h3 {
+    font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+    color: var(--gray-900); margin: 0 0 .6rem;
+  }
+  .tool-card p {
+    font-size: .92rem; color: var(--gray-700); line-height: 1.65;
+    margin: 0 0 1.25rem; flex-grow: 1;
+  }
+  .tool-meta {
+    font-size: .8rem; color: var(--gray-500); margin-bottom: 1.25rem;
+    padding-top: 1rem; border-top: 1px solid var(--gray-100);
+  }
+  .tool-links { display: flex; gap: .75rem; flex-wrap: wrap; }
+  .tool-btn {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: var(--teal); color: var(--white);
+    padding: .6rem 1.2rem; border-radius: 8px;
+    font-size: .85rem; font-weight: 500; text-decoration: none;
+    transition: background .2s;
+  }
+  .tool-btn:hover { background: var(--teal-dark); }
+  .tool-btn-ghost {
+    background: transparent; color: var(--gray-700);
+    border: 1px solid var(--gray-300);
+  }
+  .tool-btn-ghost:hover { background: var(--gray-50); color: var(--gray-900); border-color: var(--gray-500); }
+  @media (max-width: 640px) { .tool-grid { grid-template-columns: 1fr; } }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -1171,7 +1221,7 @@
       <li><a href="#research" data-i18n="nav.research">Research</a></li>
       <li><a href="#publications" data-i18n="nav.publications">Publications</a></li>
       <li><a href="#team" data-i18n="nav.team">Team</a></li>
-      <li class="nav-hide-mobile"><a href="#collaborators" data-i18n="nav.collaborators">Collaborators</a></li>
+      <li><a href="#tools" data-i18n="nav.tools">Tools</a></li>
       <li class="nav-hide-mobile"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
       <li>
         <button class="lang-toggle" id="langToggle" type="button" aria-label="Switch language">
@@ -2031,6 +2081,30 @@
 </section>
 
 <!-- CONTACT -->
+<section id="tools" style="background:var(--gray-50);">
+  <div class="section-inner">
+    <p class="section-label" data-i18n="tools.label">Open Tools</p>
+    <h2 class="section-title" data-i18n="tools.title">Tools &amp; Resources</h2>
+    <p class="section-lead" data-i18n="tools.lead">Free, open-source web tools built in the lab to support our own experimental work. They run entirely in your browser &mdash; no sequence data is uploaded or stored.</p>
+
+    <div class="tool-grid">
+
+      <div class="tool-card">
+        <span class="tool-tag">Protein Engineering</span>
+        <h3>PrimerForge</h3>
+        <p data-i18n="tools.primerforge.desc">Designs site-directed mutagenesis primers for whole-plasmid inverse PCR. Supports NNK and NDT degenerate codons for saturation mutagenesis, host-specific codon usage (<em>E.&nbsp;coli</em>, <em>S.&nbsp;cerevisiae</em>, <em>P.&nbsp;pastoris</em>), nearest-neighbour Tm calculation, and automatic detection of shared primers across variants at the same site to reduce synthesis cost.</p>
+        <p class="tool-meta" data-i18n="tools.primerforge.meta">Runs in-browser · No installation · MIT licensed</p>
+        <div class="tool-links">
+          <a href="https://primer-design.vercel.app/" target="_blank" rel="noopener" class="tool-btn" data-i18n="tools.launch">Launch tool →</a>
+          <a href="https://primer-design.vercel.app/help.html" target="_blank" rel="noopener" class="tool-btn tool-btn-ghost" data-i18n="tools.guide">User guide</a>
+          <a href="https://github.com/zhangc-lab/PrimerDesign" target="_blank" rel="noopener" class="tool-btn tool-btn-ghost" data-i18n="tools.source">Source</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section id="contact">
   <div class="section-inner">
     <p class="section-label" data-i18n="contact.label">Contact</p>
@@ -2102,6 +2176,7 @@
       <a href="#research" data-i18n="nav.research">Research</a>
       <a href="#publications" data-i18n="nav.publications">Publications</a>
       <a href="#team" data-i18n="nav.team">Team</a>
+      <a href="#tools" data-i18n="nav.tools">Tools</a>
       <a href="#collaborators" data-i18n="nav.collaborators">Collaborators</a>
       <a href="#contact" data-i18n="nav.contact">Contact</a>
       <a href="https://www.a-star.edu.sg/sifbi" target="_blank">SIFBI ↗</a>
@@ -2723,6 +2798,15 @@
   const ZH = {
     // Nav
     'nav.research':       '研究',
+    'nav.tools':          '工具',
+    'tools.label':        '开放工具',
+    'tools.title':        '工具与资源',
+    'tools.lead':         '本实验室为支持自身实验工作而开发的免费开源网页工具。全部计算均在浏览器本地完成，不会上传或存储任何序列数据。',
+    'tools.primerforge.desc': '用于全质粒反向 PCR 的定点突变引物设计。支持 NNK 与 NDT 简并密码子以实现饱和突变，可选宿主密码子偏好（大肠杆菌、酿酒酵母、毕赤酵母），采用最近邻模型计算 Tm，并自动识别同一位点各变体间可共用的引物以降低合成成本。',
+    'tools.primerforge.meta': '浏览器内运行 · 无需安装 · MIT 许可',
+    'tools.launch':       '打开工具 →',
+    'tools.guide':        '使用指南',
+    'tools.source':       '源代码',
     'nav.publications':   '论文与专利',
     'nav.team':           '团队',
     'nav.collaborators':  '合作者',
